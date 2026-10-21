@@ -234,9 +234,14 @@ function GeminiOps.ApplyExternalAddonQoL()
   if _G.GetBindingKey and _G.SetBinding and not (_G.InCombatLockdown and _G.InCombatLockdown()) then
     local k1, k2 = _G.GetBindingKey("Combat Mode - Mouse Look")
     if k1 ~= "G" and k2 ~= "G" then
-      pcall(_G.SetBinding, "G", "Combat Mode - Mouse Look")
-      if _G.SaveBindings and _G.GetCurrentBindingSet then
-        pcall(_G.SaveBindings, _G.GetCurrentBindingSet())
+      local CM = _G.CombatMode
+      if CM and CM.AssignNamedKeybind then
+        pcall(CM.AssignNamedKeybind, "Combat Mode - Mouse Look", "G")
+      else
+        pcall(_G.SetBinding, "G", "Combat Mode - Mouse Look")
+        if _G.SaveBindings and _G.GetCurrentBindingSet then
+          pcall(_G.SaveBindings, _G.GetCurrentBindingSet())
+        end
       end
     end
   end
@@ -390,6 +395,7 @@ end
 local STARHAMMER_MACROS = {
   ["1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:845] Рассекающий удар; Вихрь",
   ["2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:190456] !Стойкость к боли\n/cast Верная победа",
+  ["3"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast Аватара",
   ["B3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:5246,@target,harm] Устрашающий крик; [known:384100] Крик берсерка; Ярость берсерка",
   ["SB3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:12323] Пронзительный вой; [known:384100] Крик берсерка; Ярость берсерка",
   ["CM1"] = "#showtooltip Бой насмерть\n/stopmacro [flying]\n/cast Бой насмерть",
@@ -397,7 +403,7 @@ local STARHAMMER_MACROS = {
   ["M1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
   ["M2"] = "#showtooltip\n/stopmacro [flying][nocombat]\n/cast [known:228920, @player] Опустошитель; Вихрь клинков",
   ["R"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:384318] Громогласный рык; [known:376079,@player] Копье чемпиона; [known:772] Кровопускание; Размашистые удары",
-  ["SM2"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast Аватара",
+  ["SM2"] = "#showtooltip Размашистые удары\n/stopmacro [flying]\n/cast Размашистые удары\n/cast [combat] Аватара",
   ["T"] = "#showtooltip\n/stopmacro [flying]\n#FS EH, X\n/cast [known:107570,@none][known:107570,@target] Удар громовержца; [@target] Героический бросок",
   ["V"] = "#showtooltip\n/stopmacro [flying]\n/cast [stance:1] Боевая стойка; Оборонительная стойка",
 }
@@ -414,8 +420,8 @@ function GeminiOps.SyncStarhammerMacros(force)
     return false, "Cannot sync macros in combat"
   end
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.completedTasks["starhammer_macros_v2"] and not force then
-    return false, "Already synced (v2)"
+  if gopsDB.completedTasks["starhammer_macros_v3"] and not force then
+    return false, "Already synced (v3)"
   end
   if not _G.GetMacroInfo or not _G.EditMacro then
     return false, "Macro API unavailable"
@@ -441,9 +447,9 @@ function GeminiOps.SyncStarhammerMacros(force)
   end
 
   if updated > 0 then
-    gopsDB.completedTasks["starhammer_macros_v2"] = true
+    gopsDB.completedTasks["starhammer_macros_v3"] = true
   end
-  return updated > 0, "Обновлено макросов Стархаммера (v2): " .. tostring(updated)
+  return updated > 0, "Обновлено макросов Стархаммера (v3): " .. tostring(updated)
 end
 
 ---------------------------------------------------------------------------------------
