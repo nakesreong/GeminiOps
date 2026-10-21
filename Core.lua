@@ -385,6 +385,67 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
 end
 
 ---------------------------------------------------------------------------------------
+--  3B. STARHAMMER ARMS WARRIOR MACRO SYNC (SLAYER DELVES/M+ & FALLBACKS)
+---------------------------------------------------------------------------------------
+local STARHAMMER_MACROS = {
+  ["1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:845] Рассекающий удар; Вихрь",
+  ["2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:190456] !Стойкость к боли\n/cast Верная победа",
+  ["B3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:5246,@target,harm] Устрашающий крик; [known:384100] Крик берсерка; Ярость берсерка",
+  ["SB3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:12323] Пронзительный вой; [known:384100] Крик берсерка; Ярость берсерка",
+  ["CM2"] = "#showtooltip\n/stopmacro [flying]\n/cast !Оборонительная стойка\n/cast [known:383762] Горестная невосприимчивость; [known:97462] Ободряющий клич; Оборонительная стойка",
+  ["M1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
+  ["M2"] = "#showtooltip\n/stopmacro [flying][nocombat]\n/cast [known:228920, @player] Опустошитель; Вихрь клинков",
+  ["R"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:384318] Громогласный рык; [known:376079,@player] Копье чемпиона; [known:772] Кровопускание; Размашистые удары",
+  ["SM2"] = "#showtooltip\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast Аватара",
+  ["T"] = "#showtooltip\n/stopmacro [flying]\n#FS EH, X\n/cast [known:107570,@none][known:107570,@target] Удар громовержца; [@target] Героический бросок",
+  ["V"] = "#showtooltip\n/stopmacro [flying]\n/cast [stance:1] Боевая стойка; Оборонительная стойка",
+}
+
+local STARHAMMER_SQ_THUNDER = "#showtooltip\n/stopmacro [flying]\n/cast [known:6343] Удар грома; Мощный удар"
+local STARHAMMER_SQ_SHARPEN = "#showtooltip\n/stopmacro [flying]\n/cast [known:198817] Заточка клинка; Кровавая ярость"
+
+function GeminiOps.SyncStarhammerMacros(force)
+  local curKey = GeminiOps.GetCurrentCharKey()
+  if curKey ~= "Стархаммер - Свежеватель Душ" then
+    return false, "Macro sync is only for Стархаммер"
+  end
+  if _G.InCombatLockdown and _G.InCombatLockdown() then
+    return false, "Cannot sync macros in combat"
+  end
+  local gopsDB = GeminiOps:EnsureDB()
+  if gopsDB.completedTasks["starhammer_macros_v1"] and not force then
+    return false, "Already synced (v1)"
+  end
+  if not _G.GetMacroInfo or not _G.EditMacro then
+    return false, "Macro API unavailable"
+  end
+
+  local updated = 0
+  for idx = 121, 150 do
+    local name, _, body = _G.GetMacroInfo(idx)
+    if name then
+      if name == "SQ" and type(body) == "string" then
+        if body:find("Заточка") or body:find("Кровавая ярость") then
+          pcall(_G.EditMacro, idx, "SQ", "INV_MISC_QUESTIONMARK", STARHAMMER_SQ_SHARPEN)
+          updated = updated + 1
+        else
+          pcall(_G.EditMacro, idx, "SQ", "INV_MISC_QUESTIONMARK", STARHAMMER_SQ_THUNDER)
+          updated = updated + 1
+        end
+      elseif STARHAMMER_MACROS[name] then
+        pcall(_G.EditMacro, idx, name, "INV_MISC_QUESTIONMARK", STARHAMMER_MACROS[name])
+        updated = updated + 1
+      end
+    end
+  end
+
+  if updated > 0 then
+    gopsDB.completedTasks["starhammer_macros_v1"] = true
+  end
+  return updated > 0, "Обновлено макросов Стархаммера под билд Slayer: " .. tostring(updated)
+end
+
+---------------------------------------------------------------------------------------
 --  4. EVENT LOOP & SLASH COMMANDS (/gops, /gemini)
 ---------------------------------------------------------------------------------------
 local eventFrame = _G.CreateFrame("Frame", "GeminiOpsEventFrame", UIParent)
@@ -402,12 +463,16 @@ eventFrame:SetScript("OnEvent", function(_, event)
         GeminiOps.ApplyEnvironmentHygiene()
         GeminiOps.ApplyExternalAddonQoL()
 
-        -- Auto-clone if Стархаммер has not received the v2 clone yet
+        -- Auto-clone & macro sync if Стархаммер has not received them yet
         local curKey = GeminiOps.GetCurrentCharKey()
         if curKey == "Стархаммер - Свежеватель Душ" then
           local ok, msg = GeminiOps.CloneCharacterProfiles(GeminiOps.DEFAULT_TEMPLATE_CHAR, curKey, false)
           if ok then
             print("|cff00ccff[GeminiOps]|r " .. tostring(msg))
+          end
+          local okM, msgM = GeminiOps.SyncStarhammerMacros(false)
+          if okM then
+            print("|cff00ccff[GeminiOps]|r " .. tostring(msgM))
           end
         end
       end)
@@ -432,6 +497,9 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
     if ok then
       print("|cff00ccff[GeminiOps]|r Напиши |cffffd100/reload|r, чтобы применить приватные модули ElvUI.")
     end
+  elseif cmd == "macros" then
+    local okM, msgM = GeminiOps.SyncStarhammerMacros(true)
+    print("|cff00ccff[GeminiOps]|r " .. tostring(msgM))
   elseif cmd == "qol" then
     GeminiOps.ApplyExternalAddonQoL()
     GeminiOps.ApplyEnvironmentHygiene()
