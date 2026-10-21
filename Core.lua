@@ -395,15 +395,15 @@ end
 local STARHAMMER_MACROS = {
   ["1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:845] Рассекающий удар; Вихрь",
   ["2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:190456] !Стойкость к боли\n/cast Верная победа",
-  ["3"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast Аватара",
+  ["3"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast Аватара",
   ["B3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:5246,@target,harm] Устрашающий крик; [known:384100] Крик берсерка; Ярость берсерка",
   ["SB3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:12323] Пронзительный вой; [known:384100] Крик берсерка; Ярость берсерка",
-  ["CM1"] = "#showtooltip Бой насмерть\n/stopmacro [flying]\n/cast Бой насмерть",
-  ["CM2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:383762] Горестная невосприимчивость; Ободряющий клич",
-  ["M1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
+  ["CM1"] = "#showtooltip Бой насмерть\n/stopmacro [flying]\n/cast !Оборонительная стойка\n/cast Бой насмерть",
+  ["CM2"] = "#showtooltip [known:383762] Горестная невосприимчивость; Ободряющий клич\n/stopmacro [flying]\n/cast !Оборонительная стойка\n/cast [known:383762] Горестная невосприимчивость; Ободряющий клич",
+  ["M1"] = "#showtooltip [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
   ["M2"] = "#showtooltip\n/stopmacro [flying][nocombat]\n/cast [known:228920, @player] Опустошитель; Вихрь клинков",
   ["R"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:384318] Громогласный рык; [known:376079,@player] Копье чемпиона; [known:772] Кровопускание; Размашистые удары",
-  ["SM2"] = "#showtooltip Размашистые удары\n/stopmacro [flying]\n/cast Размашистые удары\n/cast [combat] Аватара",
+  ["SM2"] = "#showtooltip Размашистые удары\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast Размашистые удары\n/cast [combat] Аватара",
   ["T"] = "#showtooltip\n/stopmacro [flying]\n#FS EH, X\n/cast [known:107570,@none][known:107570,@target] Удар громовержца; [@target] Героический бросок",
   ["V"] = "#showtooltip\n/stopmacro [flying]\n/cast [stance:1] Боевая стойка; Оборонительная стойка",
 }
@@ -420,8 +420,8 @@ function GeminiOps.SyncStarhammerMacros(force)
     return false, "Cannot sync macros in combat"
   end
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.completedTasks["starhammer_macros_v3"] and not force then
-    return false, "Already synced (v3)"
+  if gopsDB.completedTasks["starhammer_macros_v4"] and not force then
+    return false, "Already synced (v4)"
   end
   if not _G.GetMacroInfo or not _G.EditMacro then
     return false, "Macro API unavailable"
@@ -447,9 +447,9 @@ function GeminiOps.SyncStarhammerMacros(force)
   end
 
   if updated > 0 then
-    gopsDB.completedTasks["starhammer_macros_v3"] = true
+    gopsDB.completedTasks["starhammer_macros_v4"] = true
   end
-  return updated > 0, "Обновлено макросов Стархаммера (v3): " .. tostring(updated)
+  return updated > 0, "Обновлено макросов Стархаммера (v4): " .. tostring(updated)
 end
 
 ---------------------------------------------------------------------------------------
