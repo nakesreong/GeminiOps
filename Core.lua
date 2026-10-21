@@ -229,6 +229,17 @@ function GeminiOps.ApplyExternalAddonQoL()
       end
     end
   end
+
+  -- Ensure key "G" is always bound to "Combat Mode - Mouse Look" ("Освободить курсор")
+  if _G.GetBindingKey and _G.SetBinding and not (_G.InCombatLockdown and _G.InCombatLockdown()) then
+    local k1, k2 = _G.GetBindingKey("Combat Mode - Mouse Look")
+    if k1 ~= "G" and k2 ~= "G" then
+      pcall(_G.SetBinding, "G", "Combat Mode - Mouse Look")
+      if _G.SaveBindings and _G.GetCurrentBindingSet then
+        pcall(_G.SaveBindings, _G.GetCurrentBindingSet())
+      end
+    end
+  end
 end
 
 ---------------------------------------------------------------------------------------
@@ -369,17 +380,6 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
     end
   end
 
-  -- 8. Character-Specific Keybindings -> Account Keybindings
-  if _G.GetCurrentBindingSet and _G.LoadBindings and _G.SaveBindings then
-    if not (_G.InCombatLockdown and _G.InCombatLockdown()) then
-      local okSet, curSet = pcall(_G.GetCurrentBindingSet)
-      if okSet and curSet == 2 then
-        pcall(_G.LoadBindings, 1)
-        pcall(_G.SaveBindings, 2)
-      end
-    end
-  end
-
   gopsDB.clonedCharacters[dstKey] = "v2"
   return true, "Cloned all profiles from [" .. tostring(srcKey) .. "] to [" .. tostring(dstKey) .. "]"
 end
@@ -392,17 +392,18 @@ local STARHAMMER_MACROS = {
   ["2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:190456] !Стойкость к боли\n/cast Верная победа",
   ["B3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:5246,@target,harm] Устрашающий крик; [known:384100] Крик берсерка; Ярость берсерка",
   ["SB3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:12323] Пронзительный вой; [known:384100] Крик берсерка; Ярость берсерка",
-  ["CM2"] = "#showtooltip\n/stopmacro [flying]\n/cast !Оборонительная стойка\n/cast [known:383762] Горестная невосприимчивость; [known:97462] Ободряющий клич; Оборонительная стойка",
+  ["CM1"] = "#showtooltip Бой насмерть\n/stopmacro [flying]\n/cast Бой насмерть",
+  ["CM2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:383762] Горестная невосприимчивость; Ободряющий клич",
   ["M1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
   ["M2"] = "#showtooltip\n/stopmacro [flying][nocombat]\n/cast [known:228920, @player] Опустошитель; Вихрь клинков",
   ["R"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:384318] Громогласный рык; [known:376079,@player] Копье чемпиона; [known:772] Кровопускание; Размашистые удары",
-  ["SM2"] = "#showtooltip\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast Аватара",
+  ["SM2"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast Аватара",
   ["T"] = "#showtooltip\n/stopmacro [flying]\n#FS EH, X\n/cast [known:107570,@none][known:107570,@target] Удар громовержца; [@target] Героический бросок",
   ["V"] = "#showtooltip\n/stopmacro [flying]\n/cast [stance:1] Боевая стойка; Оборонительная стойка",
 }
 
 local STARHAMMER_SQ_THUNDER = "#showtooltip\n/stopmacro [flying]\n/cast [known:6343] Удар грома; Мощный удар"
-local STARHAMMER_SQ_SHARPEN = "#showtooltip\n/stopmacro [flying]\n/cast [known:198817] Заточка клинка; Кровавая ярость"
+local STARHAMMER_SQ_SHARPEN = "#showtooltip\n/stopmacro [flying]\n/cast [known:198817] Заточка клинка; [known:20572] Кровавое неистовство; Размашистые удары"
 
 function GeminiOps.SyncStarhammerMacros(force)
   local curKey = GeminiOps.GetCurrentCharKey()
@@ -413,8 +414,8 @@ function GeminiOps.SyncStarhammerMacros(force)
     return false, "Cannot sync macros in combat"
   end
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.completedTasks["starhammer_macros_v1"] and not force then
-    return false, "Already synced (v1)"
+  if gopsDB.completedTasks["starhammer_macros_v2"] and not force then
+    return false, "Already synced (v2)"
   end
   if not _G.GetMacroInfo or not _G.EditMacro then
     return false, "Macro API unavailable"
@@ -425,7 +426,7 @@ function GeminiOps.SyncStarhammerMacros(force)
     local name, _, body = _G.GetMacroInfo(idx)
     if name then
       if name == "SQ" and type(body) == "string" then
-        if body:find("Заточка") or body:find("Кровавая ярость") then
+        if body:find("Заточка") or body:find("Кровав") then
           pcall(_G.EditMacro, idx, "SQ", "INV_MISC_QUESTIONMARK", STARHAMMER_SQ_SHARPEN)
           updated = updated + 1
         else
@@ -440,9 +441,9 @@ function GeminiOps.SyncStarhammerMacros(force)
   end
 
   if updated > 0 then
-    gopsDB.completedTasks["starhammer_macros_v1"] = true
+    gopsDB.completedTasks["starhammer_macros_v2"] = true
   end
-  return updated > 0, "Обновлено макросов Стархаммера под билд Slayer: " .. tostring(updated)
+  return updated > 0, "Обновлено макросов Стархаммера (v2): " .. tostring(updated)
 end
 
 ---------------------------------------------------------------------------------------
