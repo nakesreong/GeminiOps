@@ -455,6 +455,72 @@ function GeminiOps.SyncStarhammerMacros(force)
   return updated > 0, "Обновлено макросов Стархаммера (v4): " .. tostring(updated)
 end
 
+function GeminiOps.EnableStarhammerBar5(force)
+  local curKey = GeminiOps.GetCurrentCharKey()
+  if curKey ~= "Стархаммер - Свежеватель Душ" then
+    return false
+  end
+  if _G.InCombatLockdown and _G.InCombatLockdown() then
+    return false
+  end
+  local gopsDB = GeminiOps:EnsureDB()
+  if gopsDB.completedTasks["starhammer_bt4_bar5_v1"] and not force then
+    return false
+  end
+
+  local BT4 = _G.Bartender4
+  if not BT4 or not BT4.GetModule then
+    return false
+  end
+
+  local abMod = BT4:GetModule("ActionBars", true)
+  if abMod and abMod.db and abMod.db.profile and abMod.db.profile.actionbars then
+    local b5 = abMod.db.profile.actionbars[5]
+    if b5 then
+      b5.enabled = true
+      b5.WoW10Layout = true
+      b5.version = 3
+      b5.rows = 1
+      b5.buttons = 12
+      b5.showgrid = true
+      b5.fadeout = false
+      b5.fadeoutalpha = 1
+      b5.visibility = b5.visibility or {}
+      b5.visibility.custom = false
+      b5.visibility.combat = false
+      b5.visibility.nocombat = false
+      b5.position = b5.position or {}
+      b5.position.point = "BOTTOM"
+      b5.position.x = -327.75
+      b5.position.y = 302
+      b5.position.scale = 0.75
+      if abMod.EnableBar then
+        pcall(abMod.EnableBar, abMod, 5)
+      end
+      if abMod.actionbars and abMod.actionbars[5] then
+        local barObj = abMod.actionbars[5]
+        pcall(barObj.ApplyConfig, barObj, b5)
+      end
+    end
+  end
+
+  local stMod = BT4:GetModule("StanceBar", true)
+  if stMod and stMod.db and stMod.db.profile then
+    local stCfg = stMod.db.profile
+    stCfg.position = stCfg.position or {}
+    stCfg.position.point = "BOTTOM"
+    stCfg.position.x = -327.75
+    stCfg.position.y = 338
+    stCfg.position.scale = 0.9
+    if stMod.bar and stMod.bar.ApplyConfig then
+      pcall(stMod.bar.ApplyConfig, stMod.bar, stCfg)
+    end
+  end
+
+  gopsDB.completedTasks["starhammer_bt4_bar5_v1"] = true
+  return true, "Включена Панель 5 Bartender4 (1, 2, 3, 4 / Shift+1..4) третьей сверху в масштабе 0.75"
+end
+
 ---------------------------------------------------------------------------------------
 --  4. EVENT LOOP & SLASH COMMANDS (/gops, /gemini)
 ---------------------------------------------------------------------------------------
@@ -483,6 +549,10 @@ eventFrame:SetScript("OnEvent", function(_, event)
           local okM, msgM = GeminiOps.SyncStarhammerMacros(false)
           if okM then
             print("|cff00ccff[GeminiOps]|r " .. tostring(msgM))
+          end
+          local okB, msgB = GeminiOps.EnableStarhammerBar5(false)
+          if okB then
+            print("|cff00ccff[GeminiOps]|r " .. tostring(msgB))
           end
         end
       end)
