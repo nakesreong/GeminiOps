@@ -230,18 +230,21 @@ function GeminiOps.ApplyExternalAddonQoL()
     end
   end
 
-  -- Ensure key "G" is always bound to "Combat Mode - Mouse Look" ("Освободить курсор")
+  -- Ensure both "G" (hold) and "`" (toggle) are bound to "Combat Mode - Mouse Look"
   if _G.GetBindingKey and _G.SetBinding and not (_G.InCombatLockdown and _G.InCombatLockdown()) then
     local k1, k2 = _G.GetBindingKey("Combat Mode - Mouse Look")
-    if k1 ~= "G" and k2 ~= "G" then
+    local hasG = (k1 == "G" or k2 == "G")
+    local hasTick = (k1 == "`" or k2 == "`")
+    if not hasG or not hasTick then
+      pcall(_G.SetBinding, "G", "Combat Mode - Mouse Look")
+      pcall(_G.SetBinding, "`", "Combat Mode - Mouse Look")
+      if _G.SaveBindings and _G.GetCurrentBindingSet then
+        pcall(_G.SaveBindings, _G.GetCurrentBindingSet())
+      end
       local CM = _G.CombatMode
-      if CM and CM.AssignNamedKeybind then
-        pcall(CM.AssignNamedKeybind, "Combat Mode - Mouse Look", "G")
-      else
-        pcall(_G.SetBinding, "G", "Combat Mode - Mouse Look")
-        if _G.SaveBindings and _G.GetCurrentBindingSet then
-          pcall(_G.SaveBindings, _G.GetCurrentBindingSet())
-        end
+      if CM then
+        if CM.ApplyToggleFocusTargetBinding then pcall(CM.ApplyToggleFocusTargetBinding) end
+        if CM.ApplyCycleFocusBindings then pcall(CM.ApplyCycleFocusBindings) end
       end
     end
   end
