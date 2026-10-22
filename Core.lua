@@ -398,15 +398,17 @@ end
 local STARHAMMER_MACROS = {
   ["1"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:845] Рассекающий удар; Вихрь",
   ["2"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:190456] !Стойкость к боли\n/cast Верная победа",
-  ["3"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast Аватара",
+  ["3"] = "#showtooltip Аватара\n/stopmacro [flying]\n/cast [nostance:2] Боевая стойка\n/cast Аватара",
   ["B3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:5246,@target,harm] Устрашающий крик; [known:384100] Крик берсерка; Ярость берсерка",
   ["SB3"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:12323] Пронзительный вой; [known:384100] Крик берсерка; Ярость берсерка",
-  ["CM1"] = "#showtooltip Бой насмерть\n/stopmacro [flying]\n/cast !Оборонительная стойка\n/cast Бой насмерть",
-  ["CM2"] = "#showtooltip [known:383762] Горестная невосприимчивость; Ободряющий клич\n/stopmacro [flying]\n/cast !Оборонительная стойка\n/cast [known:383762] Горестная невосприимчивость; Ободряющий клич",
-  ["M1"] = "#showtooltip [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
+  ["CM1"] = "#showtooltip Бой насмерть\n/stopmacro [flying]\n/cast [nostance:1] Оборонительная стойка\n/cast Бой насмерть",
+  ["CM2"] = "#showtooltip [known:383762] Горестная невосприимчивость; Ободряющий клич\n/stopmacro [flying]\n/cast [nostance:1] Оборонительная стойка\n/cast [known:383762] Горестная невосприимчивость; Ободряющий клич",
+  ["M1"] = "#showtooltip [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса\n/stopmacro [flying]\n/cast [nostance:2] Боевая стойка\n/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса",
   ["M2"] = "#showtooltip\n/stopmacro [flying][nocombat]\n/cast [known:228920, @player] Опустошитель; Вихрь клинков",
   ["R"] = "#showtooltip\n/stopmacro [flying]\n/cast [known:384318] Громогласный рык; [known:376079,@player] Копье чемпиона; [known:772] Кровопускание; Размашистые удары",
-  ["SM2"] = "#showtooltip Размашистые удары\n/stopmacro [flying]\n/cast !Боевая стойка\n/cast Размашистые удары\n/cast [combat] Аватара",
+  ["S1"] = "#showtooltip Вмешательство\n#FS OD, X, ODTG\n/stopmacro [flying]\n/cast [known:3411, nostance:1] Оборонительная стойка\n/cast [known:3411, @none][@targetfriend] Вмешательство\n/cast [@none, harm] Рывок",
+  ["S2"] = "#showtooltip Вмешательство\n#FS healer\n/stopmacro [flying]\n/cast [known:3411, nostance:1] Оборонительная стойка\n/cast [known:3411, @none] Вмешательство",
+  ["SM2"] = "#showtooltip Размашистые удары\n/stopmacro [flying]\n/cast [nostance:2] Боевая стойка\n/cast Размашистые удары\n/cast [combat] Аватара",
   ["T"] = "#showtooltip\n/stopmacro [flying]\n#FS EH, X\n/cast [known:107570,@none][known:107570,@target] Удар громовержца; [@target] Героический бросок",
   ["V"] = "#showtooltip\n/stopmacro [flying]\n/cast [stance:1] Боевая стойка; Оборонительная стойка",
 }
@@ -423,8 +425,8 @@ function GeminiOps.SyncStarhammerMacros(force)
     return false, "Cannot sync macros in combat"
   end
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.completedTasks["starhammer_macros_v4"] and not force then
-    return false, "Already synced (v4)"
+  if gopsDB.completedTasks["starhammer_macros_v5"] and not force then
+    return false, "Already synced (v5)"
   end
   if not _G.GetMacroInfo or not _G.EditMacro then
     return false, "Macro API unavailable"
@@ -450,9 +452,74 @@ function GeminiOps.SyncStarhammerMacros(force)
   end
 
   if updated > 0 then
-    gopsDB.completedTasks["starhammer_macros_v4"] = true
+    gopsDB.completedTasks["starhammer_macros_v5"] = true
   end
-  return updated > 0, "Обновлено макросов Стархаммера (v4): " .. tostring(updated)
+  return updated > 0, "Обновлено макросов Стархаммера со стойками [nostance] (v5): " .. tostring(updated)
+end
+
+function GeminiOps.EmbedDetailsInRightChat(force)
+  local gopsDB = GeminiOps:EnsureDB()
+  local curKey = GeminiOps.GetCurrentCharKey() or "default"
+  local taskKey = "details_embed_right_v1_" .. curKey
+  if gopsDB.completedTasks[taskKey] and not force then
+    return false
+  end
+
+  local Details = _G.Details or _G._detalhes
+  if not Details or not Details.GetInstance then
+    return false
+  end
+
+  local ok, err = pcall(function()
+    local inst = Details:GetInstance(1)
+    if not inst then return end
+
+    local targetPos = {
+      x = 1070.667236328125,
+      y = -405.000244140625,
+      w = 463.6189270019531,
+      h = 185.4286041259766,
+    }
+
+    inst.posicao = inst.posicao or {}
+    inst.posicao.normal = DeepCopyTable(targetPos)
+
+    if type(_G._detalhes_database) == "table" then
+      _G._detalhes_database.local_instances_config = _G._detalhes_database.local_instances_config or {}
+      _G._detalhes_database.local_instances_config[1] = _G._detalhes_database.local_instances_config[1] or {}
+      _G._detalhes_database.local_instances_config[1].pos = _G._detalhes_database.local_instances_config[1].pos or {}
+      _G._detalhes_database.local_instances_config[1].pos.normal = DeepCopyTable(targetPos)
+    end
+
+    if inst.RestoreMainWindowPosition then
+      inst:RestoreMainWindowPosition(true)
+    end
+
+    local rcp = _G.RightChatPanel
+    if rcp and inst.baseframe then
+      local rw = rcp:GetWidth()
+      local rh = rcp:GetHeight()
+      if rw and rw > 200 and rh and rh > 100 then
+        local w = rw - 4
+        local h = rh - 44
+        inst.baseframe:ClearAllPoints()
+        inst.baseframe:SetPoint("BOTTOMRIGHT", rcp, "BOTTOMRIGHT", -2, 23)
+        inst.baseframe:SetSize(w, h)
+        if inst.SaveMainWindowPosition then
+          inst:SaveMainWindowPosition()
+        end
+        if inst.RestoreMainWindowPosition then
+          inst:RestoreMainWindowPosition(true)
+        end
+      end
+    end
+  end)
+
+  if ok then
+    gopsDB.completedTasks[taskKey] = true
+    return true, "Details! встроен в правую панель ElvUI (RightChatPanel)"
+  end
+  return false, tostring(err)
 end
 
 function GeminiOps.EnableStarhammerBar5(force)
@@ -553,6 +620,10 @@ eventFrame:SetScript("OnEvent", function(_, event)
           local okB, msgB = GeminiOps.EnableStarhammerBar5(false)
           if okB then
             print("|cff00ccff[GeminiOps]|r " .. tostring(msgB))
+          end
+          local okD, msgD = GeminiOps.EmbedDetailsInRightChat(false)
+          if okD then
+            print("|cff00ccff[GeminiOps]|r " .. tostring(msgD))
           end
         end
       end)
