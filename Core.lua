@@ -11,9 +11,29 @@ local _G = _G
 local GeminiOps = _G.GeminiOps or {}
 _G.GeminiOps = GeminiOps
 
-GeminiOps.VERSION = "1.0.0"
+GeminiOps.VERSION = "1.1.0"
 GeminiOps.DEFAULT_TEMPLATE_CHAR = "Ньарлатхотеп - Свежеватель Душ"
 GeminiOps.DEFAULT_TEMPLATE_DETAILS = "Ньарлатхотеп-Свежеватель Душ"
+GeminiOps.PRIEST_TEMPLATE_CANDIDATES = {
+  "Ньарлатхотеп - Пиратская Бухта",
+  "Ньярлатхотеп - Пиратская Бухта",
+  "Ньарлатхотеп - Свежеватель Душ",
+}
+
+function GeminiOps.ResolvePriestTemplateKey(dstKey)
+  local profiles = _G.ElvDB and _G.ElvDB.profiles
+  if type(profiles) == "table" then
+    for _, cand in ipairs(GeminiOps.PRIEST_TEMPLATE_CANDIDATES) do
+      if cand ~= dstKey and type(profiles[cand]) == "table" and next(profiles[cand]) ~= nil then
+        -- Prefer a candidate that also exists in Bartender4DB (full configured profile)
+        if not _G.Bartender4DB or not _G.Bartender4DB.profiles or _G.Bartender4DB.profiles[cand] then
+          return cand
+        end
+      end
+    end
+  end
+  return GeminiOps.DEFAULT_TEMPLATE_CHAR
+end
 
 local C_AddOns = _G.C_AddOns
 local C_CVar = _G.C_CVar
@@ -107,6 +127,7 @@ function GeminiOps.ApplyEnvironmentHygiene()
   if C_CVar and C_CVar.SetCVar then
     pcall(C_CVar.SetCVar, "assistedCombatHighlight", "1")
     pcall(C_CVar.SetCVar, "CursorStickyCentering", "0")
+    pcall(C_CVar.SetCVar, "scriptErrors", "1")
   end
   if C_AddOns and C_AddOns.EnableAddOn then
     pcall(C_AddOns.EnableAddOn, "!BugGrabber")
@@ -119,17 +140,13 @@ function GeminiOps.ApplyEnvironmentHygiene()
     pcall(C_AddOns.DisableAddOn, "WeakAurasArchive")
     pcall(C_AddOns.DisableAddOn, "WeakAurasCompanion")
   end
-  if UIParent and UIParent.UnregisterEvent then
-    pcall(UIParent.UnregisterEvent, UIParent, "LUA_WARNING")
-    pcall(UIParent.UnregisterEvent, UIParent, "ADDON_ACTION_FORBIDDEN")
-    pcall(UIParent.UnregisterEvent, UIParent, "ADDON_ACTION_BLOCKED")
-  end
-  if _G.StaticPopupDialogs then
-    _G.StaticPopupDialogs["TOO_MANY_LUA_ERRORS"] = nil
-  end
-  if _G.StaticPopup_Hide then
-    pcall(_G.StaticPopup_Hide, "TOO_MANY_LUA_ERRORS")
-    pcall(_G.StaticPopup_Hide, "ADDON_ACTION_FORBIDDEN")
+  local E = _G.ElvUI and _G.ElvUI[1]
+  if E and E.private and E.private.WT and E.privateVars and E.privateVars.profile and E.privateVars.profile.WT then
+    for k, v in pairs(E.privateVars.profile.WT) do
+      if E.private.WT[k] == nil and type(v) == "table" then
+        E.private.WT[k] = v
+      end
+    end
   end
   GeminiOps.ForceElvUIChatAlwaysVisible()
 end
@@ -616,16 +633,18 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
     _G.ElvDB.profiles[dstKey] = DeepCopyTable(_G.ElvDB.profiles[srcKey])
   end
 
-  -- 2. ElvPrivateDB (disable ElvUI ActionBars/Nameplates/Bags + WindTools private config)
-  if type(_G.ElvPrivateDB) == "table" and _G.ElvPrivateDB.profiles and _G.ElvPrivateDB.profiles[srcKey] then
+  -- 2. ElvPrivateDB (preserve AceDB metatables on E.private and E.private.WT!)
+  if E and E.charSettings and E.charSettings.SetProfile and E.charSettings.CopyProfile then
+    pcall(function()
+      if _G.ElvPrivateDB and _G.ElvPrivateDB.profiles and _G.ElvPrivateDB.profiles[srcKey] then
+        E.charSettings:SetProfile(dstKey)
+        E.charSettings:CopyProfile(srcKey, false)
+      end
+    end)
+  elseif type(_G.ElvPrivateDB) == "table" and _G.ElvPrivateDB.profiles and _G.ElvPrivateDB.profiles[srcKey] then
     _G.ElvPrivateDB.profileKeys = _G.ElvPrivateDB.profileKeys or {}
     _G.ElvPrivateDB.profileKeys[dstKey] = dstKey
     _G.ElvPrivateDB.profiles[dstKey] = DeepCopyTable(_G.ElvPrivateDB.profiles[srcKey])
-    if E and E.private then
-      for k, v in pairs(_G.ElvPrivateDB.profiles[dstKey]) do
-        E.private[k] = DeepCopyTable(v)
-      end
-    end
   end
   if E and E.private then
     E.private.actionbar = E.private.actionbar or {}
@@ -1221,14 +1240,27 @@ eventFrame:SetScript("OnEvent", function(_, event)
         GeminiOps.ApplyEnvironmentHygiene()
         GeminiOps.ApplyExternalAddonQoL()
 
-        -- One-time profile clone for Трипобраз & Улак (from Ньарлатхотеп) and Морвара (from Калиратри)
+        -- One-time profile clone for Пиратская Бухта & Свежеватель Душ characters
         local curKey = GeminiOps.GetCurrentCharKey()
-        if curKey == "Трипобраз - Свежеватель Душ" or curKey == "Улак - Свежеватель Душ" then
-          local okC, msgC = GeminiOps.CloneCharacterProfiles(GeminiOps.DEFAULT_TEMPLATE_CHAR, curKey, false)
+        local autoCloneFromPriest = {
+          ["Ньарлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Свежеватель Душ",
+          ["Ньярлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Свежеватель Душ",
+          ["Трипобраз - Пиратская Бухта"]    = true,
+          ["Котастрофа - Пиратская Бухта"]   = true,
+          ["Котострофа - Пиратская Бухта"]   = true,
+          ["Улак - Пиратская Бухта"]         = true,
+          ["Трипобраз - Свежеватель Душ"]    = true,
+          ["Улак - Свежеватель Душ"]         = true,
+        }
+        if curKey and autoCloneFromPriest[curKey] then
+          local srcTpl = (type(autoCloneFromPriest[curKey]) == "string")
+            and autoCloneFromPriest[curKey]
+            or GeminiOps.ResolvePriestTemplateKey(curKey)
+          local okC, msgC = GeminiOps.CloneCharacterProfiles(srcTpl, curKey, false)
           if okC then
             print("|cff00ccff[GeminiOps]|r " .. tostring(msgC))
           end
-        elseif curKey == "Морвара - Свежеватель Душ" then
+        elseif curKey == "Морвара - Свежеватель Душ" or curKey == "Морвара - Пиратская Бухта" then
           local okC, msgC = GeminiOps.CloneCharacterProfiles("Калиратри - Свежеватель Душ", curKey, false)
           if okC then
             print("|cff00ccff[GeminiOps]|r " .. tostring(msgC))
@@ -1262,7 +1294,14 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
 
   if cmd == "clone" then
     local curKey = GeminiOps.GetCurrentCharKey()
-    local tpl = (curKey == "Морвара - Свежеватель Душ") and "Калиратри - Свежеватель Душ" or GeminiOps.DEFAULT_TEMPLATE_CHAR
+    local tpl
+    if curKey == "Морвара - Свежеватель Душ" or curKey == "Морвара - Пиратская Бухта" then
+      tpl = "Калиратри - Свежеватель Душ"
+    elseif curKey == "Ньарлатхотеп - Пиратская Бухта" or curKey == "Ньярлатхотеп - Пиратская Бухта" then
+      tpl = "Ньарлатхотеп - Свежеватель Душ"
+    else
+      tpl = GeminiOps.ResolvePriestTemplateKey(curKey)
+    end
     local ok, statusMsg = GeminiOps.CloneCharacterProfiles(tpl, curKey, true)
     print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
     if ok then

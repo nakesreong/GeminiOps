@@ -1,0 +1,146 @@
+VER 3 0100000000000015 "ar1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Веер клинков
+END
+VER 3 010000000000001E "ar10" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Шаг сквозь тень
+END
+VER 3 0100000000000016 "ar2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Гаррота
+END
+VER 3 0100000000000017 "ar3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Знак смерти
+END
+VER 3 0100000000000018 "ar4" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Кровавый вихрь
+END
+VER 3 0100000000000019 "ar5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Отравление
+END
+VER 3 010000000000001A "ar6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Отравленный нож
+END
+VER 3 010000000000001B "ar7" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Погибель королей
+END
+VER 3 010000000000001C "ar8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Расправа
+END
+VER 3 010000000000001D "ar9" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Рваная рана
+END
+VER 3 0100000000000001 "r1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast  Алый фиал
+END
+VER 3 010000000000000A "r10" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Отравляющий укол
+END
+VER 3 010000000000000B "r11" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Ошеломление
+END
+VER 3 010000000000000C "r12" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Пинок
+END
+VER 3 010000000000000D "r13" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Плащ теней
+END
+VER 3 010000000000000E "r14" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Подлый трюк
+END
+VER 3 010000000000000F "r15" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Скорополоховый чай
+END
+VER 3 0100000000000010 "r16" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Скрывающий покров
+END
+VER 3 0100000000000011 "r17" "INV_MISC_QUESTIONMARK"
+#showtooltip 
+/stopmacro [flying]
+/cast [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift, flyable] Осквернитель рощи; Неустрашимая императорская рысь
+/cast [nocombat] Незаметность; [combat] Исчезновение
+END
+VER 3 0100000000000012 "r18" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Удар по почкам
+END
+VER 3 0100000000000013 "r19" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Уловка
+END
+VER 3 0100000000000002 "r2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast  Взлом замка
+END
+VER 3 0100000000000014 "r20" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Ускользание
+END
+VER 3 0100000000000003 "r3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Внезапный удар
+END
+VER 3 0100000000000005 "r5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Мясорубка
+END
+VER 3 0100000000000006 "r6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Спринт
+END
+VER 3 0100000000000007 "r7" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Обшаривание карманов
+END
+VER 3 0100000000000008 "r8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Ослепление
+END
+VER 3 0100000000000009 "r9" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Отвлечение
+END

@@ -1,0 +1,165 @@
+VER 3 0100000000000033 "1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:845] Рассекающий удар; Вихрь
+END
+VER 3 0100000000000030 "2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:190456] !Стойкость к боли
+/cast Верная победа
+END
+VER 3 010000000000002F "3" "INV_MISC_QUESTIONMARK"
+#showtooltip Аватара
+/stopmacro [flying]
+/cast [nostance:2] Боевая стойка
+/cast Аватара
+END
+VER 3 0100000000000027 "AM1" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cast Отражение заклинаний
+END
+VER 3 0100000000000032 "AM2" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast Боевой крик
+END
+VER 3 010000000000002C "B3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:5246,@target,harm] Устрашающий крик; [known:384100] Крик берсерка; Ярость берсерка
+END
+VER 3 0100000000000025 "C" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cast Ободряющий клич
+END
+VER 3 0100000000000005 "CM1" "INV_MISC_QUESTIONMARK"
+#showtooltip Бой насмерть
+/stopmacro [flying]
+/cast [nostance:1] Оборонительная стойка
+/cast Бой насмерть
+END
+VER 3 0100000000000028 "CM2" "INV_MISC_QUESTIONMARK"
+#showtooltip [known:383762] Горестная невосприимчивость; Ободряющий клич
+/stopmacro [flying]
+/cast [nostance:1] Оборонительная стойка
+/cast [known:383762] Горестная невосприимчивость; Ободряющий клич
+END
+VER 3 010000000000000E "E" "134400"
+#showtooltip [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса
+/stopmacro [flying]
+/cast [nostance:2] Боевая стойка
+/cast [known:262161] Миротворец; [known:436358] Сокрушение; Удар колосса
+END
+VER 3 010000000000002D "F" "134400"
+#showtooltip Зуботычина
+/stopmacro [flying]
+/cast [@target, harm] !Зуботычина
+END
+VER 3 0100000000000006 "M1" "134400"
+#showtooltip Казнь
+/cancelaura Вихрь клинков
+/cast [@target, harm] Казнь
+END
+VER 3 0100000000000018 "M2" "134400"
+#showtooltip Смертельный удар
+/stopmacro [flying]
+/cast [known:198817, combat] !Заточка клинка
+/cast [known:12294, @target, harm] Смертельный удар
+END
+VER 3 010000000000001C "Q" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Превосходство 
+END
+VER 3 0100000000000019 "R" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:384318] Громогласный рык; [known:376079,@player] Копье чемпиона; [known:772] Кровопускание; Размашистые удары
+END
+VER 3 0100000000000013 "S1" "INV_MISC_QUESTIONMARK"
+#showtooltip Вмешательство
+#FS OD, X, ODTG
+/stopmacro [flying]
+/cast [known:3411, nostance:1] Оборонительная стойка
+/cast [known:3411, @none][@targetfriend] Вмешательство
+/cast [@none, harm] Рывок
+END
+VER 3 0100000000000026 "S2" "INV_MISC_QUESTIONMARK"
+#showtooltip Вмешательство
+#FS healer
+/stopmacro [flying]
+/cast [known:3411, nostance:1] Оборонительная стойка
+/cast [known:3411, @none] Вмешательство
+END
+VER 3 0100000000000023 "S3" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [known:236077, @target] Обезоруживание; [@target][] Героический бросок
+END
+VER 3 0100000000000029 "S4" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cast Ярость берсерка
+END
+VER 3 010000000000002B "SB3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:12323] Пронзительный вой; [known:384100] Крик берсерка; Ярость берсерка
+END
+VER 3 0100000000000031 "SE" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast Верная победа
+END
+VER 3 0100000000000009 "SF" "134400"
+#showtooltip
+/cast [@target, harm] !Рывок
+/cast [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift, flyable] Зисбарг; Инкогнитро, непостижимый скверноцикл
+/cast [@target] Подрезать сухожилия
+END
+VER 3 0100000000000017 "SM1" "134400"
+#showtooltip
+/stopmacro [flying][nocombat]
+/cast [known:228920, @player] Опустошитель; Вихрь клинков
+END
+VER 3 010000000000002A "SM2" "INV_MISC_QUESTIONMARK"
+#showtooltip Размашистые удары
+/stopmacro [flying]
+/cast [nostance:2] Боевая стойка
+/cast Размашистые удары
+/cast [combat] Аватара
+END
+VER 3 0100000000000016 "SQ" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:6343] Удар грома; Мощный удар
+END
+VER 3 0100000000000010 "SQ" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [known:198817] Заточка клинка; [known:20572] Кровавое неистовство; Размашистые удары
+END
+VER 3 010000000000002E "SR" "134400"
+#showtooltip Ударная волна
+/stopmacro [flying]
+/cast Ударная волна
+END
+VER 3 0100000000000007 "T" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+#FS EH, X
+/cast [known:107570,@none][known:107570,@target] Удар громовержца; [@target] Героический бросок
+END
+VER 3 010000000000000C "V" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [stance:1] Боевая стойка; Оборонительная стойка
+END
+VER 3 0100000000000034 "Z" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast Героический прыжок
+END

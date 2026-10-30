@@ -3,10 +3,10 @@
 ## Notes: Personal AI management utility for Anya & Gemini (Tiger): live AceDB profile cloning, ultrawide BlizzMove/CombatMode QoL, ElvUI chat guards & hotfix queue.
 ## Notes-ruRU: Личная инженерная утилита Джемини (Тигра) и Ани: живое клонирование профилей (ElvUI, Plater, Bartender4, Details), ультравайд QoL и мост SavedVariables.
 ## Author: Gemini (Tiger) & 5cr3am1ng5oul (Anya)
-## Version: v1.0.0
+## Version: v1.1.0
 ## IconTexture: 136243
 ## DefaultState: enabled
 ## SavedVariables: GeminiOpsDB
-## OptionalDeps: ElvUI, Bartender4, Plater, CombatMode, BlizzMove, Details, Masque, BetterBags, BigWigs, Krowi_ExtendedVendorUI
+## OptionalDeps: ElvUI, Bartender4, Plater, SpArc, MAWM, CombatMode, BlizzMove, Details, Masque, BetterBags, BigWigs, Krowi_ExtendedVendorUI
 
 Core.lua

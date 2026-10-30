@@ -1,0 +1,140 @@
+VER 3 010000000000001E "3" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Манипуляции со временем
+END
+VER 3 0100000000000007 "4" "134400"
+#showtooltip Зеркальное изображение
+/stopmacro [flying]
+/stopcasting
+/cast Зеркальное изображение
+END
+VER 3 0100000000000015 "F" "135856"
+#showtooltip Антимагия
+/stopcasting
+/cast [@target, harm][@mouseover, harm] Антимагия
+END
+VER 3 0100000000000024 "fm1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Ледяная преграда
+END
+VER 3 0100000000000026 "fm3" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Стрела ледяного огня
+END
+VER 3 010000000000001A "m1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target, noharm][@player] Замедленное падение
+END
+VER 3 010000000000000D "M1" "134400"
+#showtooltip Шквал
+/stopmacro [flying][channeling]
+/cast [@target, harm][@mouseover, harm] Шквал
+END
+VER 3 0100000000000023 "m10" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Чародейский интеллект
+END
+VER 3 0100000000000029 "m11" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Снятие проклятия
+END
+VER 3 010000000000002A "m12" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Чарокрад
+END
+VER 3 010000000000002B "M2" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Морозный луч
+END
+VER 3 010000000000001B "m2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Искажение времени
+END
+VER 3 0100000000000002 "M3" "135857"
+#showtooltip Снежная буря
+/stopmacro [flying]
+/cast [@target] Снежная буря
+/tar [@mouseover,exists][@softenemy,exists][@softfriend,exists]
+END
+VER 3 010000000000001D "m4" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Ледяная глыба
+END
+VER 3 0100000000000028 "m5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Великая невидимость
+END
+VER 3 010000000000001F "m6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Превращение
+END
+VER 3 0100000000000020 "m7" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Скачок
+END
+VER 3 0100000000000021 "m8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [mod:shift] Сотворение яств
+/use Сотворенные булочки из маны
+END
+VER 3 0100000000000022 "m9" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Чародейский взрыв
+END
+VER 3 010000000000002C "Q" "134400"
+#showtooltip Ледяное копье
+/focus [mod:alt,@mouseover,exists][mod:alt]
+/stopmacro [channeling][flying][mod:alt]
+/cast [@target,harm,nodead] Ледяное копье; [nocombat] Распыление
+END
+VER 3 010000000000001C "R" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Конус холода
+END
+VER 3 0100000000000005 "SE" "134400"
+#showtooltip Ледяная стрела
+/stopmacro [flying][channeling] 
+/cast [@target, harm][@mouseover, harm] !Ледяная стрела
+END
+VER 3 0100000000000014 "SF" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cast [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift, flyable] Осквернитель рощи; Инкогнитро, непостижимый скверноцикл
+/cast [@player] Скачок
+END
+VER 3 0100000000000027 "SM2" "134400"
+#showtooltip Ледяной шар
+/stopmacro [flying]
+/cast Ледяной шар
+END
+VER 3 0100000000000018 "SM3" "134400"
+#showtooltip Кольцо льда
+/stopmacro [flying]
+/cast Кольцо льда
+END
+VER 3 0100000000000001 "SQ" "2126034"
+#showtooltip Кометная буря
+/stopmacro [flying][channeling] 
+/cast [@target, harm][@mouseover, harm] Кометная буря
+END
+VER 3 0100000000000025 "SR" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast Снежный занос
+END

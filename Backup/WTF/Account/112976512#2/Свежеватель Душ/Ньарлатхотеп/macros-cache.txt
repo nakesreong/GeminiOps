@@ -1,0 +1,167 @@
+VER 3 010000000000004F "1_to_2" "134400"
+#showtooltip [actionbar:1] Придание сил; [actionbar:2] Взрыв разума
+#FS OD
+/cast [actionbar:1, @none, exists][actionbar:1, @player] !Придание сил; [actionbar:2, @target, harm] Взрыв разума
+/cast Облик Бездны
+/changeactionbar [actionbar:1]2
+END
+VER 3 0100000000000042 "AM1" "136230"
+#showtooltip
+/cast [known:15286] Объятия вампира
+END
+VER 3 0100000000000047 "AM2" "134400"
+#showtooltip
+/cast Слово силы: Стойкость
+END
+VER 3 010000000000003F "CM1" "237550"
+#showtooltip
+/stopcasting
+/cast !Молитва отчаяния
+/cast [@player] Слово силы: Щит
+END
+VER 3 010000000000004D "CM2" "134400"
+#showtooltip Слияние с тьмой
+/stopcasting
+/cast !Слияние с тьмой
+END
+VER 3 0100000000000033 "DD_Sield" "134400"
+#showtooltip Слово силы: Щит
+#FS OD
+/cast [@none] Слово силы: Щит
+END
+VER 3 010000000000004C "Dps" "537079"
+#showtooltip Вхождение в Бездну
+#FS OD
+/stopmacro [flying]
+/cast [@none] Вхождение в Бездну
+END
+VER 3 0100000000000051 "F" "134400"
+#showtooltip Безмолвие
+#FS target, EH
+/stopmacro [flying]
+/cast [@target, mod:ctrl] !Безмолвие; [@none][@target] !Безмолвие
+/cast [@target] Рассеивание заклинаний
+END
+VER 3 0100000000000045 "H_Shield" "134400"
+#showtooltip Слово силы: Щит
+#FS H
+/cast [@none, exists] Слово силы: Щит
+END
+VER 3 010000000000004B "Healer" "537079"
+#showtooltip Вхождение в Бездну
+#FS H
+/stopmacro [flying]
+/cast [@none] Вхождение в Бездну
+END
+VER 3 0100000000000041 "M1" "134400"
+#showtooltip
+/stopmacro [channeling:391403][channeling:263165][flying]
+/changeactionbar [bar:1,known:Залп Бездны]2;[bar:2,noknown:Залп Бездны]1
+/cast [noform] Облик Тьмы; [bar:1] Взрыв разума; [bar:2] Залп Бездны
+END
+VER 3 0100000000000039 "M2" "134400"
+#showtooltip [stance:0] Облик Тьмы; Мощный удар щупальцем
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [stance:0] Облик Тьмы; [stance:1, @target, harm] Мощный удар щупальцем
+END
+VER 3 0100000000000046 "M3" "134400"
+#showtooltip Слово Тьмы: Боль
+/focus [mod:alt,@mouseover,exists][mod:alt]
+/stopmacro [channeling][flying][mod:alt]
+/cast [@mouseover,help];[@target,harm,nodead] Слово Тьмы: Боль
+/tar [@mouseover,exists][@softenemy,exists][@softfriend,exists]
+END
+VER 3 0100000000000053 "M3" "237568"
+#showtooltip Глубинный ужас
+/stopmacro [flying]
+/cast [known:64044, @target] Глубинный ужас
+END
+VER 3 010000000000002E "p1" "642580"
+#showtooltip
+/stopmacro [flying]
+/cast [mod:ctrl] Позолоченный брутозавр торговца; [mod:alt] Вожак стаи из Седых холмов
+/castrandom [mod:shift] Жуткий скакун Всадника без головы
+/cast [@player] Божественное перышко
+END
+VER 3 010000000000003A "p12" "134400"
+#showtooltip Уход в тень
+/stopmacro [flying]
+/cast !Уход в тень
+/cast [@player] Слово силы: Щит
+END
+VER 3 0100000000000048 "p16" "134400"
+#showtooltip Воля к жизни
+/stopmacro [flying]
+/cast Воля к жизни
+END
+VER 3 0100000000000040 "p2" "136184"
+#showtooltip Ментальный крик
+/stopcasting
+/cast Ментальный крик
+END
+VER 3 010000000000003C "p2vp" "237568"
+#showtooltip Глубинный ужас
+#FS EH
+/stopmacro [flying]
+/cast [known:64044, @none] Глубинный ужас
+END
+VER 3 010000000000003E "p4" "134400"
+#showtooltip Слово силы: Щит
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [@player] !Слово силы: Щит
+/cast Уход в тень
+END
+VER 3 0100000000000038 "pvptal" "134400"
+#showtooltip
+#FS EH, EH, X, X
+/cast [known:211522, mod:ctrl, @none] Ментальный демон; [known:375901, mod:ctrl, @none] Игры разума; [known:211522, @target] Ментальный демон; [known:375901, @target] Игры разума; [@target] Слово Тьмы: Боль
+/targetenemy
+END
+VER 3 010000000000003D "S1" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [known:122121] !Божественная звезда; [known:120644] !Сияние; [@target] Рассеивание заклинаний
+END
+VER 3 0100000000000049 "S4" "134400"
+#showtooltip
+/cast Левитация
+END
+VER 3 0100000000000043 "SM1" "136149"
+#showtooltip Слово Тьмы: Смерть
+/stopcasting
+/cast [@target, harm] Слово Тьмы: Смерть
+END
+VER 3 0100000000000050 "SM2" "1386551"
+#showtooltip Поток бездны
+/stopmacro [channeling:391403][channeling:263165][flying]
+/changeactionbar [actionbar:2]1
+/cast [noform] Облик Тьмы; [@target, harm] Поток бездны
+END
+VER 3 010000000000004A "sp1pvp" "134400"
+#showtooltip Прикосновение вампира
+/stopmacro [channeling][flying]
+/cast [@target, harm] !Прикосновение вампира
+/targetenemyplayer
+END
+VER 3 0100000000000052 "sp3" "INV_Misc_QuestionMark"
+#showtooltip [known:Мощный удар щупальцем] Мощный удар щупальцем; Прикосновение вампира
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [noform] Облик Тьмы; [known:Мощный удар щупальцем, @target, harm] Мощный удар щупальцем; [@target, harm
+END
+VER 3 010000000000004E "sp4" "INV_Misc_QuestionMark"
+#showtooltip Слово Тьмы: Безумие
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cancelaura Слияние с Тьмой
+/cast [noform] Облик Тьмы; [@target, harm, exists] !Слово Тьмы: Безумие
+/cast Рассеивание заклинаний
+END
+VER 3 0100000000000054 "sp8" "134400"
+#showtooltip Пытка разума
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [noform] Облик Тьмы; [@target, harm] !Пытка разума
+END
+VER 3 0100000000000026 "V" "134400"
+#showtooltip 
+/cast [mod:ctrl, @player, known:32375][@cursor, known:32375] !Массовое рассеивание; [known:108920] !Щупальца Бездны
+/cast [@target] Рассеивание заклинаний
+END

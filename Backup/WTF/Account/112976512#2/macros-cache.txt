@@ -1,0 +1,249 @@
+VER 3 00000000000000B4 "bd1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха; [@player] Звездопад
+END
+VER 3 00000000000000B5 "bd2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Парад планет
+END
+VER 3 00000000000000B6 "bd3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха; [@player] Сила природы
+END
+VER 3 00000000000000B7 "bd4" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха; Созыв духов
+END
+VER 3 00000000000000B8 "bd5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха;t [@target] Солнечное затмение
+END
+VER 3 00000000000000B9 "bd6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Столп солнечного света
+END
+VER 3 00000000000000BA "bd7" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Солнечное затмение
+END
+VER 3 00000000000000AF "d31" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Облик лунного совуха
+END
+VER 3 00000000000000B0 "d32" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Озарение
+END
+VER 3 00000000000000B1 "d33" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Порыв
+END
+VER 3 00000000000000B2 "d34" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха; [@target] Солнечный огонь
+END
+VER 3 00000000000000B3 "d35" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Стремительный рывок
+END
+VER 3 00000000000000BB "d36" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха; [@target] Звездный поток
+END
+VER 3 00000000000000BC "d37" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик лунного совуха; [@target] Звездный огонь
+END
+VER 3 0000000000000002 "Disench_Template" "132853"
+#showtooltip
+/cast [@target, harm]
+/cast [@target, help]
+/cast [combat]
+/cast [nocombat] Распыление
+END
+VER 3 00000000000000A3 "E" "132212"
+#showtooltip item:41146
+/target [@mouseover,exists][@softenemy,exists][@softinteract,exists][@softfriend,exists]
+END
+VER 3 00000000000000A9 "fd1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Бурное бешенство
+END
+VER 3 00000000000000AA "fd2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Воплощение: аватара Пеплошкурой
+END
+VER 3 00000000000000AB "fd3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Инстинкты выживания
+END
+VER 3 00000000000000AC "fd4" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Лобовая атака
+END
+VER 3 00000000000000AD "fd5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Первобытный гнев
+END
+VER 3 00000000000000AE "fd6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Тигриное неистовство
+END
+VER 3 0000000000000097 "M1_1" "134400"
+#showtooltip [actionbar:1] Прикосновение вампира; [actionbar:2] Темное вознесение
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [actionbar:1, @target, harm] Прикосновение вампира; [actionbar:2] Темное вознесение
+END
+VER 3 0000000000000099 "M1_2" "134400"
+#showtooltip Взрыв разума
+/stopmacro [flying]
+/cast [actionbar:2, @target, harm] Взрыв разума
+END
+VER 3 000000000000009A "Mage_Tower_1" "134400"
+#showtooltip
+/cast [@Потусторонняя длань] Безмолвие
+END
+VER 3 000000000000009C "Mage_Tower_2" "134400"
+#showtooltip Прикосновение вампира
+/target [@Рейст]
+/cast [@target, harm] Прикосновение вампира
+END
+VER 3 000000000000009B "Mage_Tower_2" "134400"
+#showtooltip Прикосновение вампира
+/target [@Карам]
+/cast [@target, harm] Прикосновение вампира
+END
+VER 3 000000000000009D "Mage_Tower_3" "134400"
+#showtooltip Всепожирающая чума
+/cast [@Потусторонняя длань, exists][@target, harm] Всепожирающая чума
+END
+VER 3 000000000000009E "Mage_Tower_4" "134400"
+#showtooltip Поток Бездны
+/changeactionbar [actionbar:2]1
+/cast [@Потусторонняя длань, exists][@target, harm] Поток бездны
+END
+VER 3 000000000000009F "Mage_Tower_5" "134400"
+#showtooltip Темное сокрушение
+/cast [@Потусторонняя длань, exists][@Исчадие тьмы, exists][@Частица тьмы, exists] Темное сокрушение
+END
+VER 3 0000000000000095 "MG_1" "134400"
+#showtooltip
+/cast Безмолвие
+END
+VER 3 0000000000000096 "MG_2" "134400"
+END
+VER 3 0000000000000076 "mount" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cast [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift, flyable] Тельдрассилский гиппогриф; Величественный мушан бойца
+/cast [@player] 
+END
+VER 3 00000000000000A4 "p3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Внутреннее зрение
+END
+VER 3 00000000000000A5 "p5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Воскрешение
+END
+VER 3 00000000000000A6 "p6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Духовное рвение
+END
+VER 3 00000000000000A7 "p7" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Очищение от болезни
+END
+VER 3 00000000000000A8 "p8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Успокоение разума
+END
+VER 3 000000000000008C "self" "134400"
+#showtooltip
+/cast [@player] Быстрое исцеление
+END
+VER 3 0000000000000073 "SM2" "135826"
+#showtooltip Огненный столб
+/stopmacro [flying]
+/cast [@cursor] Огненный столб
+END
+VER 3 0000000000000080 "steal" "134400"
+#showtoooltip
+/cast [known:316262, @target] Украденные мысли 
+END
+VER 3 000000000000000A "Stone" "134400"
+#showtooltip
+/use [mod:alt] Камень возвращения в Даларан; Камень возвращения отъявленных нитей
+END
+VER 3 0000000000000094 "T" "134400"
+#showtooltip
+/cancelaura Зачарованная свеча
+/cast Кольцо Света
+END
+VER 3 0000000000000085 "t" "134400"
+#showtooltip
+/stopcasting
+/cast [@arena1] !Слово Тьмы: Боль
+/cast [@arena2] !Слово Тьмы: Боль
+/cast [@arena3] !Слово Тьмы: Боль
+END
+VER 3 00000000000000A2 "t0" "134400"
+#showtooltip
+/use 13
+END
+VER 3 0000000000000092 "t1" "134400"
+#showtooltip
+/use 14
+END
+VER 3 0000000000000087 "t3" "134400"
+#showtooltip Глубинный ужас
+#FS EH, X
+/stopmacro [flying]
+/cast [known:64044, @none, mod:ctrl] !Глубинный ужас; [known:64044, @target, harm, exists] !Глубинный ужас
+/cast [@target] Рассеивание заклинаний
+END
+VER 3 0000000000000091 "V1" "134400"
+#showtooltip Прикосновение вампира
+/stopmacro [channeling:391403][channeling:263165]
+/cast [@arena1, exists] Прикосновение вампира
+END
+VER 3 0000000000000088 "V1" "134400"
+#showtooltip
+/cast [@player] !Слово силы: Щит 
+/changeactionbar [actionbar:2]1
+END
+VER 3 0000000000000089 "V2" "134400"
+#showtooltip Прикосновение вампира
+/stopmacro [channeling:391403][channeling:263165]
+/cast [@arena2, exists] Прикосновение вампира
+END
+VER 3 000000000000008A "V3" "134400"
+#showtooltip Прикосновение вампира
+/stopmacro [channeling:391403][channeling:263165]
+/cast [@arena3, exists] Прикосновение вампира
+END
