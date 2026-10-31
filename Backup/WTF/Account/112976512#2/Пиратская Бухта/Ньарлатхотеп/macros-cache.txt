@@ -99,3 +99,69 @@ VER 3 0100000000000040 "p2" "136184"
 /stopcasting
 /cast Ментальный крик
 END
+VER 3 010000000000003C "p2vp" "237568"
+#showtooltip Глубинный ужас
+#FS EH
+/stopmacro [flying]
+/cast [known:64044, @none] Глубинный ужас
+END
+VER 3 010000000000003E "p4" "134400"
+#showtooltip Слово силы: Щит
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [@player] !Слово силы: Щит
+/cast Уход в тень
+END
+VER 3 0100000000000038 "pvptal" "134400"
+#showtooltip
+#FS EH, EH, X, X
+/cast [known:211522, mod:ctrl, @none] Ментальный демон; [known:375901, mod:ctrl, @none] Игры разума; [known:211522, @target] Ментальный демон; [known:375901, @target] Игры разума; [@target] Слово Тьмы: Боль
+/targetenemy
+END
+VER 3 010000000000003D "S1" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [known:122121] !Божественная звезда; [known:120644] !Сияние; [@target] Рассеивание заклинаний
+END
+VER 3 0100000000000049 "S4" "134400"
+#showtooltip
+/cast Левитация
+END
+VER 3 0100000000000043 "SM1" "136149"
+#showtooltip Слово Тьмы: Смерть
+/stopcasting
+/cast [@target, harm] Слово Тьмы: Смерть
+END
+VER 3 0100000000000050 "SM2" "1386551"
+#showtooltip Поток бездны
+/stopmacro [channeling:391403][channeling:263165][flying]
+/changeactionbar [actionbar:2]1
+/cast [noform] Облик Тьмы; [@target, harm] Поток бездны
+END
+VER 3 010000000000004A "sp1pvp" "134400"
+#showtooltip Прикосновение вампира
+/stopmacro [channeling][flying]
+/cast [@target, harm] !Прикосновение вампира
+/targetenemyplayer
+END
+VER 3 0100000000000052 "sp3" "INV_Misc_QuestionMark"
+#showtooltip [known:Мощный удар щупальцем] Мощный удар щупальцем; Прикосновение вампира
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [noform] Облик Тьмы; [known:Мощный удар щупальцем, @target, harm] Мощный удар щупальцем; [@target, harm
+END
+VER 3 010000000000004E "sp4" "INV_Misc_QuestionMark"
+#showtooltip Слово Тьмы: Безумие
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cancelaura Слияние с Тьмой
+/cast [noform] Облик Тьмы; [@target, harm, exists] !Слово Тьмы: Безумие
+/cast Рассеивание заклинаний
+END
+VER 3 0100000000000054 "sp8" "134400"
+#showtooltip Пытка разума
+/stopmacro [channeling:391403][channeling:263165][flying]
+/cast [noform] Облик Тьмы; [@target, harm] !Пытка разума
+END
+VER 3 0100000000000026 "V" "134400"
+#showtooltip 
+/cast [mod:ctrl, @player, known:32375][@cursor, known:32375] !Массовое рассеивание; [known:108920] !Щупальца Бездны
+/cast [@target] Рассеивание заклинаний
+END

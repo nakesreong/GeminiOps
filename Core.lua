@@ -898,6 +898,135 @@ function GeminiOps.SyncStarhammerMacros(force)
   return updated > 0, "Обновлено макросов Вара со стойками [nostance] (v5): " .. tostring(updated)
 end
 
+---------------------------------------------------------------------------------------
+--  3C. PRIEST (НЬАРЛАТХОТЕП) CHARACTER MACRO RESTORATION (30 SLOTS: 121..150)
+--  Blizzard's Realm Transfer truncates character macros at 18 (slots 121..138),
+--  dropping slots 139..150 (p2vp, p4, pvptal, S1, S4, SM1, SM2, sp1pvp, sp3, sp4, sp8, V).
+---------------------------------------------------------------------------------------
+local PRIEST_CHARACTER_MACROS = {
+  { name = "1_to_2", icon = 134400, body = "#showtooltip [actionbar:1] Придание сил; [actionbar:2] Взрыв разума\n#FS OD\n/cast [actionbar:1, @none, exists][actionbar:1, @player] !Придание сил; [actionbar:2, @target, harm] Взрыв разума\n/cast Облик Бездны\n/changeactionbar [actionbar:1]2" },
+  { name = "AM1",    icon = 136230, body = "#showtooltip\n/cast [known:15286] Объятия вампира" },
+  { name = "AM2",    icon = 134400, body = "#showtooltip\n/cast Слово силы: Стойкость" },
+  { name = "CM1",    icon = 237550, body = "#showtooltip\n/stopcasting\n/cast !Молитва отчаяния\n/cast [@player] Слово силы: Щит" },
+  { name = "CM2",    icon = 134400, body = "#showtooltip Слияние с тьмой\n/stopcasting\n/cast !Слияние с тьмой" },
+  { name = "DD_Sield", icon = 134400, body = "#showtooltip Слово силы: Щит\n#FS OD\n/cast [@none] Слово силы: Щит" },
+  { name = "Dps",    icon = 537079, body = "#showtooltip Вхождение в Бездну\n#FS OD\n/stopmacro [flying]\n/cast [@none] Вхождение в Бездну" },
+  { name = "F",      icon = 134400, body = "#showtooltip Безмолвие\n#FS target, EH\n/stopmacro [flying]\n/cast [@target, mod:ctrl] !Безмолвие; [@none][@target] !Безмолвие\n/cast [@target] Рассеивание заклинаний" },
+  { name = "H_Shield", icon = 134400, body = "#showtooltip Слово силы: Щит\n#FS H\n/cast [@none, exists] Слово силы: Щит" },
+  { name = "Healer", icon = 537079, body = "#showtooltip Вхождение в Бездну\n#FS H\n/stopmacro [flying]\n/cast [@none] Вхождение в Бездну" },
+  { name = "M1",     icon = 134400, body = "#showtooltip\n/stopmacro [channeling:391403][channeling:263165][flying]\n/changeactionbar [bar:1,known:Залп Бездны]2;[bar:2,noknown:Залп Бездны]1\n/cast [noform] Облик Тьмы; [bar:1] Взрыв разума; [bar:2] Залп Бездны" },
+  { name = "M2",     icon = 134400, body = "#showtooltip [stance:0] Облик Тьмы; Мощный удар щупальцем\n/stopmacro [channeling:391403][channeling:263165][flying]\n/cast [stance:0] Облик Тьмы; [stance:1, @target, harm] Мощный удар щупальцем" },
+  { name = "M3",     icon = 134400, match = "Боль", body = "#showtooltip Слово Тьмы: Боль\n/focus [mod:alt,@mouseover,exists][mod:alt]\n/stopmacro [channeling][flying][mod:alt]\n/cast [@mouseover,help];[@target,harm,nodead] Слово Тьмы: Боль\n/tar [@mouseover,exists][@softenemy,exists][@softfriend,exists]" },
+  { name = "M3",     icon = 237568, match = "ужас", body = "#showtooltip Глубинный ужас\n/stopmacro [flying]\n/cast [known:64044, @target] Глубинный ужас" },
+  { name = "p1",     icon = 642580, body = "#showtooltip\n/stopmacro [flying]\n/cast [mod:ctrl] Позолоченный брутозавр торговца; [mod:alt] Вожак стаи из Седых холмов\n/castrandom [mod:shift] Жуткий скакун Всадника без головы\n/cast [@player] Божественное перышко" },
+  { name = "p12",    icon = 134400, body = "#showtooltip Уход в тень\n/stopmacro [flying]\n/cast !Уход в тень\n/cast [@player] Слово силы: Щит" },
+  { name = "p16",    icon = 134400, body = "#showtooltip Воля к жизни\n/stopmacro [flying]\n/cast Воля к жизни" },
+  { name = "p2",     icon = 136184, body = "#showtooltip Ментальный крик\n/stopcasting\n/cast Ментальный крик" },
+  -- Slots 19..30 (139..150) truncated during Blizzard realm transfer:
+  { name = "p2vp",   icon = 237568, body = "#showtooltip Глубинный ужас\n#FS EH\n/stopmacro [flying]\n/cast [known:64044, @none] Глубинный ужас" },
+  { name = "p4",     icon = 134400, body = "#showtooltip Слово силы: Щит\n/stopmacro [channeling:391403][channeling:263165][flying]\n/cast [@player] !Слово силы: Щит\n/cast Уход в тень" },
+  { name = "pvptal", icon = 134400, body = "#showtooltip\n#FS EH, EH, X, X\n/cast [known:211522, mod:ctrl, @none] Ментальный демон; [known:375901, mod:ctrl, @none] Игры разума; [known:211522, @target] Ментальный демон; [known:375901, @target] Игры разума; [@target] Слово Тьмы: Боль\n/targetenemy" },
+  { name = "S1",     icon = 134400, slots = { 53 }, body = "#showtooltip\n/stopmacro [flying]\n/cast [known:122121] !Божественная звезда; [known:120644] !Сияние; [@target] Рассеивание заклинаний" },
+  { name = "S4",     icon = 134400, slots = { 56 }, body = "#showtooltip\n/cast Левитация" },
+  { name = "SM1",    icon = 136149, slots = { 3, 15 }, body = "#showtooltip Слово Тьмы: Смерть\n/stopcasting\n/cast [@target, harm] Слово Тьмы: Смерть" },
+  { name = "SM2",    icon = 1386551, slots = { 4, 16 }, body = "#showtooltip Поток бездны\n/stopmacro [channeling:391403][channeling:263165][flying]\n/changeactionbar [actionbar:2]1\n/cast [noform] Облик Тьмы; [@target, harm] Поток бездны" },
+  { name = "sp1pvp", icon = 134400, body = "#showtooltip Прикосновение вампира\n/stopmacro [channeling][flying]\n/cast [@target, harm] !Прикосновение вампира\n/targetenemyplayer" },
+  { name = "sp3",    icon = "INV_MISC_QUESTIONMARK", slots = { 51 }, body = "#showtooltip [known:Мощный удар щупальцем] Мощный удар щупальцем; Прикосновение вампира\n/stopmacro [channeling:391403][channeling:263165][flying]\n/cast [noform] Облик Тьмы; [known:Мощный удар щупальцем, @target, harm] Мощный удар щупальцем; [@target, harm] Прикосновение вампира" },
+  { name = "sp4",    icon = "INV_MISC_QUESTIONMARK", slots = { 52 }, body = "#showtooltip Слово Тьмы: Безумие\n/stopmacro [channeling:391403][channeling:263165][flying]\n/cancelaura Слияние с Тьмой\n/cast [noform] Облик Тьмы; [@target, harm, exists] !Слово Тьмы: Безумие\n/cast Рассеивание заклинаний" },
+  { name = "sp8",    icon = 134400, body = "#showtooltip Пытка разума\n/stopmacro [channeling:391403][channeling:263165][flying]\n/cast [noform] Облик Тьмы; [@target, harm] !Пытка разума" },
+  { name = "V",      icon = 134400, slots = { 70 }, body = "#showtooltip \n/cast [mod:ctrl, @player, known:32375][@cursor, known:32375] !Массовое рассеивание; [known:108920] !Щупальца Бездны\n/cast [@target] Рассеивание заклинаний" },
+}
+
+function GeminiOps.IsPlayerPriest()
+  if _G.UnitClass then
+    local ok, _, cls = pcall(_G.UnitClass, "player")
+    if ok and cls == "PRIEST" then
+      return true
+    end
+  end
+  return false
+end
+
+function GeminiOps.SyncPriestMacros(force)
+  local curKey = GeminiOps.GetCurrentCharKey()
+  if not GeminiOps.IsPlayerPriest()
+    and curKey ~= "Ньарлатхотеп - Пиратская Бухта"
+    and curKey ~= "Ньярлатхотеп - Пиратская Бухта"
+    and curKey ~= "Ньарлатхотеп - Свежеватель Душ" then
+    return false, "Macro sync is only for Priest (Ньарлатхотеп)"
+  end
+  if _G.InCombatLockdown and _G.InCombatLockdown() then
+    return false, "Cannot sync macros in combat"
+  end
+  if not _G.GetMacroInfo or not _G.CreateMacro or not _G.EditMacro then
+    return false, "Macro API unavailable"
+  end
+
+  local created = 0
+  local updated = 0
+  local placed  = 0
+
+  for _, entry in ipairs(PRIEST_CHARACTER_MACROS) do
+    local foundIdx = nil
+    for idx = 121, 150 do
+      local name, _, body = _G.GetMacroInfo(idx)
+      if name == entry.name then
+        if not entry.match or (type(body) == "string" and body:find(entry.match, 1, true)) then
+          foundIdx = idx
+          break
+        end
+      end
+    end
+
+    if not foundIdx then
+      local okC, newIdx = pcall(_G.CreateMacro, entry.name, entry.icon or 134400, entry.body, true)
+      if okC and newIdx then
+        created = created + 1
+        foundIdx = newIdx
+      end
+    elseif force then
+      pcall(_G.EditMacro, foundIdx, entry.name, entry.icon or 134400, entry.body)
+      updated = updated + 1
+    end
+  end
+
+  -- Re-scan character macros after alphabetical sort and restore any emptied action bar slots
+  if _G.HasAction and _G.PickupMacro and _G.PlaceAction and _G.ClearCursor then
+    for _, entry in ipairs(PRIEST_CHARACTER_MACROS) do
+      if entry.slots then
+        local macroIdx = nil
+        for idx = 121, 150 do
+          local name, _, body = _G.GetMacroInfo(idx)
+          if name == entry.name then
+            if not entry.match or (type(body) == "string" and body:find(entry.match, 1, true)) then
+              macroIdx = idx
+              break
+            end
+          end
+        end
+        if macroIdx then
+          for _, slot in ipairs(entry.slots) do
+            if not _G.HasAction(slot) then
+              pcall(_G.PickupMacro, macroIdx)
+              pcall(_G.PlaceAction, slot)
+              pcall(_G.ClearCursor)
+              placed = placed + 1
+            end
+          end
+        end
+      end
+    end
+  end
+
+  if created > 0 or updated > 0 or placed > 0 then
+    return true, string.format(
+      "Восстановлены макросы Приста: создано %d (S1, S4, SM1, SM2, V, p4, sp3, sp4, sp8...), обновлено %d, возвращено на пустые слоты панелей: %d",
+      created, updated, placed
+    )
+  end
+  return false, "Все 30 персональных макросов Приста уже на месте"
+end
+
 local detailsChatTabBtn = nil
 local detailsChatTabBg = nil
 local detailsTabActive = false
@@ -1267,6 +1396,14 @@ eventFrame:SetScript("OnEvent", function(_, event)
           end
         end
 
+        -- Automatically restore any missing Priest character macros (truncated by Blizzard realm transfer)
+        if GeminiOps.IsPlayerPriest() then
+          local okPM, msgPM = GeminiOps.SyncPriestMacros(false)
+          if okPM then
+            print("|cff00ccff[GeminiOps]|r " .. tostring(msgPM))
+          end
+        end
+
         -- Move Details! out of RightChatPanel (Loot) to LeftChatPanel (Tab or Above) for all characters
         GeminiOps.SetupDetailsLeftChat(nil, nil)
       end)
@@ -1307,9 +1444,14 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
     if ok then
       print("|cff00ccff[GeminiOps]|r Напиши |cffffd100/reload|r, чтобы применить приватные модули ElvUI.")
     end
-  elseif cmd == "macros" then
-    local okM, msgM = GeminiOps.SyncStarhammerMacros(true)
-    print("|cff00ccff[GeminiOps]|r " .. tostring(msgM))
+  elseif cmd == "macros" or cmd == "priestmacros" then
+    if cmd == "priestmacros" or GeminiOps.IsPlayerPriest() then
+      local _, msgM = GeminiOps.SyncPriestMacros(true)
+      print("|cff00ccff[GeminiOps]|r " .. tostring(msgM))
+    else
+      local _, msgM = GeminiOps.SyncStarhammerMacros(true)
+      print("|cff00ccff[GeminiOps]|r " .. tostring(msgM))
+    end
   elseif cmd == "tab" then
     local _, statusMsg = GeminiOps.SetupDetailsLeftChat("TAB", true)
     print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
