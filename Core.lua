@@ -178,23 +178,32 @@ function GeminiOps.ApplyEnvironmentHygiene()
       end
     end
     -- Unbind all F1..F12 keys (plus Shift/Ctrl/Alt modifiers) & hidden ACTIONPAGE binds so Insights recorder (F6/F7) and system hotkeys never conflict with WoW
-    if _G.GetBindingAction and _G.SetBinding then
+    if _G.SetBinding then
       local changedBinds = false
-      for i = 1, 12 do
-        for _, prefix in ipairs({ "", "SHIFT-", "CTRL-", "ALT-" }) do
-          local fKey = prefix .. "F" .. i
-          local act = _G.GetBindingAction(fKey)
-          if act and act ~= "" then
-            pcall(_G.SetBinding, fKey, nil)
-            changedBinds = true
+      if _G.GetBindingKey then
+        for _, pageAct in ipairs({
+          "ACTIONPAGE1", "ACTIONPAGE2", "ACTIONPAGE3", "ACTIONPAGE4", "ACTIONPAGE5", "ACTIONPAGE6",
+          "PREVIOUSACTIONPAGE", "NEXTACTIONPAGE",
+        }) do
+          local keys = { _G.GetBindingKey(pageAct) }
+          for _, k in ipairs(keys) do
+            if k and k ~= "" then
+              pcall(_G.SetBinding, k, nil)
+              changedBinds = true
+            end
           end
         end
       end
-      for _, pKey in ipairs({ "SHIFT-UP", "SHIFT-DOWN", "SHIFT-MOUSEWHEELUP", "SHIFT-MOUSEWHEELDOWN" }) do
-        local act = _G.GetBindingAction(pKey)
-        if act and (act:find("^ACTIONPAGE") or act == "PREVIOUSACTIONPAGE" or act == "NEXTACTIONPAGE") then
-          pcall(_G.SetBinding, pKey, nil)
-          changedBinds = true
+      if _G.GetBindingAction then
+        for i = 1, 12 do
+          for _, prefix in ipairs({ "", "SHIFT-", "CTRL-", "ALT-" }) do
+            local fKey = prefix .. "F" .. i
+            local act = _G.GetBindingAction(fKey)
+            if act and act ~= "" then
+              pcall(_G.SetBinding, fKey, nil)
+              changedBinds = true
+            end
+          end
         end
       end
       if changedBinds and _G.SaveBindings and _G.GetCurrentBindingSet then
@@ -1421,9 +1430,31 @@ local eventFrame = _G.CreateFrame("Frame", "GeminiOpsEventFrame", UIParent)
 eventFrame:RegisterEvent("PLAYER_LOGIN")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 eventFrame:RegisterEvent("PLAYER_LOGOUT")
+eventFrame:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
+eventFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+
+local pendingPageReset = false
 
 eventFrame:SetScript("OnEvent", function(_, event)
-  if event == "PLAYER_LOGIN" then
+  if event == "ACTIONBAR_PAGE_CHANGED" then
+    if _G.GetActionBarPage and _G.ChangeActionBarPage then
+      local curPage = _G.GetActionBarPage()
+      if curPage and curPage > 2 then
+        if _G.InCombatLockdown and _G.InCombatLockdown() then
+          pendingPageReset = true
+        else
+          pcall(_G.ChangeActionBarPage, 1)
+        end
+      end
+    end
+    return
+  elseif event == "PLAYER_REGEN_ENABLED" then
+    if pendingPageReset and _G.ChangeActionBarPage then
+      pendingPageReset = false
+      pcall(_G.ChangeActionBarPage, 1)
+    end
+    return
+  elseif event == "PLAYER_LOGIN" then
     GeminiOps.ApplyEnvironmentHygiene()
     GeminiOps.ApplyExternalAddonQoL()
 
@@ -1459,9 +1490,15 @@ eventFrame:SetScript("OnEvent", function(_, event)
           end
         end
 
-        -- Automatically restore any missing Priest character macros (truncated by Blizzard realm transfer)
+        -- Automatically restore & update Priest character macros (including M1 and 1_to_2 fix v3)
         if GeminiOps.IsPlayerPriest() then
-          local okPM, msgPM = GeminiOps.SyncPriestMacros(false)
+          local gopsDB = GeminiOps:EnsureDB()
+          local pmKey = "priest_macros_v3_" .. tostring(curKey or "default")
+          local forceUpdate = not gopsDB.completedTasks[pmKey]
+          local okPM, msgPM = GeminiOps.SyncPriestMacros(forceUpdate)
+          if forceUpdate then
+            gopsDB.completedTasks[pmKey] = true
+          end
           if okPM then
             print("|cff00ccff[GeminiOps]|r " .. tostring(msgPM))
           end
