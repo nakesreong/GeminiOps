@@ -83,14 +83,35 @@ function GeminiOps.ForceElvUIChatAlwaysVisible()
     if E.db.WT and E.db.WT.quest and E.db.WT.quest.turnIn then
       E.db.WT.quest.turnIn.enable = false
     end
+    if E.db.WT and E.db.WT.combat and E.db.WT.combat.combatAlert then
+      E.db.WT.combat.combatAlert.enable = false
+    end
   end
-  local W = _G.ElvUI_WindTools and _G.ElvUI_WindTools[1]
+  if _G.ElvDB and type(_G.ElvDB.profiles) == "table" then
+    for _, prof in pairs(_G.ElvDB.profiles) do
+      if type(prof) == "table" and prof.WT and prof.WT.combat then
+        prof.WT.combat.combatAlert = prof.WT.combat.combatAlert or {}
+        prof.WT.combat.combatAlert.enable = false
+      end
+    end
+  end
+  local W = (_G.WindTools and _G.WindTools[1]) or (_G.ElvUI_WindTools and _G.ElvUI_WindTools[1])
   if W and W.GetModule then
-    local okTI, TI = pcall(W.GetModule, W, "TurnIn")
+    local okTI, TI = pcall(W.GetModule, W, "TurnIn", true)
     if okTI and TI then
       if TI.db then TI.db.enable = false end
       if TI.UnregisterAllEvents then pcall(TI.UnregisterAllEvents, TI) end
       TI.initialized = false
+    end
+    local okCA, CA = pcall(W.GetModule, W, "CombatAlert", true)
+    if okCA and CA then
+      if CA.db then CA.db.enable = false end
+      CA.ShowAlert = function() end
+      CA.QueueAlert = function() end
+      CA.PLAYER_REGEN_DISABLED = function() end
+      CA.PLAYER_REGEN_ENABLED = function() end
+      if CA.UnregisterAllEvents then pcall(CA.UnregisterAllEvents, CA) end
+      if CA.AlertFrame and CA.AlertFrame.Hide then pcall(CA.AlertFrame.Hide, CA.AlertFrame) end
     end
   end
   if _G.LeftChatPanel then
@@ -128,6 +149,7 @@ function GeminiOps.ApplyEnvironmentHygiene()
     pcall(C_CVar.SetCVar, "assistedCombatHighlight", "1")
     pcall(C_CVar.SetCVar, "CursorStickyCentering", "0")
     pcall(C_CVar.SetCVar, "scriptErrors", "1")
+    pcall(C_CVar.SetCVar, "floatingCombatTextCombatState", "0")
   end
   if C_AddOns and C_AddOns.EnableAddOn then
     pcall(C_AddOns.EnableAddOn, "!BugGrabber")
@@ -713,9 +735,12 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
     end
   end
 
-  -- 5. SpArc (Per-Character Visual/Camera Profile Cloner)
+  -- 5. SpArc (Per-Character Visual/Camera Profile Cloner; only copy DoT aura rules if same character name across realms)
   if _G.SpArc and _G.SpArc.CopyProfileFrom then
-    pcall(_G.SpArc.CopyProfileFrom, _G.SpArc, srcKey)
+    local srcBase = tostring(srcKey or ""):match("^(.-)%s*%-") or tostring(srcKey or "")
+    local dstBase = tostring(dstKey or ""):match("^(.-)%s*%-") or tostring(dstKey or "")
+    local sameChar = (srcBase ~= "" and srcBase == dstBase)
+    pcall(_G.SpArc.CopyProfileFrom, _G.SpArc, srcKey, sameChar)
   end
   if type(_G.SpArcDB) == "table" and type(_G.SpArcDB.profiles) == "table" then
     local spSrc = _G.SpArcDB.profiles[srcKey]
