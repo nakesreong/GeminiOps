@@ -170,6 +170,28 @@ function GeminiOps.ApplyEnvironmentHygiene()
       end
     end
   end
+  if not (_G.InCombatLockdown and _G.InCombatLockdown()) then
+    if _G.GetActionBarPage and _G.ChangeActionBarPage then
+      local curPage = _G.GetActionBarPage()
+      if curPage and curPage ~= 1 then
+        pcall(_G.ChangeActionBarPage, 1)
+      end
+    end
+    -- Strip hidden Blizzard ACTIONPAGE5/6 binds from F5/F6 (used by Insights video recorder!)
+    if _G.GetBindingAction and _G.SetBinding then
+      local changedBinds = false
+      for _, fKey in ipairs({ "F5", "F6", "SHIFT-UP", "SHIFT-DOWN", "SHIFT-MOUSEWHEELUP", "SHIFT-MOUSEWHEELDOWN" }) do
+        local act = _G.GetBindingAction(fKey)
+        if act and (act:find("^ACTIONPAGE") or act == "PREVIOUSACTIONPAGE" or act == "NEXTACTIONPAGE") then
+          pcall(_G.SetBinding, fKey, nil)
+          changedBinds = true
+        end
+      end
+      if changedBinds and _G.SaveBindings and _G.GetCurrentBindingSet then
+        pcall(_G.SaveBindings, _G.GetCurrentBindingSet() or 2)
+      end
+    end
+  end
   GeminiOps.ForceElvUIChatAlwaysVisible()
 end
 
@@ -499,7 +521,7 @@ local TEMPLATE_KEYBINDINGS = {
   { "F2", "NONE" },
   { "F3", "NONE" },
   { "F4", "NONE" },
-  { "F5", "ACTIONPAGE5" },
+  { "F5", "NONE" },
   { "G", "Combat Mode - Mouse Look" },
   { "F", "MULTIACTIONBAR1BUTTON5" },
   { "SHIFT-V", "NONE" },
@@ -538,7 +560,7 @@ local TEMPLATE_KEYBINDINGS = {
   { "BUTTON5", "CLICK LM_B1:LeftButton" },
   { "SHIFT-BUTTON5", "NONE" },
   { "`", "Combat Mode - Mouse Look" },
-  { "F6", "ACTIONPAGE6" },
+  { "F6", "NONE" },
   { "CTRL-.", "TOGGLESOUND" },
   { "ALT-Q", "NONE" },
   { "ALT-R", "NONE" },
@@ -929,7 +951,7 @@ end
 --  dropping slots 139..150 (p2vp, p4, pvptal, S1, S4, SM1, SM2, sp1pvp, sp3, sp4, sp8, V).
 ---------------------------------------------------------------------------------------
 local PRIEST_CHARACTER_MACROS = {
-  { name = "1_to_2", icon = 134400, body = "#showtooltip [actionbar:1] Придание сил; [actionbar:2] Взрыв разума\n#FS OD\n/cast [actionbar:1, @none, exists][actionbar:1, @player] !Придание сил; [actionbar:2, @target, harm] Взрыв разума\n/cast Облик Бездны\n/changeactionbar [actionbar:1]2" },
+  { name = "1_to_2", icon = 134400, body = "#showtooltip [bar:1] Придание сил; Взрыв разума\n#FS OD\n/cast [bar:1, @none, exists][bar:1, @player] !Придание сил; [@target, harm] Взрыв разума\n/cast [bar:1] Облик Бездны\n/changeactionbar [bar:1]2" },
   { name = "AM1",    icon = 136230, body = "#showtooltip\n/cast [known:15286] Объятия вампира" },
   { name = "AM2",    icon = 134400, body = "#showtooltip\n/cast Слово силы: Стойкость" },
   { name = "CM1",    icon = 237550, body = "#showtooltip\n/stopcasting\n/cast !Молитва отчаяния\n/cast [@player] Слово силы: Щит" },
@@ -939,7 +961,7 @@ local PRIEST_CHARACTER_MACROS = {
   { name = "F",      icon = 134400, body = "#showtooltip Безмолвие\n#FS target, EH\n/stopmacro [flying]\n/cast [@target, mod:ctrl] !Безмолвие; [@none][@target] !Безмолвие\n/cast [@target] Рассеивание заклинаний" },
   { name = "H_Shield", icon = 134400, body = "#showtooltip Слово силы: Щит\n#FS H\n/cast [@none, exists] Слово силы: Щит" },
   { name = "Healer", icon = 537079, body = "#showtooltip Вхождение в Бездну\n#FS H\n/stopmacro [flying]\n/cast [@none] Вхождение в Бездну" },
-  { name = "M1",     icon = 134400, body = "#showtooltip\n/stopmacro [channeling:391403][channeling:263165][flying]\n/changeactionbar [bar:1,known:Залп Бездны]2;[bar:2,noknown:Залп Бездны]1\n/cast [noform] Облик Тьмы; [bar:1] Взрыв разума; [bar:2] Залп Бездны" },
+  { name = "M1",     icon = 134400, body = "#showtooltip\n/stopmacro [channeling:391403][channeling:263165][flying]\n/changeactionbar [known:1242173][known:Залп Бездны]2;1\n/cast [noform] Облик Тьмы; [bar:2,known:1242173][bar:2,known:Залп Бездны] Залп Бездны; Взрыв разума" },
   { name = "M2",     icon = 134400, body = "#showtooltip [stance:0] Облик Тьмы; Мощный удар щупальцем\n/stopmacro [channeling:391403][channeling:263165][flying]\n/cast [stance:0] Облик Тьмы; [stance:1, @target, harm] Мощный удар щупальцем" },
   { name = "M3",     icon = 134400, match = "Боль", body = "#showtooltip Слово Тьмы: Боль\n/focus [mod:alt,@mouseover,exists][mod:alt]\n/stopmacro [channeling][flying][mod:alt]\n/cast [@mouseover,help];[@target,harm,nodead] Слово Тьмы: Боль\n/tar [@mouseover,exists][@softenemy,exists][@softfriend,exists]" },
   { name = "M3",     icon = 237568, match = "ужас", body = "#showtooltip Глубинный ужас\n/stopmacro [flying]\n/cast [known:64044, @target] Глубинный ужас" },
