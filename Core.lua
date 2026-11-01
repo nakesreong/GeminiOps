@@ -177,13 +177,23 @@ function GeminiOps.ApplyEnvironmentHygiene()
         pcall(_G.ChangeActionBarPage, 1)
       end
     end
-    -- Strip hidden Blizzard ACTIONPAGE5/6 binds from F5/F6 (used by Insights video recorder!)
+    -- Unbind all F1..F12 keys (plus Shift/Ctrl/Alt modifiers) & hidden ACTIONPAGE binds so Insights recorder (F6/F7) and system hotkeys never conflict with WoW
     if _G.GetBindingAction and _G.SetBinding then
       local changedBinds = false
-      for _, fKey in ipairs({ "F5", "F6", "SHIFT-UP", "SHIFT-DOWN", "SHIFT-MOUSEWHEELUP", "SHIFT-MOUSEWHEELDOWN" }) do
-        local act = _G.GetBindingAction(fKey)
+      for i = 1, 12 do
+        for _, prefix in ipairs({ "", "SHIFT-", "CTRL-", "ALT-" }) do
+          local fKey = prefix .. "F" .. i
+          local act = _G.GetBindingAction(fKey)
+          if act and act ~= "" then
+            pcall(_G.SetBinding, fKey, nil)
+            changedBinds = true
+          end
+        end
+      end
+      for _, pKey in ipairs({ "SHIFT-UP", "SHIFT-DOWN", "SHIFT-MOUSEWHEELUP", "SHIFT-MOUSEWHEELDOWN" }) do
+        local act = _G.GetBindingAction(pKey)
         if act and (act:find("^ACTIONPAGE") or act == "PREVIOUSACTIONPAGE" or act == "NEXTACTIONPAGE") then
-          pcall(_G.SetBinding, fKey, nil)
+          pcall(_G.SetBinding, pKey, nil)
           changedBinds = true
         end
       end
@@ -522,13 +532,19 @@ local TEMPLATE_KEYBINDINGS = {
   { "F3", "NONE" },
   { "F4", "NONE" },
   { "F5", "NONE" },
+  { "F6", "NONE" },
+  { "F7", "NONE" },
+  { "F8", "NONE" },
+  { "F9", "NONE" },
+  { "F10", "NONE" },
+  { "F11", "NONE" },
+  { "F12", "NONE" },
   { "G", "Combat Mode - Mouse Look" },
   { "F", "MULTIACTIONBAR1BUTTON5" },
   { "SHIFT-V", "NONE" },
   { "CTRL-V", "NONE" },
   { "SHIFT-T", "MULTIACTIONBAR1BUTTON8" },
   { "SHIFT-B", "NONE" },
-  { "F12", "TOGGLESOUND" },
   { "SHIFT-SPACE", "EXTRAACTIONBUTTON1" },
   { "J", "NONE" },
   { "SHIFT-Y", "NONE" },
