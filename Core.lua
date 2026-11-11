@@ -1647,6 +1647,7 @@ local HUNTER_MOUNT_CHEETAH_MACRO = "#showtooltip\n/stopmacro [flying]\n/castrand
 
 local HUNTER_CUSTOM_SPELL_BODIES = {
   ["Дух гепарда"]          = HUNTER_MOUNT_CHEETAH_MACRO,
+  ["Команда \"Взять!\""]   = "#showtooltip Команда \"Взять!\"\n/stopmacro [flying]\n/cleartarget [dead][noharm]\n/cast [@target,harm,nodead][@mouseover,harm,nodead] Команда \"Взять!\"\n/settarget\n/startattack\n/petattack",
   ["Отрыв"]                = "#showtooltip Отрыв\n/stopmacro [flying]\n/cast Отрыв\n/cast [combat][mod:shift] Дух орла",
   ["Дух орла"]             = "#showtooltip Дух орла\n/stopmacro [flying]\n/cleartarget [dead][noharm]\n/cast Отрыв\n/cast Дух орла\n/startattack\n/petattack",
   ["Огнестрел"]            = "#showtooltip Огнестрел\n/stopmacro [flying]\n/cleartarget [dead][noharm]\n/cast [combat][harm,nodead] Огнестрел; Распыление\n/stopmacro [nocombat,noharm]\n/startattack\n/petattack",
