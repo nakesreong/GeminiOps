@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
-["session"] = 266,
 ["lastSanitation"] = 3,
+["session"] = 267,
 ["errors"] = {
 {
 ["message"] = "C stack overflow",
@@ -141,8 +141,8 @@ BugGrabberDB = {
 },
 {
 ["message"] = "LUA_WARNING: Interface/AddOns/SpArc/SpArc.lua:1 Interface/AddOns/SpArc/SpArc.lua:1315: function at line 1108 has more than 60 upvalues",
-["time"] = 1792771099,
 ["session"] = 42,
+["time"] = 1792771099,
 ["counter"] = 3,
 },
 {
@@ -395,14 +395,14 @@ BugGrabberDB = {
 },
 {
 ["message"] = "LUA_WARNING: AddOn [ShadowedUnitFrames] failure to load: missing",
-["session"] = 168,
 ["time"] = 1793425276,
+["session"] = 168,
 ["counter"] = 8,
 },
 {
 ["message"] = "LUA_WARNING: AddOn [ShadowedUFFacade] Failed to load missing dependency [ShadowedUnitFrames]",
-["session"] = 168,
 ["time"] = 1793425276,
+["session"] = 168,
 ["counter"] = 8,
 },
 {
@@ -479,14 +479,14 @@ BugGrabberDB = {
 },
 {
 ["message"] = "LUA_WARNING: ChatFrame1:SetPoint(): Couldn't find region named 'LeftChatPanel'\n|cffffd200Stack:|r\n[C]: in function 'secureexecuterange'\n[Interface/AddOns/Blizzard_EditMode/Shared/EditModeManager.lua]:1400: in function 'UpdateSystems' with args (self=EditModeManagerFrame <EditModeManager.xml:4>)\n[Interface/AddOns/Blizzard_EditMode/Shared/EditModeManager.lua]:953: in function 'UpdateLayoutInfo' with args (self=EditModeManagerFrame <EditModeManager.xml:4>, layoutInfo=<table>, reconcileLayouts=true)\n[Interface/AddOns/Blizzard_EditMode/Shared/EditModeManager.lua]:190: in function <.../AddOns/Blizzard_EditMode/Shared/EditModeManager.lua:187> with args (self=EditModeManagerFrame <EditModeManager.xml:4>, event=\"EDIT_MODE_LAYOUTS_UPDATED\")\n",
-["session"] = 203,
 ["time"] = 1793668169,
+["session"] = 203,
 ["counter"] = 49,
 },
 {
 ["message"] = "LUA_WARNING: ChatFrame1:SetPoint(): Couldn't find region named 'LeftChatPanel'\n|cffffd200Stack:|r\n[C]: in function 'secureexecuterange'\n[Interface/AddOns/Blizzard_EditMode/Shared/EditModeManager.lua]:1400: in function 'UpdateSystems' with args (self=EditModeManagerFrame <EditModeManager.xml:4>)\n[Interface/AddOns/Blizzard_EditMode/Shared/EditModeManager.lua]:953: in function 'UpdateLayoutInfo' with args (self=EditModeManagerFrame <EditModeManager.xml:4>, layoutInfo=<table>, reconcileLayouts=false)\n[Interface/AddOns/Blizzard_EditMode/Shared/EditModeManager.lua]:190: in function <.../AddOns/Blizzard_EditMode/Shared/EditModeManager.lua:187> with args (self=EditModeManagerFrame <EditModeManager.xml:4>, event=\"EDIT_MODE_LAYOUTS_UPDATED\")\n",
-["time"] = 1793668239,
 ["session"] = 205,
+["time"] = 1793668239,
 ["counter"] = 102,
 },
 {

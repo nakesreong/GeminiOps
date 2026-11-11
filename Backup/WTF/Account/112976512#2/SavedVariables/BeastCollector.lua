@@ -1,8 +1,8 @@
 
 BeastCollectorDB = {
 ["stabledByName"] = {
-["змей"] = 128068,
 ["рато"] = 122803,
+["змей"] = 128068,
 },
 ["stabledByCreatureID"] = {
 [241513] = {
@@ -16,17 +16,12 @@ BeastCollectorDB = {
 ["familyName"] = "Змей",
 },
 [165189] = {
-["name"] = "Змей",
+["name"] = "Рато",
 },
 },
 ["settings"] = {
-["onlyUncollected"] = false,
 ["showUnitTooltips"] = true,
-},
-["minimap"] = {
-["hide"] = false,
-},
-["manualCollected"] = {
+["onlyUncollected"] = false,
 },
 ["stabledByDisplay"] = {
 [122803] = {
@@ -39,5 +34,10 @@ BeastCollectorDB = {
 ["name"] = "Змей",
 ["familyName"] = "Змей",
 },
+},
+["manualCollected"] = {
+},
+["minimap"] = {
+["hide"] = false,
 },
 }

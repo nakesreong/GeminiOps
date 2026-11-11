@@ -1,659 +1,8 @@
 
 Blizzard_Console_SavedVars = {
 ["version"] = 3,
+["height"] = 299.9999694824219,
 ["messageHistory"] = {
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002bf26d21110\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002bd806ac320\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Dissolve Effect ID 306 has invalid fade out time. This will result in the record beign ignore and a regular fade out being applied to the creature.",
-0,
-},
-{
-"Successfully instantiated mirrored storage object",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"Dissolve Effect ID 306 has invalid fade out time. This will result in the record beign ignore and a regular fade out being applied to the creature.",
-0,
-},
-{
-"Dissolve Effect ID 306 has invalid fade out time. This will result in the record beign ignore and a regular fade out being applied to the creature.",
-0,
-},
-{
-"Dissolve Effect ID 306 has invalid fade out time. This will result in the record beign ignore and a regular fade out being applied to the creature.",
-0,
-},
-{
-"Dissolve Effect ID 306 has invalid fade out time. This will result in the record beign ignore and a regular fade out being applied to the creature.",
-0,
-},
-{
-"Dissolve Effect ID 306 has invalid fade out time. This will result in the record beign ignore and a regular fade out being applied to the creature.",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002c03a337bd0\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002bf26d21110\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Successfully instantiated mirrored storage object",
-0,
-},
-{
-"Added house xp to all houses on account xp=\"10\"",
-0,
-},
-{
-"Skill 333 increased from 4 to 5",
-0,
-},
-{
-"Skill 2909 increased from 4 to 5",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"LimitedLuaResources: Reset All",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"GameTimeSync: skipping forwards 2 game minutes, (current = 11/10/2026 (Tue) 9:49, newtime = 11/10/2026 (Tue) 9:51)",
-0,
-},
-{
-"GameTimeSync: skipping forwards 2 game minutes, (current = 11/10/2026 (Tue) 9:49, newtime = 11/10/2026 (Tue) 9:51)",
-5,
-},
-{
-"Time set to 11/10/2026 (Tue) 10:13",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 10:13",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"KillConnection conn=\"000002c03a337bd0\" state=\"(enum)7\"",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"Resume()",
-0,
-},
-{
-"Screen invalid. Changing from=\"none\" to=\"charselect\"",
-0,
-},
-{
-"Switching to screen=\"CharacterSelect\" (from \"none\")",
-0,
-},
-{
-"From EnsureValidScreen",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"Suspend()",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"Attempted to register existing command: SetDifficulty",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002bf26d23330\" protocol=\"(enum)0\"",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000100",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000101",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000141",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000008141",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000021",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c141",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c141",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c143",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c543",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000029",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000002d",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c547",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c54f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004e54f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000014e54f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000014e5cf",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000002f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000014e5cf",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000002f",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:06",
-0,
-},
-{
-"Gamespeed set from 0.017 to 0.017",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002be7bf70300\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002bf26d23330\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Successfully instantiated mirrored storage object",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002bf0b143940\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002be7bf70300\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002bd830af410\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002bf0b143940\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:36",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:36",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"LimitedLuaResources: Reset All",
-0,
-},
-{
-"Successfully instantiated mirrored storage object",
-0,
-},
-{
-"Water detail changed to 0",
-0,
-},
-{
-"Reflection mode changed to 0",
-0,
-},
-{
-"Ripple detail changed to 0",
-0,
-},
-{
-"Shadow mode changed to 0 - Blob shadows",
-0,
-},
-{
-"Shadow texture size changed to 1024.",
-0,
-},
-{
-"Soft shadows changed to 0.",
-0,
-},
-{
-"Shadow cascade blending changed to 0",
-0,
-},
-{
-"Number of shadow cascades changed to 1",
-0,
-},
-{
-"MSAA disabled",
-0,
-},
-{
-"Sunshafts quality changed to 0",
-0,
-},
-{
-"Refraction mode changed to 0",
-0,
-},
-{
-"Depth Based Opacity Disabled",
-0,
-},
-{
-"Render scale changed to 0.77",
-0,
-},
-{
-"SSAO mode set to 0",
-0,
-},
-{
-"Volume fog disabled.",
-0,
-},
-{
-"Volume fog disabled.",
-0,
-},
-{
-"Particulate volumes disabled.",
-0,
-},
-{
-"Clustered shading disabled.",
-0,
-},
-{
-"Sunshafts quality changed to 0",
-0,
-},
-{
-"Shadow RT mode changed to 0 (Disabled)",
-0,
-},
-{
-"Resample quality changed to 3",
-0,
-},
-{
-"Outline mode changed to 1",
-0,
-},
-{
-"Skill 333 increased from 5 to 6",
-0,
-},
-{
-"Skill 2909 increased from 5 to 6",
-0,
-},
-{
-"Skill 333 increased from 6 to 7",
-0,
-},
-{
-"Skill 2909 increased from 6 to 7",
-0,
-},
-{
-"Skill 333 increased from 7 to 8",
-0,
-},
-{
-"Skill 2909 increased from 7 to 8",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:42",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:42",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:43",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:43",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:43",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 11:43",
-0,
-},
-{
-"All pings from all pongs received",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002bef9ade7b0\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002bd830af410\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"KillConnection conn=\"000002bef9ade7b0\" state=\"(enum)7\"",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"Resume()",
-0,
-},
-{
-"Screen invalid. Changing from=\"none\" to=\"charselect\"",
-0,
-},
-{
-"Switching to screen=\"CharacterSelect\" (from \"none\")",
-0,
-},
-{
-"From EnsureValidScreen",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"Suspend()",
-0,
-},
-{
-"LimitedLuaResources: Reset Timer",
-0,
-},
-{
-"Attempted to register existing command: SetDifficulty",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002be7c595680\" protocol=\"(enum)0\"",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000100",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000101",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000141",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000008141",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000021",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c141",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c141",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c143",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c543",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000029",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000002d",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c547",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004c54f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000004e54f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000014e54f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000014e5cf",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000002f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000014e5cf",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000002f",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Time set to 11/10/2026 (Tue) 12:16",
-0,
-},
-{
-"Gamespeed set from 0.017 to 0.017",
-0,
-},
-{
-"Connecting conn=\"(enum)3\" connPtr=\"000002be5691fee0\" protocol=\"(enum)0\"",
-0,
-},
-{
-"KillConnection conn=\"000002be7c595680\" state=\"(enum)6\"",
-0,
-},
-{
-"Weather changed to 0, intensity 0.000000\n",
-0,
-},
-{
-"Water detail changed to 0",
-0,
-},
-{
-"Reflection mode changed to 0",
-0,
-},
-{
-"Ripple detail changed to 0",
-0,
-},
-{
-"Shadow mode changed to 0 - Blob shadows",
-0,
-},
-{
-"Shadow texture size changed to 1024.",
-0,
-},
 {
 "Soft shadows changed to 0.",
 0,
@@ -4654,10 +4003,653 @@ Blizzard_Console_SavedVars = {
 "Disconnected from authentication server.",
 0,
 },
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
 },
-["height"] = 299.9999694824219,
-["fontHeight"] = 14,
+{
+"Suspend()",
+0,
+},
+{
+"LimitedLuaResources: Reset Timer",
+0,
+},
+{
+"Connecting conn=\"(enum)3\" connPtr=\"000002135f59d8e0\" protocol=\"(enum)0\"",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000000100",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000000101",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000000141",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000008141",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000021",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c141",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000004c141",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000004c143",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000004c543",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000029",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x000000002d",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000004c547",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000004c54f",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000004e54f",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000014e54f",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000014e5cf",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x000000002f",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000014e5cf",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x000000002f",
+0,
+},
+{
+"Weather changed to 0, intensity 0.000000\n",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:20",
+0,
+},
+{
+"Gamespeed set from 0.017 to 0.017",
+0,
+},
+{
+"Connecting conn=\"(enum)3\" connPtr=\"000002142c8a1460\" protocol=\"(enum)0\"",
+0,
+},
+{
+"KillConnection conn=\"000002135f59d8e0\" state=\"(enum)6\"",
+0,
+},
+{
+"Weather changed to 0, intensity 0.000000\n",
+0,
+},
+{
+"Water detail changed to 0",
+0,
+},
+{
+"Reflection mode changed to 0",
+0,
+},
+{
+"Ripple detail changed to 0",
+0,
+},
+{
+"Shadow mode changed to 0 - Blob shadows",
+0,
+},
+{
+"Shadow texture size changed to 1024.",
+0,
+},
+{
+"Soft shadows changed to 0.",
+0,
+},
+{
+"Shadow cascade blending changed to 0",
+0,
+},
+{
+"Number of shadow cascades changed to 1",
+0,
+},
+{
+"MSAA disabled",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Refraction mode changed to 0",
+0,
+},
+{
+"Depth Based Opacity Disabled",
+0,
+},
+{
+"Render scale changed to 0.77",
+0,
+},
+{
+"SSAO mode set to 0",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Particulate volumes disabled.",
+0,
+},
+{
+"Clustered shading disabled.",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Shadow RT mode changed to 0 (Disabled)",
+0,
+},
+{
+"Resample quality changed to 3",
+0,
+},
+{
+"Outline mode changed to 1",
+0,
+},
+{
+"Water detail changed to 0",
+0,
+},
+{
+"Reflection mode changed to 0",
+0,
+},
+{
+"Ripple detail changed to 0",
+0,
+},
+{
+"Shadow mode changed to 0 - Blob shadows",
+0,
+},
+{
+"Shadow texture size changed to 1024.",
+0,
+},
+{
+"Soft shadows changed to 0.",
+0,
+},
+{
+"Shadow cascade blending changed to 0",
+0,
+},
+{
+"Number of shadow cascades changed to 1",
+0,
+},
+{
+"MSAA disabled",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Refraction mode changed to 0",
+0,
+},
+{
+"Depth Based Opacity Disabled",
+0,
+},
+{
+"Render scale changed to 0.77",
+0,
+},
+{
+"SSAO mode set to 0",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Particulate volumes disabled.",
+0,
+},
+{
+"Clustered shading disabled.",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Shadow RT mode changed to 0 (Disabled)",
+0,
+},
+{
+"Resample quality changed to 3",
+0,
+},
+{
+"Outline mode changed to 1",
+0,
+},
+{
+"Water detail changed to 0",
+0,
+},
+{
+"Reflection mode changed to 0",
+0,
+},
+{
+"Ripple detail changed to 0",
+0,
+},
+{
+"Shadow mode changed to 0 - Blob shadows",
+0,
+},
+{
+"Shadow texture size changed to 1024.",
+0,
+},
+{
+"Soft shadows changed to 0.",
+0,
+},
+{
+"Shadow cascade blending changed to 0",
+0,
+},
+{
+"Number of shadow cascades changed to 1",
+0,
+},
+{
+"MSAA disabled",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Refraction mode changed to 0",
+0,
+},
+{
+"Depth Based Opacity Disabled",
+0,
+},
+{
+"Render scale changed to 0.77",
+0,
+},
+{
+"SSAO mode set to 0",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Particulate volumes disabled.",
+0,
+},
+{
+"Clustered shading disabled.",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Shadow RT mode changed to 0 (Disabled)",
+0,
+},
+{
+"Resample quality changed to 3",
+0,
+},
+{
+"Outline mode changed to 1",
+0,
+},
+{
+"Successfully instantiated mirrored storage object",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:23",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:23",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:30",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:30",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:31",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:31",
+0,
+},
+{
+"Volume fog enabled.",
+0,
+},
+{
+"Water detail changed to 3",
+0,
+},
+{
+"Reflection mode changed to 3",
+0,
+},
+{
+"Ripple detail changed to 2",
+0,
+},
+{
+"Shadow mode changed to 4 - 4 band dynamic shadows on units and terrain, 2048",
+0,
+},
+{
+"Shadow texture size changed to 2048.",
+0,
+},
+{
+"Soft shadows changed to 1.",
+0,
+},
+{
+"Shadow cascade blending changed to 1",
+0,
+},
+{
+"Number of shadow cascades changed to 4",
+0,
+},
+{
+"Sunshafts quality changed to 2",
+0,
+},
+{
+"Refraction mode changed to 2",
+0,
+},
+{
+"Depth Based Opacity Enabled",
+0,
+},
+{
+"Render scale changed to 1",
+0,
+},
+{
+"Volume fog enabled.",
+0,
+},
+{
+"Particulate volumes enabled.",
+0,
+},
+{
+"Clustered shading enabled.",
+0,
+},
+{
+"Sunshafts quality changed to 2",
+0,
+},
+{
+"Shadow RT mode changed to 0 (Disabled)",
+0,
+},
+{
+"SSAO mode set to 4",
+0,
+},
+{
+"Outline mode changed to 2",
+0,
+},
+{
+"MSAA set to 8 color samples, 8 coverage samples",
+0,
+},
+{
+"Water detail changed to 3",
+0,
+},
+{
+"Reflection mode changed to 3",
+0,
+},
+{
+"Ripple detail changed to 2",
+0,
+},
+{
+"Shadow mode changed to 4 - 4 band dynamic shadows on units and terrain, 2048",
+0,
+},
+{
+"Shadow texture size changed to 2048.",
+0,
+},
+{
+"Soft shadows changed to 1.",
+0,
+},
+{
+"Shadow cascade blending changed to 1",
+0,
+},
+{
+"Number of shadow cascades changed to 4",
+0,
+},
+{
+"SSAO mode set to 4",
+0,
+},
+{
+"Sunshafts quality changed to 2",
+0,
+},
+{
+"Refraction mode changed to 2",
+0,
+},
+{
+"Depth Based Opacity Enabled",
+0,
+},
+{
+"Render scale changed to 1",
+0,
+},
+{
+"Volume fog enabled.",
+0,
+},
+{
+"Volume fog enabled.",
+0,
+},
+{
+"Particulate volumes enabled.",
+0,
+},
+{
+"Clustered shading enabled.",
+0,
+},
+{
+"Sunshafts quality changed to 2",
+0,
+},
+{
+"Shadow RT mode changed to 0 (Disabled)",
+0,
+},
+{
+"Resample quality changed to 3",
+0,
+},
+{
+"Outline mode changed to 2",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:33",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:33",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:38",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:38",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:41",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:41",
+0,
+},
+{
+"Sending ping results from timeout timeoutNs=\"48930795271100\" nowNs=\"48930811839600\"",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:50",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:50",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:53",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:53",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:59",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 18:59",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 19:02",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 19:02",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 19:05",
+0,
+},
+{
+"Time set to 11/11/2026 (Wed) 19:05",
+0,
+},
+},
 ["isShown"] = false,
+["fontHeight"] = 14,
 ["commandHistory"] = {
 },
 }

@@ -39,7 +39,7 @@ Bartender4DB = {
 ["point"] = "BOTTOM",
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["enabled"] = true,
 ["version"] = 3,
 ["position"] = {
@@ -111,7 +111,7 @@ Bartender4DB = {
 },
 ["version"] = 3,
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["enabled"] = true,
 ["version"] = 3,
 ["position"] = {
@@ -155,7 +155,7 @@ Bartender4DB = {
 ["point"] = "BOTTOM",
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["version"] = 3,
 ["position"] = {
 ["y"] = 41.26185989379883,
@@ -218,7 +218,7 @@ Bartender4DB = {
 },
 ["version"] = 3,
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["version"] = 3,
 ["position"] = {
 ["y"] = 41.26185989379883,
@@ -233,19 +233,19 @@ Bartender4DB = {
 ["Сегфальт - Пиратская Бухта"] = {
 ["actionbars"] = {
 {
+["showgrid"] = true,
+["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 82,
 ["x"] = -285,
 ["point"] = "BOTTOM",
 },
-["WoW10Layout"] = true,
-["version"] = 3,
-["showgrid"] = true,
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -276,8 +276,8 @@ Bartender4DB = {
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 184,
 ["x"] = -285,
@@ -285,8 +285,8 @@ Bartender4DB = {
 },
 },
 {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 133,
 ["x"] = -285,
@@ -319,29 +319,29 @@ Bartender4DB = {
 ["Трипобраз - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
+["fadeout"] = true,
+["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["combat"] = false,
-["nocombat"] = false,
-},
-["fadeoutalpha"] = 0,
 ["showgrid"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["version"] = 3,
-["WoW10Layout"] = true,
-["fadeout"] = true,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
+["fadeoutalpha"] = 0,
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -349,14 +349,9 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["combat"] = false,
-["custom"] = true,
-["nocombat"] = false,
-},
-["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -365,18 +360,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeoutalpha"] = 0,
-},
-{
-["fadeoutdelay"] = 0.15,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
 ["combat"] = false,
 ["custom"] = true,
-["nocombat"] = false,
 },
 ["fadeout"] = true,
+},
+{
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -385,12 +380,17 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
+["combat"] = false,
+["custom"] = true,
+},
+["fadeout"] = true,
 },
 {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -398,24 +398,24 @@ Bartender4DB = {
 },
 },
 {
+["version"] = 3,
+["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["combat"] = false,
-["nocombat"] = false,
-},
-["fadeout"] = true,
 ["showgrid"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
-["version"] = 3,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
+["fadeout"] = true,
 },
 {
 ["WoW10Layout"] = true,
@@ -430,8 +430,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -439,8 +439,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -448,8 +448,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -461,29 +461,29 @@ Bartender4DB = {
 ["Ньарлатхотеп - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
+["fadeout"] = true,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
 ["fadeoutdelay"] = 0.15,
-["WoW10Layout"] = true,
-["fadeoutalpha"] = 0,
 ["showgrid"] = true,
-["version"] = 3,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["combat"] = false,
-["nocombat"] = false,
-},
-["fadeout"] = true,
+["version"] = 3,
+["WoW10Layout"] = true,
+["fadeoutalpha"] = 0,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -491,14 +491,9 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
 ["fadeout"] = true,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["combat"] = false,
-["custom"] = true,
-["nocombat"] = false,
-},
-["fadeoutdelay"] = 0.15,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -507,18 +502,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeoutalpha"] = 0,
-},
-{
-["fadeout"] = true,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
 ["combat"] = false,
 ["custom"] = true,
-["nocombat"] = false,
 },
 ["fadeoutdelay"] = 0.15,
+},
+{
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -527,12 +522,17 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
+["combat"] = false,
+["custom"] = true,
+},
+["fadeoutdelay"] = 0.15,
 },
 {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -540,24 +540,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
 ["fadeout"] = true,
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
 ["showgrid"] = true,
-["version"] = 3,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["combat"] = false,
-["nocombat"] = false,
-},
-["fadeoutalpha"] = 0,
+["version"] = 3,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 },
 {
 ["WoW10Layout"] = true,
@@ -572,8 +572,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -581,8 +581,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -590,8 +590,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -603,29 +603,29 @@ Bartender4DB = {
 ["Морвара - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
+["version"] = 3,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["nocombat"] = false,
+["combat"] = false,
+},
 ["fadeout"] = true,
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-["combat"] = false,
-["custom"] = true,
-},
-["version"] = 3,
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -633,14 +633,9 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
 ["fadeoutalpha"] = 0,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["nocombat"] = false,
-["custom"] = true,
-["combat"] = false,
-},
-["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -649,18 +644,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
-},
-{
-["fadeoutalpha"] = 0,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
+["combat"] = false,
 ["nocombat"] = false,
 ["custom"] = true,
-["combat"] = false,
 },
 ["fadeout"] = true,
+},
+{
+["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -669,12 +664,17 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["combat"] = false,
+["nocombat"] = false,
+["custom"] = true,
+},
+["fadeout"] = true,
 },
 {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -682,24 +682,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["nocombat"] = false,
+["combat"] = false,
+},
 ["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["showgrid"] = true,
-["version"] = 3,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-["combat"] = false,
-["custom"] = true,
-},
-["fadeoutdelay"] = 0.15,
+["version"] = 3,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
 ["WoW10Layout"] = true,
@@ -714,8 +714,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -723,8 +723,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -732,8 +732,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -742,32 +742,32 @@ Bartender4DB = {
 },
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["actionbars"] = {
 {
 ["fadeout"] = true,
 ["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
+["version"] = 3,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
 ["position"] = {
-["y"] = 212,
-["x"] = -327.75,
+["y"] = 155,
+["x"] = -330,
 ["point"] = "BOTTOM",
-["scale"] = 1.15,
+["scale"] = 1.149999976158142,
 },
+["fadeoutalpha"] = 0,
 ["visibility"] = {
 ["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
 ["combat"] = false,
+["custom"] = true,
 ["nocombat"] = false,
 },
-["version"] = 3,
+["fadeoutdelay"] = 0.15,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -779,77 +779,69 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
 ["position"] = {
-["y"] = 144.9522787091046,
-["x"] = -316.8578413765354,
+["y"] = 150,
+["x"] = -463,
 ["point"] = "BOTTOM",
 ["scale"] = 0.7200000286102295,
 },
-["fadeoutalpha"] = 0,
+["version"] = 3,
 ["rows"] = 3,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
-["combat"] = false,
 ["custom"] = true,
+["combat"] = false,
 ["nocombat"] = false,
 },
-["version"] = 3,
+["fadeoutalpha"] = 0,
 },
 {
 ["fadeout"] = true,
 ["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
 ["position"] = {
-["y"] = 150.2851194971845,
-["x"] = 179.6190924141847,
+["y"] = 150,
+["x"] = 320,
 ["point"] = "BOTTOM",
 ["scale"] = 0.7200000286102295,
 },
-["fadeoutalpha"] = 0,
+["version"] = 3,
 ["rows"] = 3,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
-["combat"] = false,
 ["custom"] = true,
+["combat"] = false,
 ["nocombat"] = false,
 },
-["version"] = 3,
+["fadeoutalpha"] = 0,
 },
 {
-["version"] = 3,
-["showgrid"] = true,
-["position"] = {
-["y"] = 302,
-["x"] = -327.75,
-["point"] = "BOTTOM",
-["scale"] = 0.75,
-},
-["visibility"] = {
-["combat"] = false,
-["custom"] = false,
-["nocombat"] = false,
-},
 ["WoW10Layout"] = true,
-["fadeoutalpha"] = 1,
+["version"] = 3,
+["position"] = {
+["y"] = 203,
+["x"] = -288,
+["point"] = "BOTTOM",
+},
 },
 {
 ["fadeout"] = true,
 ["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
 ["showgrid"] = true,
-["version"] = 3,
 ["position"] = {
-["y"] = 266,
-["x"] = -327.75,
+["y"] = 100,
+["x"] = -330,
 ["point"] = "BOTTOM",
-["scale"] = 1.15,
+["scale"] = 1.149999976158142,
 },
+["fadeoutalpha"] = 0,
 ["visibility"] = {
 ["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
 ["combat"] = false,
+["custom"] = true,
 ["nocombat"] = false,
 },
-["fadeoutalpha"] = 0,
+["version"] = 3,
 },
 {
 ["WoW10Layout"] = true,
@@ -864,8 +856,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -873,8 +865,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -882,8 +874,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -895,29 +887,29 @@ Bartender4DB = {
 ["Гитсутра - Пиратская Бухта"] = {
 ["actionbars"] = {
 {
+["version"] = 3,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["nocombat"] = false,
+["combat"] = false,
+},
 ["fadeoutdelay"] = 0.15,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["showgrid"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["fadeoutalpha"] = 0,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-["combat"] = false,
-["custom"] = true,
-},
-["version"] = 3,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -925,9 +917,14 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["combat"] = false,
+["nocombat"] = false,
+["custom"] = true,
+},
 ["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -936,18 +933,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["nocombat"] = false,
-["custom"] = true,
-["combat"] = false,
-},
-["fadeoutdelay"] = 0.15,
-},
-{
-["fadeoutalpha"] = 0,
 ["WoW10Layout"] = true,
 ["fadeout"] = true,
+},
+{
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["combat"] = false,
+["nocombat"] = false,
+["custom"] = true,
+},
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -956,17 +953,12 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["nocombat"] = false,
-["custom"] = true,
-["combat"] = false,
-},
-["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -974,24 +966,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["nocombat"] = false,
+["combat"] = false,
+},
 ["version"] = 3,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["showgrid"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["fadeoutalpha"] = 0,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-["combat"] = false,
-["custom"] = true,
-},
-["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
 ["WoW10Layout"] = true,
@@ -1006,8 +998,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1015,8 +1007,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1024,8 +1016,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1037,29 +1029,29 @@ Bartender4DB = {
 ["Калиратри - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
+["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
 ["fadeout"] = true,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["combat"] = false,
-["nocombat"] = false,
-},
-["version"] = 3,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
+["version"] = 3,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -1067,9 +1059,14 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
+["combat"] = false,
+["custom"] = true,
+},
 ["fadeoutdelay"] = 0.15,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -1078,18 +1075,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["combat"] = false,
-["custom"] = true,
-["nocombat"] = false,
-},
-["fadeoutalpha"] = 0,
-},
-{
-["fadeoutdelay"] = 0.15,
 ["WoW10Layout"] = true,
 ["fadeout"] = true,
+},
+{
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
+["combat"] = false,
+["custom"] = true,
+},
+["fadeoutdelay"] = 0.15,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -1098,17 +1095,12 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["combat"] = false,
-["custom"] = true,
-["nocombat"] = false,
-},
-["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -1116,24 +1108,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["combat"] = false,
-["nocombat"] = false,
-},
-["fadeout"] = true,
 ["showgrid"] = true,
-["version"] = 3,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["WoW10Layout"] = true,
-["fadeoutalpha"] = 0,
+["version"] = 3,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
+["fadeout"] = true,
 },
 {
 ["WoW10Layout"] = true,
@@ -1148,8 +1140,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1157,8 +1149,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1166,8 +1158,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1179,29 +1171,29 @@ Bartender4DB = {
 ["Улак - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
+["fadeout"] = true,
+["WoW10Layout"] = true,
 ["version"] = 3,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["nocombat"] = false,
-["combat"] = false,
-},
-["fadeoutdelay"] = 0.15,
 ["showgrid"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
-["fadeout"] = true,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["combat"] = false,
+["custom"] = true,
+["nocombat"] = false,
+},
+["fadeoutdelay"] = 0.15,
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -1209,9 +1201,14 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["custom"] = true,
+["combat"] = false,
+["nocombat"] = false,
+},
 ["fadeout"] = true,
-["WoW10Layout"] = true,
-["version"] = 3,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -1220,18 +1217,18 @@ Bartender4DB = {
 },
 ["fadeoutalpha"] = 0,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["combat"] = false,
-["nocombat"] = false,
-["custom"] = true,
-},
-["fadeoutdelay"] = 0.15,
-},
-{
-["fadeout"] = true,
 ["WoW10Layout"] = true,
 ["version"] = 3,
+},
+{
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["custom"] = true,
+["combat"] = false,
+["nocombat"] = false,
+},
+["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -1240,17 +1237,12 @@ Bartender4DB = {
 },
 ["fadeoutalpha"] = 0,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["combat"] = false,
-["nocombat"] = false,
-["custom"] = true,
-},
-["fadeoutdelay"] = 0.15,
-},
-{
 ["WoW10Layout"] = true,
 ["version"] = 3,
+},
+{
+["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -1258,24 +1250,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
 ["fadeout"] = true,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["nocombat"] = false,
-["combat"] = false,
-},
-["version"] = 3,
 ["showgrid"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["combat"] = false,
+["custom"] = true,
+["nocombat"] = false,
+},
+["version"] = 3,
 },
 {
 ["WoW10Layout"] = true,
@@ -1290,8 +1282,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1299,8 +1291,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1308,8 +1300,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1321,19 +1313,19 @@ Bartender4DB = {
 ["Сегфальт - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
+["showgrid"] = true,
+["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 82,
 ["x"] = -285,
 ["point"] = "BOTTOM",
 },
-["WoW10Layout"] = true,
-["version"] = 3,
-["showgrid"] = true,
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -1364,8 +1356,8 @@ Bartender4DB = {
 },
 {
 ["enabled"] = false,
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 184,
 ["x"] = -285,
@@ -1373,8 +1365,8 @@ Bartender4DB = {
 },
 },
 {
-["WoW10Layout"] = true,
 ["version"] = 3,
+["WoW10Layout"] = true,
 ["position"] = {
 ["y"] = 133,
 ["x"] = -285,
@@ -1407,29 +1399,29 @@ Bartender4DB = {
 ["Котастрофа - Пиратская Бухта"] = {
 ["actionbars"] = {
 {
+["version"] = 3,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["nocombat"] = false,
+["combat"] = false,
+},
 ["fadeout"] = true,
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-["combat"] = false,
-["custom"] = true,
-},
-["version"] = 3,
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -1437,9 +1429,14 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["combat"] = false,
+["nocombat"] = false,
+["custom"] = true,
+},
 ["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -1448,18 +1445,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["nocombat"] = false,
-["custom"] = true,
-["combat"] = false,
-},
-["fadeoutdelay"] = 0.15,
-},
-{
-["fadeoutalpha"] = 0,
 ["WoW10Layout"] = true,
 ["fadeout"] = true,
+},
+{
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["combat"] = false,
+["nocombat"] = false,
+["custom"] = true,
+},
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -1468,17 +1465,12 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["nocombat"] = false,
-["custom"] = true,
-["combat"] = false,
-},
-["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -1486,24 +1478,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeoutdelay"] = 0.15,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["nocombat"] = false,
+["combat"] = false,
+},
 ["version"] = 3,
-["WoW10Layout"] = true,
-["fadeout"] = true,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-["combat"] = false,
-["custom"] = true,
-},
-["fadeoutdelay"] = 0.15,
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeout"] = true,
 },
 {
 ["WoW10Layout"] = true,
@@ -1518,8 +1510,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1527,8 +1519,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1536,8 +1528,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1549,29 +1541,29 @@ Bartender4DB = {
 ["Ньарлатхотеп - Пиратская Бухта"] = {
 ["actionbars"] = {
 {
+["fadeoutdelay"] = 0.15,
+["WoW10Layout"] = true,
 ["fadeout"] = true,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["combat"] = false,
-["nocombat"] = false,
-["custom"] = true,
-},
-["fadeoutalpha"] = 0,
 ["showgrid"] = true,
-["version"] = 3,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["WoW10Layout"] = true,
-["fadeoutdelay"] = 0.15,
+["version"] = 3,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["combat"] = false,
+["nocombat"] = false,
+},
+["fadeoutalpha"] = 0,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -1579,14 +1571,9 @@ Bartender4DB = {
 },
 },
 {
+["fadeout"] = true,
+["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat]fade;show",
-["custom"] = true,
-["nocombat"] = false,
-["combat"] = false,
-},
-["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
@@ -1595,18 +1582,18 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeout"] = true,
-},
-{
-["fadeoutdelay"] = 0.15,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
+["combat"] = false,
 ["custom"] = true,
 ["nocombat"] = false,
-["combat"] = false,
 },
 ["fadeoutalpha"] = 0,
+},
+{
+["fadeout"] = true,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
@@ -1615,12 +1602,17 @@ Bartender4DB = {
 },
 ["version"] = 3,
 ["rows"] = 3,
-["WoW10Layout"] = true,
-["fadeout"] = true,
+["visibility"] = {
+["customdata"] = "[combat]fade;show",
+["combat"] = false,
+["custom"] = true,
+["nocombat"] = false,
+},
+["fadeoutalpha"] = 0,
 },
 {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
@@ -1628,24 +1620,24 @@ Bartender4DB = {
 },
 },
 {
+["fadeout"] = true,
+["WoW10Layout"] = true,
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["combat"] = false,
-["nocombat"] = false,
-["custom"] = true,
-},
-["version"] = 3,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["WoW10Layout"] = true,
-["fadeout"] = true,
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["custom"] = true,
+["combat"] = false,
+["nocombat"] = false,
+},
+["version"] = 3,
 },
 {
 ["WoW10Layout"] = true,
@@ -1660,8 +1652,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1669,8 +1661,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1678,8 +1670,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1692,23 +1684,23 @@ Bartender4DB = {
 ["actionbars"] = {
 {
 ["showgrid"] = true,
-["fadeout"] = true,
-["version"] = 3,
 ["fadeoutdelay"] = 0.15,
 ["fadeoutalpha"] = 0,
+["fadeout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 155,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
+["WoW10Layout"] = true,
 ["visibility"] = {
-["combat"] = false,
 ["custom"] = true,
+["combat"] = false,
 ["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
 ["nocombat"] = false,
 },
-["WoW10Layout"] = true,
 },
 {
 ["enabled"] = false,
@@ -1722,72 +1714,78 @@ Bartender4DB = {
 },
 {
 ["rows"] = 3,
-["fadeout"] = true,
-["visibility"] = {
-["custom"] = true,
-["combat"] = false,
-["customdata"] = "[combat]fade;show",
-["nocombat"] = false,
-},
 ["fadeoutdelay"] = 0.15,
-["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 150,
 ["x"] = -463,
 ["point"] = "BOTTOM",
 ["scale"] = 0.7200000286102295,
 },
-["version"] = 3,
-["WoW10Layout"] = true,
-},
-{
-["rows"] = 3,
-["fadeout"] = true,
+["fadeoutalpha"] = 0,
 ["visibility"] = {
-["custom"] = true,
 ["combat"] = false,
+["custom"] = true,
 ["customdata"] = "[combat]fade;show",
 ["nocombat"] = false,
 },
+},
+{
+["rows"] = 3,
 ["fadeoutdelay"] = 0.15,
-["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = 150,
 ["x"] = 320,
 ["point"] = "BOTTOM",
 ["scale"] = 0.7200000286102295,
 },
-["version"] = 3,
-["WoW10Layout"] = true,
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["combat"] = false,
+["custom"] = true,
+["customdata"] = "[combat]fade;show",
+["nocombat"] = false,
+},
 },
 {
+["fadeoutdelay"] = 0.54,
+["visibility"] = {
+["custom"] = true,
+["customdata"] = "[combat][exists][overridebar][possessbar][bonusbar:5]show;fade",
+},
 ["version"] = 3,
 ["position"] = {
 ["y"] = 203,
 ["x"] = -288,
 ["point"] = "BOTTOM",
 },
+["fadeoutalpha"] = 0,
 ["WoW10Layout"] = true,
 },
 {
 ["showgrid"] = true,
-["fadeout"] = true,
-["visibility"] = {
-["combat"] = false,
-["custom"] = true,
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["nocombat"] = false,
-},
 ["fadeoutdelay"] = 0.15,
-["version"] = 3,
+["WoW10Layout"] = true,
+["fadeout"] = true,
+["fadeoutalpha"] = 0,
 ["position"] = {
 ["y"] = 100,
 ["x"] = -330,
 ["point"] = "BOTTOM",
 ["scale"] = 1.149999976158142,
 },
-["fadeoutalpha"] = 0,
-["WoW10Layout"] = true,
+["version"] = 3,
+["visibility"] = {
+["custom"] = true,
+["combat"] = false,
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+},
 },
 {
 ["WoW10Layout"] = true,
@@ -1830,32 +1828,32 @@ Bartender4DB = {
 },
 },
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["actionbars"] = {
 {
 ["version"] = 3,
 ["visibility"] = {
 ["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
 ["nocombat"] = false,
+["custom"] = true,
 ["combat"] = false,
 },
-["fadeoutdelay"] = 0.15,
-["showgrid"] = true,
-["fadeoutalpha"] = 0,
-["position"] = {
-["y"] = 155,
-["x"] = -330,
-["point"] = "BOTTOM",
-["scale"] = 1.149999976158142,
-},
-["WoW10Layout"] = true,
 ["fadeout"] = true,
+["showgrid"] = true,
+["position"] = {
+["y"] = 212,
+["x"] = -327.75,
+["point"] = "BOTTOM",
+["scale"] = 1.15,
+},
+["fadeoutalpha"] = 0,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 },
 {
 ["enabled"] = false,
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -223.9998474121094,
 ["x"] = -284.4998779296875,
@@ -1863,73 +1861,81 @@ Bartender4DB = {
 },
 },
 {
-["fadeoutdelay"] = 0.15,
+["version"] = 3,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
-["combat"] = false,
 ["nocombat"] = false,
+["combat"] = false,
 ["custom"] = true,
 },
-["fadeoutalpha"] = 0,
+["fadeout"] = true,
 ["position"] = {
-["y"] = 150,
-["x"] = -463,
+["y"] = 144.9522787091046,
+["x"] = -316.8578413765354,
 ["point"] = "BOTTOM",
 ["scale"] = 0.7200000286102295,
 },
-["version"] = 3,
+["fadeoutalpha"] = 0,
 ["rows"] = 3,
 ["WoW10Layout"] = true,
-["fadeout"] = true,
+["fadeoutdelay"] = 0.15,
 },
 {
-["fadeoutdelay"] = 0.15,
+["version"] = 3,
 ["visibility"] = {
 ["customdata"] = "[combat]fade;show",
-["combat"] = false,
 ["nocombat"] = false,
+["combat"] = false,
 ["custom"] = true,
 },
-["fadeoutalpha"] = 0,
+["fadeout"] = true,
 ["position"] = {
-["y"] = 150,
-["x"] = 320,
+["y"] = 150.2851194971845,
+["x"] = 179.6190924141847,
 ["point"] = "BOTTOM",
 ["scale"] = 0.7200000286102295,
 },
-["version"] = 3,
+["fadeoutalpha"] = 0,
 ["rows"] = 3,
 ["WoW10Layout"] = true,
-["fadeout"] = true,
-},
-{
-["version"] = 3,
-["WoW10Layout"] = true,
-["position"] = {
-["y"] = 203,
-["x"] = -288,
-["point"] = "BOTTOM",
-},
-},
-{
 ["fadeoutdelay"] = 0.15,
-["visibility"] = {
-["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
-["custom"] = true,
-["nocombat"] = false,
-["combat"] = false,
 },
+{
 ["version"] = 3,
 ["showgrid"] = true,
-["fadeoutalpha"] = 0,
-["position"] = {
-["y"] = 100,
-["x"] = -330,
-["point"] = "BOTTOM",
-["scale"] = 1.149999976158142,
-},
+["fadeoutalpha"] = 1,
 ["WoW10Layout"] = true,
+["visibility"] = {
+["nocombat"] = false,
+["combat"] = false,
+["custom"] = false,
+},
+["position"] = {
+["y"] = 302,
+["x"] = -327.75,
+["point"] = "BOTTOM",
+["scale"] = 0.75,
+},
+},
+{
+["fadeoutalpha"] = 0,
+["visibility"] = {
+["customdata"] = "[combat][exists][mounted][flying][vehicleui][overridebar][possessbar][bonusbar:5]show;fade",
+["nocombat"] = false,
+["custom"] = true,
+["combat"] = false,
+},
 ["fadeout"] = true,
+["showgrid"] = true,
+["position"] = {
+["y"] = 266,
+["x"] = -327.75,
+["point"] = "BOTTOM",
+["scale"] = 1.15,
+},
+["version"] = 3,
+["WoW10Layout"] = true,
+["fadeoutdelay"] = 0.15,
 },
 {
 ["WoW10Layout"] = true,
@@ -1944,8 +1950,8 @@ Bartender4DB = {
 ["WoW10Layout"] = true,
 },
 [14] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1953,8 +1959,8 @@ Bartender4DB = {
 },
 },
 [13] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -1962,8 +1968,8 @@ Bartender4DB = {
 },
 },
 [15] = {
-["version"] = 3,
 ["WoW10Layout"] = true,
+["version"] = 3,
 ["position"] = {
 ["y"] = -224.0001220703125,
 ["x"] = -284.499755859375,
@@ -2008,11 +2014,11 @@ Bartender4DB = {
 ["point"] = "CENTER",
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["version"] = 3,
 ["position"] = {
-["y"] = -139.9285888671875,
-["x"] = -64.26202392578125,
+["y"] = -278.8808288574219,
+["x"] = -65.16619873046875,
 ["point"] = "CENTER",
 },
 },
@@ -2072,11 +2078,11 @@ Bartender4DB = {
 },
 ["version"] = 3,
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["version"] = 3,
 ["position"] = {
-["y"] = -278.8808288574219,
-["x"] = -65.16619873046875,
+["y"] = -139.9285888671875,
+["x"] = -64.26202392578125,
 ["point"] = "CENTER",
 },
 },
@@ -2095,10 +2101,10 @@ Bartender4DB = {
 },
 ["Трипобраз - Свежеватель Душ"] = {
 ["enabled"] = true,
+["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
-["version"] = 3,
 ["position"] = {
 ["y"] = 42.76163482666016,
 ["x"] = 305.9762573242188,
@@ -2107,10 +2113,10 @@ Bartender4DB = {
 },
 ["Ньарлатхотеп - Свежеватель Душ"] = {
 ["enabled"] = true,
-["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
+["version"] = 3,
 ["position"] = {
 ["y"] = 42.76163482666016,
 ["x"] = 305.9762573242188,
@@ -2119,29 +2125,17 @@ Bartender4DB = {
 },
 ["Морвара - Свежеватель Душ"] = {
 ["enabled"] = true,
-["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
+["version"] = 3,
 ["position"] = {
 ["y"] = 42.76163482666016,
 ["x"] = 305.9762573242188,
 ["point"] = "BOTTOM",
 },
 },
-["Моржовый - Свежеватель Душ"] = {
-["enabled"] = true,
-["version"] = 3,
-["visibility"] = {
-["always"] = false,
-},
-["position"] = {
-["y"] = 42.76163482666016,
-["x"] = 305.9762573242188,
-["point"] = "BOTTOM",
-},
-},
-["Гитсутра - Пиратская Бухта"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["enabled"] = true,
 ["visibility"] = {
 ["always"] = false,
@@ -2154,12 +2148,25 @@ Bartender4DB = {
 ["scale"] = 0.85,
 },
 },
-["Калиратри - Свежеватель Душ"] = {
+["Гитсутра - Пиратская Бухта"] = {
 ["enabled"] = true,
 ["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
+["position"] = {
+["y"] = 42,
+["x"] = 185,
+["point"] = "BOTTOM",
+["scale"] = 0.85,
+},
+},
+["Калиратри - Свежеватель Душ"] = {
+["enabled"] = true,
+["visibility"] = {
+["always"] = false,
+},
+["version"] = 3,
 ["position"] = {
 ["y"] = 42.76163482666016,
 ["x"] = 305.9762573242188,
@@ -2168,10 +2175,10 @@ Bartender4DB = {
 },
 ["Улак - Свежеватель Душ"] = {
 ["enabled"] = true,
+["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
-["version"] = 3,
 ["position"] = {
 ["y"] = 42.76163482666016,
 ["x"] = 305.9762573242188,
@@ -2189,10 +2196,10 @@ Bartender4DB = {
 },
 ["Котастрофа - Пиратская Бухта"] = {
 ["enabled"] = true,
-["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
+["version"] = 3,
 ["position"] = {
 ["y"] = 42.76163482666016,
 ["x"] = 305.9762573242188,
@@ -2201,10 +2208,10 @@ Bartender4DB = {
 },
 ["Ньарлатхотеп - Пиратская Бухта"] = {
 ["enabled"] = true,
-["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
+["version"] = 3,
 ["position"] = {
 ["y"] = 42,
 ["x"] = 185,
@@ -2224,17 +2231,16 @@ Bartender4DB = {
 ["always"] = false,
 },
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["enabled"] = true,
-["version"] = 3,
 ["visibility"] = {
 ["always"] = false,
 },
+["version"] = 3,
 ["position"] = {
-["y"] = 42,
-["x"] = 185,
+["y"] = 42.76163482666016,
+["x"] = 305.9762573242188,
 ["point"] = "BOTTOM",
-["scale"] = 0.85,
 },
 },
 },
@@ -2290,13 +2296,14 @@ Bartender4DB = {
 ["always"] = false,
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["enabled"] = true,
 ["version"] = 3,
 ["position"] = {
-["y"] = 38.09550094604492,
-["x"] = 619.49951171875,
+["y"] = 42,
+["x"] = 140,
 ["point"] = "BOTTOM",
+["scale"] = 0.9,
 },
 ["onebag"] = true,
 ["visibility"] = {
@@ -2393,14 +2400,13 @@ Bartender4DB = {
 ["always"] = false,
 },
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["enabled"] = true,
 ["version"] = 3,
 ["position"] = {
-["y"] = 42,
-["x"] = 140,
+["y"] = 38.09550094604492,
+["x"] = 619.49951171875,
 ["point"] = "BOTTOM",
-["scale"] = 0.9,
 },
 ["onebag"] = true,
 ["visibility"] = {
@@ -2413,104 +2419,104 @@ Bartender4DB = {
 ["profiles"] = {
 ["Сегфальт - Пиратская Бухта"] = {
 ["enabled"] = true,
+["artLayout"] = "MODERN",
+["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
-["version"] = 3,
-["artLayout"] = "MODERN",
 },
 ["Трипобраз - Свежеватель Душ"] = {
+["artLayout"] = "MODERN",
+["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
-["version"] = 3,
-["artLayout"] = "MODERN",
 },
 ["Ньарлатхотеп - Свежеватель Душ"] = {
-["artLayout"] = "MODERN",
-["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 ["Морвара - Свежеватель Душ"] = {
-["artLayout"] = "MODERN",
-["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
-},
-["Моржовый - Свежеватель Душ"] = {
-["artLayout"] = "MODERN",
 ["version"] = 3,
+["artLayout"] = "MODERN",
+},
+["Ниоч - Пиратская Бухта"] = {
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 ["Гитсутра - Пиратская Бухта"] = {
+["artLayout"] = "MODERN",
+["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
-["version"] = 3,
-["artLayout"] = "MODERN",
 },
 ["Калиратри - Свежеватель Душ"] = {
-["artLayout"] = "MODERN",
-["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 ["Улак - Свежеватель Душ"] = {
+["artLayout"] = "MODERN",
+["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
-["version"] = 3,
-["artLayout"] = "MODERN",
 },
 ["Сегфальт - Свежеватель Душ"] = {
 ["enabled"] = true,
-["artLayout"] = "MODERN",
-["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 ["Котастрофа - Пиратская Бухта"] = {
-["artLayout"] = "MODERN",
-["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 ["Ньарлатхотеп - Пиратская Бухта"] = {
-["artLayout"] = "MODERN",
-["version"] = 3,
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 ["Гитпулл - Пиратская Бухта"] = {
 ["artLayout"] = "MODERN",
@@ -2521,14 +2527,14 @@ Bartender4DB = {
 },
 ["version"] = 3,
 },
-["Ниоч - Пиратская Бухта"] = {
-["artLayout"] = "MODERN",
-["version"] = 3,
+["Моржовый - Свежеватель Душ"] = {
 ["position"] = {
 ["y"] = 87,
 ["x"] = -288.5,
 ["point"] = "BOTTOM",
 },
+["version"] = 3,
+["artLayout"] = "MODERN",
 },
 },
 },
@@ -2569,13 +2575,13 @@ Bartender4DB = {
 ["scale"] = 0.8999999761581421,
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["version"] = 3,
 ["position"] = {
-["y"] = 338,
-["x"] = -327.75,
-["point"] = "BOTTOM",
-["scale"] = 0.9,
+["y"] = -185.4551411500597,
+["x"] = 627.2276384134384,
+["point"] = "LEFT",
+["scale"] = 0.8999999761581421,
 },
 },
 ["Гитсутра - Пиратская Бухта"] = {
@@ -2640,13 +2646,13 @@ Bartender4DB = {
 ["scale"] = 0.8999999761581421,
 },
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["version"] = 3,
 ["position"] = {
-["y"] = -185.4551411500597,
-["x"] = 627.2276384134384,
-["point"] = "LEFT",
-["scale"] = 0.8999999761581421,
+["y"] = 338,
+["x"] = -327.75,
+["point"] = "BOTTOM",
+["scale"] = 0.9,
 },
 },
 },
@@ -2685,7 +2691,7 @@ Bartender4DB = {
 ["point"] = "BOTTOMLEFT",
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["version"] = 3,
 ["position"] = {
 ["y"] = 264.0000915527344,
@@ -2749,7 +2755,7 @@ Bartender4DB = {
 ["point"] = "BOTTOMLEFT",
 },
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["version"] = 3,
 ["position"] = {
 ["y"] = 264.0000915527344,
@@ -2793,12 +2799,12 @@ Bartender4DB = {
 ["point"] = "LEFT",
 },
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["version"] = 3,
 ["position"] = {
-["y"] = 262.7145385742188,
-["x"] = -364.4283447265625,
-["point"] = "BOTTOM",
+["y"] = -219.8330078125,
+["x"] = 630.1192626953125,
+["point"] = "LEFT",
 },
 },
 ["Гитсутра - Пиратская Бухта"] = {
@@ -2857,12 +2863,12 @@ Bartender4DB = {
 },
 ["version"] = 3,
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["version"] = 3,
 ["position"] = {
-["y"] = -219.8330078125,
-["x"] = 630.1192626953125,
-["point"] = "LEFT",
+["y"] = 262.7145385742188,
+["x"] = -364.4283447265625,
+["point"] = "BOTTOM",
 },
 },
 },
@@ -2873,7 +2879,7 @@ Bartender4DB = {
 ["Трипобраз - Свежеватель Душ"] = "Трипобраз - Свежеватель Душ",
 ["Ньарлатхотеп - Свежеватель Душ"] = "Ньарлатхотеп - Свежеватель Душ",
 ["Морвара - Свежеватель Душ"] = "Морвара - Свежеватель Душ",
-["Моржовый - Свежеватель Душ"] = "Моржовый - Свежеватель Душ",
+["Ниоч - Пиратская Бухта"] = "Ниоч - Пиратская Бухта",
 ["Гитсутра - Пиратская Бухта"] = "Гитсутра - Пиратская Бухта",
 ["Калиратри - Свежеватель Душ"] = "Калиратри - Свежеватель Душ",
 ["Улак - Свежеватель Душ"] = "Улак - Свежеватель Душ",
@@ -2881,7 +2887,7 @@ Bartender4DB = {
 ["Котастрофа - Пиратская Бухта"] = "Котастрофа - Пиратская Бухта",
 ["Ньарлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Пиратская Бухта",
 ["Гитпулл - Пиратская Бухта"] = "Гитпулл - Пиратская Бухта",
-["Ниоч - Пиратская Бухта"] = "Ниоч - Пиратская Бухта",
+["Моржовый - Свежеватель Душ"] = "Моржовый - Свежеватель Душ",
 },
 ["profiles"] = {
 ["Сегфальт - Пиратская Бухта"] = {
@@ -2911,7 +2917,7 @@ Bartender4DB = {
 ["snapping"] = false,
 ["outofrange"] = "hotkey",
 },
-["Моржовый - Свежеватель Душ"] = {
+["Ниоч - Пиратская Бухта"] = {
 ["tigerLayoutVersion"] = 5,
 ["snapping"] = false,
 ["blizzardVehicle"] = true,
@@ -2962,11 +2968,11 @@ Bartender4DB = {
 ["Гитпулл - Пиратская Бухта"] = {
 ["tigerLayoutVersion"] = 5,
 ["blizzardVehicle"] = true,
-["snapping"] = false,
 ["focuscastmodifier"] = false,
+["snapping"] = false,
 ["outofrange"] = "hotkey",
 },
-["Ниоч - Пиратская Бухта"] = {
+["Моржовый - Свежеватель Душ"] = {
 ["tigerLayoutVersion"] = 5,
 ["snapping"] = false,
 ["blizzardVehicle"] = true,

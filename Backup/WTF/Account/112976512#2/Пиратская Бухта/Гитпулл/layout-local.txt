@@ -6,6 +6,13 @@ X: 0
 Y: 0
 W: 388
 H: 210
+Frame: BeastCollectorFrame
+FrameLevel: 1
+Anchor: CENTER
+X: 199
+Y: -62
+W: 740
+H: 556
 Frame: MountCollectorRadarFrame
 FrameLevel: 1
 Anchor: TOPRIGHT
@@ -20,10 +27,3 @@ X: 30
 Y: 125
 W: 1012
 H: 550
-Frame: BeastCollectorFrame
-FrameLevel: 1
-Anchor: CENTER
-X: 199
-Y: -62
-W: 740
-H: 556

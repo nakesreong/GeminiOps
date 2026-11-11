@@ -140,14 +140,14 @@ VER 3 000000000000009A "Mage_Tower_1" "134400"
 #showtooltip
 /cast [@Потусторонняя длань] Безмолвие
 END
-VER 3 000000000000009C "Mage_Tower_2" "134400"
-#showtooltip Прикосновение вампира
-/target [@Рейст]
-/cast [@target, harm] Прикосновение вампира
-END
 VER 3 000000000000009B "Mage_Tower_2" "134400"
 #showtooltip Прикосновение вампира
 /target [@Карам]
+/cast [@target, harm] Прикосновение вампира
+END
+VER 3 000000000000009C "Mage_Tower_2" "134400"
+#showtooltip Прикосновение вампира
+/target [@Рейст]
 /cast [@target, harm] Прикосновение вампира
 END
 VER 3 000000000000009D "Mage_Tower_3" "134400"
@@ -212,17 +212,17 @@ VER 3 000000000000000A "Stone" "134400"
 #showtooltip
 /use [mod:alt] Камень возвращения в Даларан; Камень возвращения отъявленных нитей
 END
+VER 3 0000000000000094 "T" "134400"
+#showtooltip
+/cancelaura Зачарованная свеча
+/cast Кольцо Света
+END
 VER 3 0000000000000085 "t" "134400"
 #showtooltip
 /stopcasting
 /cast [@arena1] !Слово Тьмы: Боль
 /cast [@arena2] !Слово Тьмы: Боль
 /cast [@arena3] !Слово Тьмы: Боль
-END
-VER 3 0000000000000094 "T" "134400"
-#showtooltip
-/cancelaura Зачарованная свеча
-/cast Кольцо Света
 END
 VER 3 00000000000000A2 "t0" "134400"
 #showtooltip
@@ -239,15 +239,15 @@ VER 3 0000000000000087 "t3" "134400"
 /cast [known:64044, @none, mod:ctrl] !Глубинный ужас; [known:64044, @target, harm, exists] !Глубинный ужас
 /cast [@target] Рассеивание заклинаний
 END
-VER 3 0000000000000091 "V1" "134400"
-#showtooltip Прикосновение вампира
-/stopmacro [channeling:391403][channeling:263165]
-/cast [@arena1, exists] Прикосновение вампира
-END
 VER 3 0000000000000088 "V1" "134400"
 #showtooltip
 /cast [@player] !Слово силы: Щит 
 /changeactionbar [actionbar:2]1
+END
+VER 3 0000000000000091 "V1" "134400"
+#showtooltip Прикосновение вампира
+/stopmacro [channeling:391403][channeling:263165]
+/cast [@arena1, exists] Прикосновение вампира
 END
 VER 3 0000000000000089 "V2" "134400"
 #showtooltip Прикосновение вампира

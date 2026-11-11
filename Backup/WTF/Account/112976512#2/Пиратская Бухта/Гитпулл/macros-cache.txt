@@ -95,6 +95,7 @@ VER 3 0100000000000006 "h6" "INV_MISC_QUESTIONMARK"
 /stopmacro [flying]
 /cleartarget [dead][noharm]
 /cast [@target,harm,nodead][@mouseover,harm,nodead] Команда "Взять!"
+/settarget
 /startattack
 /petattack
 END
