@@ -96,7 +96,7 @@ if (Test-Path $SourceAddOns) {
                 elseif ($line -match '^##\s*X-Tukui-ProjectID:\s*(.+)$') { $tukuiId = $Matches[1].Trim() }
             }
         }
-        $isCustomGit = $dir.Name -in @("SpArc", "MAWM", "MountCollector", "GeminiOps")
+        $isCustomGit = $dir.Name -in @("SpArc", "MAWM", "MountCollector", "BeastCollector", "GeminiOps")
         $manifest.Add([ordered]@{
             Name        = $dir.Name
             Title       = $title

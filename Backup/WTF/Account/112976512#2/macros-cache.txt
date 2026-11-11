@@ -9,9 +9,10 @@ VER 3 00000000000000B5 "bd2" "INV_MISC_QUESTIONMARK"
 /cast Парад планет
 END
 VER 3 00000000000000B6 "bd3" "INV_MISC_QUESTIONMARK"
-#showtooltip
+#showtooltip Сила природы
 /stopmacro [flying]
-/cast [noform] Облик лунного совуха; [@player] Сила природы
+/cast [nocombat, notarget, form:4] Облик лунного совуха
+/cast [noform][form:1][form:2][form:3] Облик лунного совуха; [@player] Сила природы
 END
 VER 3 00000000000000B7 "bd4" "INV_MISC_QUESTIONMARK"
 #showtooltip
@@ -33,11 +34,6 @@ VER 3 00000000000000BA "bd7" "INV_MISC_QUESTIONMARK"
 /stopmacro [flying]
 /cast [@target] Солнечное затмение
 END
-VER 3 00000000000000AF "d31" "INV_MISC_QUESTIONMARK"
-#showtooltip
-/stopmacro [flying]
-/cast [@target] Облик лунного совуха
-END
 VER 3 00000000000000B0 "d32" "INV_MISC_QUESTIONMARK"
 #showtooltip
 /stopmacro [flying]
@@ -49,9 +45,10 @@ VER 3 00000000000000B1 "d33" "INV_MISC_QUESTIONMARK"
 /cast Порыв
 END
 VER 3 00000000000000B2 "d34" "INV_MISC_QUESTIONMARK"
-#showtooltip
+#showtooltip Солнечный огонь
 /stopmacro [flying]
-/cast [noform] Облик лунного совуха; [@target] Солнечный огонь
+/cast [nocombat, notarget, form:4] Облик лунного совуха
+/cast [noform][form:1][form:2][form:3] Облик лунного совуха; [@target] Солнечный огонь
 END
 VER 3 00000000000000B3 "d35" "INV_MISC_QUESTIONMARK"
 #showtooltip
@@ -78,6 +75,26 @@ END
 VER 3 00000000000000A3 "E" "132212"
 #showtooltip item:41146
 /target [@mouseover,exists][@softenemy,exists][@softinteract,exists][@softfriend,exists]
+END
+VER 3 00000000000000C5 "es5" "INV_MISC_QUESTIONMARK"
+#showtooltip Свирепый выпад
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Свирепый выпад
+/startattack
+END
+VER 3 00000000000000C6 "es6" "INV_MISC_QUESTIONMARK"
+#showtooltip Удар бури
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Удар бури
+/startattack
+END
+VER 3 00000000000000C7 "es7" "INV_MISC_QUESTIONMARK"
+#showtooltip Вскипание лавы
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Вскипание лавы
+/startattack
 END
 VER 3 00000000000000A9 "fd1" "INV_MISC_QUESTIONMARK"
 #showtooltip
@@ -187,11 +204,6 @@ VER 3 000000000000008C "self" "134400"
 #showtooltip
 /cast [@player] Быстрое исцеление
 END
-VER 3 0000000000000073 "SM2" "135826"
-#showtooltip Огненный столб
-/stopmacro [flying]
-/cast [@cursor] Огненный столб
-END
 VER 3 0000000000000080 "steal" "134400"
 #showtoooltip
 /cast [known:316262, @target] Украденные мысли 
@@ -200,17 +212,17 @@ VER 3 000000000000000A "Stone" "134400"
 #showtooltip
 /use [mod:alt] Камень возвращения в Даларан; Камень возвращения отъявленных нитей
 END
-VER 3 0000000000000094 "T" "134400"
-#showtooltip
-/cancelaura Зачарованная свеча
-/cast Кольцо Света
-END
 VER 3 0000000000000085 "t" "134400"
 #showtooltip
 /stopcasting
 /cast [@arena1] !Слово Тьмы: Боль
 /cast [@arena2] !Слово Тьмы: Боль
 /cast [@arena3] !Слово Тьмы: Боль
+END
+VER 3 0000000000000094 "T" "134400"
+#showtooltip
+/cancelaura Зачарованная свеча
+/cast Кольцо Света
 END
 VER 3 00000000000000A2 "t0" "134400"
 #showtooltip

@@ -6,6 +6,7 @@ MAWM_DB = {
 ["showRoutesAlliance"] = true,
 ["layout"] = "mawm",
 ["showLabels"] = true,
+["showRoutesNeutral"] = true,
 ["scales"] = {
 ["BrokenIsles"] = 1.4,
 ["KulTiras"] = 1.4,
@@ -18,5 +19,5 @@ MAWM_DB = {
 ["routeAlpha"] = 0.92,
 ["showRoutes"] = true,
 ["lang"] = "auto",
-["showRoutesNeutral"] = true,
+["minimapAngle"] = -114.3126514249309,
 }

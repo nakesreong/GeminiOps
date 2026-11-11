@@ -5,7 +5,7 @@ Anchor: CENTER
 X: 0
 Y: 0
 W: 388
-H: 250
+H: 210
 Frame: PlumberExpansionLandingPage
 FrameLevel: 1
 Anchor: CENTER
@@ -13,10 +13,10 @@ X: 30
 Y: 125
 W: 1012
 H: 550
-Frame: Gathering_Header
+Frame: SimpleAddonManager
 FrameLevel: 1
-Anchor: TOP
-X: 0
-Y: -100
-W: 130
-H: 24
+Anchor: CENTER
+X: 66
+Y: 87
+W: 617
+H: 670

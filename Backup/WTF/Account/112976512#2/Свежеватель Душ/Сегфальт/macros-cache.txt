@@ -1,0 +1,153 @@
+VER 3 010000000000001B "1" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@player] Тотем исцеляющего потока
+END
+VER 3 010000000000002D "10" "134400"
+#showtooltip Исцеляющий всплеск
+/stopmacro [flying][channeling]
+/cast [@player] Исцеляющий всплеск
+END
+VER 3 010000000000001F "11" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast  Дух дикого зверя
+END
+VER 3 0100000000000038 "123" "134400"
+#showtooltip Цепная молния
+/stopmacro [flying][channeling]
+/cast [@target] Цепная молния
+END
+VER 3 0100000000000019 "2" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [known:60103, @target] Вскипание лавы; [known:187874] Сокрушающая молния 
+END
+VER 3 0100000000000026 "3" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем конденсации
+END
+VER 3 010000000000001C "4" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем ветряного порыва
+END
+VER 3 010000000000001D "5" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем трепета
+END
+VER 3 0100000000000023 "6" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем хватки земли
+END
+VER 3 010000000000001E "6" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем заземления
+END
+VER 3 0100000000000027 "7" "134400"
+#showtooltip Ледяной шок
+/stopmacro [flying][channeling]
+/cast [@target] Ледяной шок
+END
+VER 3 0100000000000029 "8" "134400"
+#showtooltip Огненный шок
+/stopmacro [flying][channeling]
+/cast [@target] Огненный шок
+END
+VER 3 0100000000000028 "AM1" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast Наставления предков
+END
+VER 3 0100000000000008 "AM2" "134400"
+#showtooltip
+/castsequence reset=3 Щит молний, Небесная ярость, Оружие неистовства ветра(Усиленное оружие), Оружие языка пламени(Усиленное оружие)
+END
+VER 3 0100000000000039 "B3" "134400"
+#showtooltip Гром и молния
+/stopmacro [flying]
+/cast [@player] Гром и молния
+END
+VER 3 010000000000002A "CM1" "134400"
+#showtooltip Астральный сдвиг
+/stopmacro [flying]
+/cast Астральный сдвиг
+END
+VER 3 0100000000000025 "CM2" "134400"
+#showtooltip
+/cast [@player] Тотем каменной преграды
+END
+VER 3 010000000000000B "F" "134400"
+#showtooltip
+#FS X, EH
+/cast [mod:ctrl, @target] Пронизывающий ветер; [@none, exists] Пронизывающий ветер; [@target] Пронизывающий ветер  
+END
+VER 3 0100000000000018 "Hex" "134400"
+#showtooltip Сглаз
+#FS X, EH
+/cast [mod:ctrl, @target] Сглаз; [@none, exists] Сглаз; [@target] Сглаз
+END
+VER 3 010000000000002F "M1" "134400"
+#showtooltip Удар бури
+/stopmacro [flying]
+/cast [@target] Удар бури
+/cast [@player] !Проецирование тотемов
+END
+VER 3 0100000000000030 "M2" "134400"
+#showtooltip Первозданная волна
+/stopmacro [flying]
+/cast [@target] Первозданная волна
+END
+VER 3 010000000000002E "mount" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cancelaura Призрачный волк
+/cast [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift, flyable] Тельдрассилский гиппогриф; Величественный мушан бойца
+/cast Призрачный волк
+END
+VER 3 0100000000000035 "pvp1" "134400"
+#showtooltip Поступь духа
+/stopmacro [flying][channeling]
+/cast Поступь духа
+END
+VER 3 0100000000000034 "Q" "134400"
+#showtooltip Раскол
+/stopmacro [flying]
+/cast [@player] !Проецирование тотемов
+/cast Раскол
+END
+VER 3 0100000000000033 "QQ" "134400"
+#showtooltip Раскол
+/stopmacro [flying][channeling]
+/cast Раскол
+END
+VER 3 0100000000000037 "shield1" "134400"
+#showtooltip Щит земли
+/stopmacro [flying]
+/cast [@player] Щит земли
+END
+VER 3 0100000000000022 "SM1" "134400"
+#showtooltip Молния
+/stopmacro [flying][channeling]
+/cast [@target] Молния
+END
+VER 3 0100000000000031 "SM2" "134400"
+#showtooltip Ветра рока
+/stopmacro [flying]
+/cast Ветра рока
+END
+VER 3 0100000000000032 "V" "134400"
+#showtooltip 
+#FS OD
+/stopmacro [flying]
+/cast [@none, exists][@player] Героизм
+END
+VER 3 0100000000000036 "Z" "134400"
+#showtooltip 
+/stopmacro [flying]
+/cast [@target] Великое очищение
+END

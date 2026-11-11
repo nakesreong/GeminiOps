@@ -6,5 +6,6 @@ SpeedyAutoLootDB = {
 ["x"] = 400,
 ["point"] = "CENTER",
 },
+["InventoryFullSound"] = 44321,
 },
 }

@@ -32,7 +32,7 @@ _detalhes_database = {
 },
 },
 ["boss_hp"] = 1,
-["CombatStartedAt"] = 197255.475,
+["CombatStartedAt"] = 292073.083,
 ["tempo_start"] = 48361.015,
 ["last_events_tables"] = {
 },
@@ -102,8 +102,8 @@ _detalhes_database = {
 ["enemy"] = "Неизвестно",
 ["trinketProcs"] = {
 },
-["TotalElapsedCombatTime"] = 84.24900000001071,
-["CombatEndedAt"] = 197339.724,
+["TotalElapsedCombatTime"] = 33.21700000000419,
+["CombatEndedAt"] = 292106.3,
 ["aura_timeline"] = {
 },
 ["compressed_charts"] = {
@@ -111,7 +111,7 @@ _detalhes_database = {
 ["data_inicio"] = 0,
 ["end_time"] = 48484.057,
 ["mapId"] = 2927,
-["EncounterName"] = "Всадник без головы",
+["EncounterName"] = "Глашатай Гальвен",
 ["overall_added"] = true,
 ["frags"] = {
 },
@@ -175,8 +175,9 @@ _detalhes_database = {
 ["width"] = 120,
 ["ignored_cooldowns"] = {
 },
-["height"] = 18,
 ["framme_locked"] = false,
+["cooldowns"] = {
+},
 ["own_frame"] = {
 ["defensive-raid"] = false,
 ["ofensive"] = false,
@@ -184,8 +185,7 @@ _detalhes_database = {
 ["utility"] = false,
 ["defensive-personal"] = false,
 },
-["cooldowns"] = {
-},
+["height"] = 18,
 ["show_conditions"] = {
 ["only_inside_instance"] = true,
 ["only_in_group"] = true,
@@ -211,11 +211,14 @@ _detalhes_database = {
 },
 ["arena_data_compressed"] = {
 },
-["mythic_plus_log"] = {
+["cached_talents"] = {
+["Player-1604-0F6733DF"] = "CIQAR03Gt7xPmcDNOjs2Zlb3yOMDDAAAAAAAAAAAAmZxMmZbmxMzyMGzw2MzYMzYDZGLbz0AMDwMbmRzmBgMGLAYmBMmZmxsxMbLDwMYA",
+["Player-1929-0FC09013"] = "CgQALMl7AwW51MWzGneuHE3tPCAAAgBAAAAzMzsstMmZmZMzMjZMsAbwMW0wAyMwGzMDmtZGjmtlZGmxswixMjZsMLDAAGAzMYmBAGMA",
+["Player-1604-0FECFE02"] = "CYGADBD3hSPCL9Y9gz68WcKvMAAAAAAAAAAAAAAAAAWoMbNMmZgxswMzMLMwDMbzsMWmxMWYZGjxMjFMAYAYsgJzgAAAAsZm5BmZAjZMmBADAAA",
 },
 ["arena_data_index_selected"] = 1,
 ["character_data"] = {
-["logons"] = 24,
+["logons"] = 32,
 },
 ["local_instances_config"] = {
 {
@@ -239,8 +242,8 @@ _detalhes_database = {
 ["attribute"] = 1,
 ["pos"] = {
 ["normal"] = {
-["y"] = -406.0000305175781,
-["x"] = -1070.666534423828,
+["y"] = -457.4284973144531,
+["x"] = -1193.523712158203,
 ["w"] = 467.6190795898438,
 ["h"] = 185.4286041259766,
 },
@@ -253,17 +256,15 @@ _detalhes_database = {
 },
 },
 },
-["cached_roles"] = {
+["damage_meter_session_info"] = {
 },
-["coach"] = {
-["enabled"] = false,
-["welcome_panel_pos"] = {
-},
-["last_coach_name"] = false,
-},
-["announce_firsthit"] = {
+["announce_damagerecord"] = {
 ["enabled"] = true,
 ["channel"] = "SELF",
+},
+["nick_tag_cache"] = {
+["nextreset"] = 1794455146,
+["last_version"] = 16,
 },
 ["last_instance_id"] = 1004,
 ["data_harvest_for_charsts"] = {
@@ -290,18 +291,23 @@ _detalhes_database = {
 ["custom"] = "",
 ["next"] = "",
 },
-["last_instance_time"] = 1793311483,
+["last_instance_time"] = 1793400375,
 ["active_profile"] = "Трипобраз-Свежеватель Душ",
-["last_realversion"] = 172,
-["on_death_menu"] = false,
-["benchmark_db"] = {
-["frame"] = {
+["mythic_dungeon_currentsaved"] = {
+["dungeon_name"] = "",
+["started"] = false,
+["segment_id"] = 0,
+["ej_id"] = 0,
+["started_at"] = 0,
+["run_id"] = 0,
+["level"] = 0,
+["dungeon_zone_id"] = 0,
+["previous_boss_killed_at"] = 0,
 },
+["last_day"] = "31",
+["data_harvested_for_charts"] = {
 },
-["announce_prepots"] = {
-["enabled"] = false,
-["channel"] = "SELF",
-["reverse"] = false,
+["cached_roles"] = {
 },
 ["arena_data_headers"] = {
 },
@@ -315,7 +321,10 @@ _detalhes_database = {
 ["evoker_show_realtimedps"] = false,
 ["inverse_deathlog_mplus"] = false,
 },
-["ignore_nicktag"] = false,
+["announce_firsthit"] = {
+["enabled"] = true,
+["channel"] = "SELF",
+},
 ["plugin_database"] = {
 ["DETAILS_PLUGIN_TINY_THREAT"] = {
 ["enabled"] = true,
@@ -464,24 +473,15 @@ _detalhes_database = {
 ["scale"] = 1,
 },
 },
-["mythic_dungeon_currentsaved"] = {
-["dungeon_name"] = "",
-["started"] = false,
-["segment_id"] = 0,
-["ej_id"] = 0,
-["started_at"] = 0,
-["run_id"] = 0,
-["level"] = 0,
-["dungeon_zone_id"] = 0,
-["previous_boss_killed_at"] = 0,
+["mythic_plus_log"] = {
 },
-["auto_combatlog"] = false,
-["nick_tag_cache"] = {
-["nextreset"] = 1794455146,
-["last_version"] = 16,
+["on_death_menu"] = false,
+["announce_prepots"] = {
+["enabled"] = false,
+["channel"] = "SELF",
+["reverse"] = false,
 },
-["data_harvested_for_charts"] = {
-},
+["ignore_nicktag"] = false,
 ["apocalypse_hashes"] = {
 },
 ["last_version"] = "12.1.5 15339",
@@ -491,8 +491,11 @@ _detalhes_database = {
 ["combat_id"] = 0,
 ["savedStyles"] = {
 },
-["last_day"] = "30",
-["damage_meter_session_info"] = {
+["damage_meter_sessions"] = {
+},
+["benchmark_db"] = {
+["frame"] = {
+},
 },
 ["announce_deaths"] = {
 ["enabled"] = false,
@@ -579,29 +582,13 @@ _detalhes_database = {
 },
 ["compressed_charts"] = {
 },
-["PhaseData"] = {
-{
-1,
-1,
-},
-["damage_section"] = {
-},
-["heal_section"] = {
-},
-["heal"] = {
-},
-["damage"] = {
-},
-},
+["data_inicio"] = 0,
 ["mapId"] = 1004,
-["segments_added"] = {
-},
 ["raid_roster"] = {
 },
 ["is_challenge"] = false,
 ["spells_cast_timeline"] = {
 },
-["combat_counter"] = 20,
 ["totals_grupo"] = {
 0,
 0,
@@ -623,7 +610,23 @@ _detalhes_database = {
 ["dead"] = 0,
 },
 },
-["data_inicio"] = 0,
+["combat_counter"] = 20,
+["PhaseData"] = {
+{
+1,
+1,
+},
+["damage_section"] = {
+},
+["heal_section"] = {
+},
+["heal"] = {
+},
+["damage"] = {
+},
+},
+["segments_added"] = {
+},
 ["start_time"] = 0,
 ["TimeData"] = {
 ["Raid Damage Done"] = {
@@ -632,472 +635,14 @@ _detalhes_database = {
 ["frags"] = {
 },
 },
-["cached_talents"] = {
-["Player-1604-0FECFE02"] = "CYGADBD3hSPCL9Y9gz68WcKvMAAAAAAAAAAAAAAAAAWoMbNjxMDMmFmZmBMDWmZbGzYGLsMjZmZMzGGAMAMWgACAAAwGzMzMgBGzAAAAA",
-},
+["last_realversion"] = 172,
 ["apocalypes_info"] = {
 },
-["damage_meter_sessions"] = {
-[58] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793311275,
-["sessionId"] = 58,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793311252,
-["endTime"] = 197015.085,
-["sessionName"] = "Попиратель Стик'кар",
-["startDate"] = "00:00:52",
-["startTime"] = 196992.035,
-["endDate"] = "00:01:15",
-["detailsId"] = "Попиратель Стик'кар58",
-},
-[60] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793311615,
-["sessionId"] = 60,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793311517,
-["endTime"] = 197354.4,
-["sessionName"] = "(!) Всадник без головы",
-["startDate"] = "00:05:17",
-["startTime"] = 197256.906,
-["endDate"] = "00:06:55",
-["detailsId"] = "(!) Всадник без головы60",
-},
-[33] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309030,
-["sessionId"] = 33,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793308981,
-["endDate"] = "23:23:50",
-["endTime"] = 194769.402,
-["startDate"] = "23:23:01",
-["startTime"] = 194720.866,
-["sessionName"] = "Быстролапый членистоног",
-["detailsId"] = "Быстролапый членистоног33",
-},
-[34] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309052,
-["sessionId"] = 34,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309030,
-["endDate"] = "23:24:12",
-["endTime"] = 194791.401,
-["startDate"] = "23:23:50",
-["startTime"] = 194769.402,
-["sessionName"] = "Быстролапый захватчик",
-["detailsId"] = "Быстролапый захватчик34",
-},
-[35] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309104,
-["sessionId"] = 35,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309052,
-["endDate"] = "23:25:04",
-["endTime"] = 194843.87,
-["startDate"] = "23:24:12",
-["startTime"] = 194791.401,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины35",
-},
-[36] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309151,
-["sessionId"] = 36,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309104,
-["endDate"] = "23:25:51",
-["endTime"] = 194891.121,
-["startDate"] = "23:25:04",
-["startTime"] = 194843.87,
-["sessionName"] = "Нерубский рассекатель",
-["detailsId"] = "Нерубский рассекатель36",
-},
-[37] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309184,
-["sessionId"] = 37,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309151,
-["endDate"] = "23:26:24",
-["endTime"] = 194923.889,
-["startDate"] = "23:25:51",
-["startTime"] = 194891.121,
-["sessionName"] = "Нерубский рассекатель",
-["detailsId"] = "Нерубский рассекатель37",
-},
-[38] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309196,
-["sessionId"] = 38,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309184,
-["endDate"] = "23:26:36",
-["endTime"] = 194935.938,
-["startDate"] = "23:26:24",
-["startTime"] = 194923.889,
-["sessionName"] = "Нерубский рассекатель",
-["detailsId"] = "Нерубский рассекатель38",
-},
-[39] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309235,
-["sessionId"] = 39,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309196,
-["endDate"] = "23:27:15",
-["endTime"] = 194974.806,
-["startDate"] = "23:26:36",
-["startTime"] = 194935.938,
-["sessionName"] = "Инвазивный спорошляпник",
-["detailsId"] = "Инвазивный спорошляпник39",
-},
-[40] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309245,
-["sessionId"] = 40,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309235,
-["endDate"] = "23:27:25",
-["endTime"] = 194984.923,
-["startDate"] = "23:27:15",
-["startTime"] = 194974.806,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины40",
-},
-[41] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309261,
-["sessionId"] = 41,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309245,
-["endDate"] = "23:27:41",
-["endTime"] = 195000.823,
-["startDate"] = "23:27:25",
-["startTime"] = 194984.923,
-["sessionName"] = "Быстролапый членистоног",
-["detailsId"] = "Быстролапый членистоног41",
-},
-[42] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309291,
-["sessionId"] = 42,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309261,
-["endDate"] = "23:28:11",
-["endTime"] = 195030.374,
-["startDate"] = "23:27:41",
-["startTime"] = 195000.823,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины42",
-},
-[43] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309303,
-["sessionId"] = 43,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309291,
-["endDate"] = "23:28:23",
-["endTime"] = 195042.504,
-["startDate"] = "23:28:11",
-["startTime"] = 195030.374,
-["sessionName"] = "Снующий вредитель",
-["detailsId"] = "Снующий вредитель43",
-},
-[44] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309320,
-["sessionId"] = 44,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309303,
-["endDate"] = "23:28:40",
-["endTime"] = 195059.841,
-["startDate"] = "23:28:23",
-["startTime"] = 195042.504,
-["sessionName"] = "Нерубский капитан",
-["detailsId"] = "Нерубский капитан44",
-},
-[45] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309343,
-["sessionId"] = 45,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309320,
-["endDate"] = "23:29:03",
-["endTime"] = 195082.642,
-["startDate"] = "23:28:40",
-["startTime"] = 195059.841,
-["sessionName"] = "Снующий вредитель",
-["detailsId"] = "Снующий вредитель45",
-},
-[46] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309386,
-["sessionId"] = 46,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309343,
-["endDate"] = "23:29:46",
-["endTime"] = 195126.026,
-["startDate"] = "23:29:03",
-["startTime"] = 195082.642,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины46",
-},
-[47] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309404,
-["sessionId"] = 47,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309386,
-["endDate"] = "23:30:04",
-["endTime"] = 195144.161,
-["startDate"] = "23:29:46",
-["startTime"] = 195126.026,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины47",
-},
-[48] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309420,
-["sessionId"] = 48,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309404,
-["endDate"] = "23:30:20",
-["endTime"] = 195160.11,
-["startDate"] = "23:30:04",
-["startTime"] = 195144.161,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины48",
-},
-[49] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309468,
-["sessionId"] = 49,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309420,
-["endDate"] = "23:31:08",
-["endTime"] = 195207.518,
-["startDate"] = "23:30:20",
-["startTime"] = 195160.11,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины49",
-},
-[50] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309479,
-["sessionId"] = 50,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309468,
-["endDate"] = "23:31:19",
-["endTime"] = 195218.783,
-["startDate"] = "23:31:08",
-["startTime"] = 195207.518,
-["sessionName"] = "Нерубский капитан",
-["detailsId"] = "Нерубский капитан50",
-},
-[51] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309502,
-["sessionId"] = 51,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309479,
-["endDate"] = "23:31:42",
-["endTime"] = 195241.629,
-["startDate"] = "23:31:19",
-["startTime"] = 195218.783,
-["sessionName"] = "Кусачая мелочь",
-["detailsId"] = "Кусачая мелочь51",
-},
-[52] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309554,
-["sessionId"] = 52,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309502,
-["endDate"] = "23:32:34",
-["endTime"] = 195293.562,
-["startDate"] = "23:31:42",
-["startTime"] = 195241.629,
-["sessionName"] = "Нерубский капитан",
-["detailsId"] = "Нерубский капитан52",
-},
-[53] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309577,
-["sessionId"] = 53,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309554,
-["endDate"] = "23:32:57",
-["endTime"] = 195316.98,
-["startDate"] = "23:32:34",
-["startTime"] = 195293.562,
-["sessionName"] = "Распространитель паутины",
-["detailsId"] = "Распространитель паутины53",
-},
-[54] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309589,
-["sessionId"] = 54,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309577,
-["endDate"] = "23:33:09",
-["endTime"] = 195329,
-["startDate"] = "23:32:57",
-["startTime"] = 195316.98,
-["sessionName"] = "Нерубский капитан",
-["detailsId"] = "Нерубский капитан54",
-},
-[55] = {
-["playerCasts"] = {
-},
-["endUnixTime"] = 1793309603,
-["sessionId"] = 55,
-["added"] = false,
-["playerAuras"] = {
-},
-["alreadyAdded"] = false,
-["startUnixTime"] = 1793309589,
-["endDate"] = "23:33:23",
-["endTime"] = 195343.13,
-["startDate"] = "23:33:09",
-["startTime"] = 195329,
-["sessionName"] = "Трескучий сеятель страха",
-["detailsId"] = "Трескучий сеятель страха55",
-},
-[56] = {
-["encounterData"] = {
-["zoneType"] = "scenario",
-["unixtimeStart"] = 1793309620,
-["instanceType"] = "scenario",
-["zoneName"] = "Шахты Землескребов",
-["difficultyId"] = 208,
-["endStatus"] = 1,
-["encounterName"] = "Паутинный генерал Аб'енар",
-["encounterId"] = 2877,
-["kill"] = true,
-["endTime"] = 195380.181,
-["sessionId"] = 56,
-["startTime"] = 195359.547,
-["difficultyName"] = "Вылазки",
-["zoneMapId"] = 2680,
-},
-["playerCasts"] = {
-},
-["sessionName"] = "(!) Паутинный генерал Аб'енар",
-["endUnixTime"] = 1793310583,
-["endTime"] = 196323.215,
-["endDate"] = "23:49:43",
-["added"] = false,
-["playerAuras"] = {
-},
-["encounterName"] = "Паутинный генерал Аб'енар",
-["startUnixTime"] = 1793309603,
-["encounterId"] = 2877,
-["sessionId"] = 56,
-["startDate"] = "23:33:23",
-["startTime"] = 195343.13,
-["alreadyAdded"] = false,
-["detailsId"] = "(!) Паутинный генерал Аб'енар56",
-},
+["coach"] = {
+["enabled"] = false,
+["welcome_panel_pos"] = {
+},
+["last_coach_name"] = false,
 },
 ["announce_cooldowns"] = {
 ["ignored_cooldowns"] = {
@@ -1110,10 +655,7 @@ _detalhes_database = {
 ["last_difficulty"] = 15,
 ["last_raid"] = "",
 },
-["announce_damagerecord"] = {
-["enabled"] = true,
-["channel"] = "SELF",
-},
+["auto_combatlog"] = false,
 ["cached_specs"] = {
 ["Player-1604-0FECFE02"] = 102,
 },

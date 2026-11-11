@@ -2,8 +2,8 @@
 PeaversCurrencyDataDB = {
 ["preferences"] = {
 ["decimalPlaces"] = 2,
-["useMoneyIcons"] = true,
 ["defaultCurrency"] = "USD",
+["useMoneyIcons"] = true,
 ["defaultRegion"] = "US",
 ["useColoredOutput"] = true,
 ["debugMode"] = false,

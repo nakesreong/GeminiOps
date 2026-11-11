@@ -1,0 +1,145 @@
+VER 3 0100000000000025 "bd8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Воплощение: избранный Элуны
+END
+VER 3 0100000000000026 "bd9" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Дикий гриб
+END
+VER 3 0100000000000001 "d1" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Взбучка
+END
+VER 3 010000000000000A "d10" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Калечение
+END
+VER 3 010000000000000B "d11" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик кошки; Крадущийся зверь
+END
+VER 3 010000000000000C "d12" "INV_MISC_QUESTIONMARK"
+#showtooltip Лунный огонь
+/stopmacro [flying]
+/cast [nocombat, notarget, form:4] Облик лунного совуха
+/cast [noform][form:1][form:2][form:3] Облик лунного совуха; [@target] Лунный огонь
+END
+VER 3 010000000000000D "d13" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [form:1] Неистовое восстановление; Облик медведя
+END
+VER 3 0100000000000023 "d14" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Увечье
+END
+VER 3 0100000000000024 "d15" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Умиротворение
+END
+VER 3 0100000000000010 "d16" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Оживление
+END
+VER 3 0100000000000011 "d17" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Парализующий рык
+END
+VER 3 0100000000000012 "d18" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [noform] Облик кошки; [@target] Полоснуть
+END
+VER 3 0100000000000013 "d19" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [mod:ctrl,mod:alt] Походный облик; [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; Облик кошки
+END
+VER 3 0100000000000002 "d2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Вихрь Урсола
+END
+VER 3 0100000000000014 "d20" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Размах
+END
+VER 3 0100000000000015 "d21" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Разорвать
+END
+VER 3 0100000000000016 "d22" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Рывок тигра
+END
+VER 3 0100000000000017 "d23" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Рык
+END
+VER 3 0100000000000018 "d24" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Свирепый укус
+END
+VER 3 0100000000000019 "d25" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Снятие порчи
+END
+VER 3 010000000000001A "d26" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Тайфун
+END
+VER 3 010000000000001B "d27" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Телепортация: Лунная поляна
+END
+VER 3 010000000000001C "d3" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Возрождение
+END
+VER 3 010000000000001D "d4" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Восстановление
+END
+VER 3 010000000000001E "d5" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Гнев
+END
+VER 3 010000000000001F "d6" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Гнев деревьев
+END
+VER 3 0100000000000020 "d7" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Дубовая кожа
+END
+VER 3 0100000000000021 "d8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Знак дикой природы
+END
+VER 3 0100000000000022 "d9" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [@target] Тревожный рев
+END

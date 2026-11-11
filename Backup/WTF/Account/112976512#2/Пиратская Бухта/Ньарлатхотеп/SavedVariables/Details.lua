@@ -5,17 +5,159 @@ _detalhes_database = {
 ["mythic_dungeon_id"] = 0,
 ["tabela_historico"] = {
 ["tabelas"] = {
+{
+{
+["tipo"] = 2,
+["_ActorTable"] = {
+},
+},
+{
+["tipo"] = 3,
+["_ActorTable"] = {
+},
+},
+{
+["tipo"] = 7,
+["_ActorTable"] = {
+},
+},
+{
+["tipo"] = 9,
+["_ActorTable"] = {
+},
+},
+{
+["tipo"] = 2,
+["_ActorTable"] = {
+},
+},
+["raid_roster"] = {
+},
+["CombatStartedAt"] = 28042.18,
+["overall_added"] = true,
+["last_events_tables"] = {
+},
+["alternate_power"] = {
+},
+["bossIcon"] = "",
+["bossTimers"] = {
+},
+["cleu_events"] = {
+["n"] = 1,
+},
+["playing_solo"] = true,
+["totals"] = {
+0,
+0,
+{
+0,
+[0] = 0,
+["alternatepower"] = 0,
+[3] = 0,
+[6] = 0,
+},
+{
+["buff_uptime"] = 0,
+["ress"] = 0,
+["cooldowns_defensive"] = 0,
+["dispell"] = 0,
+["interrupt"] = 0,
+["debuff_uptime"] = 0,
+["cc_break"] = 0,
+["dead"] = 0,
+},
+["frags_total"] = 0,
+["voidzone_damage"] = 0,
+},
+["totals_grupo"] = {
+0,
+0,
+{
+0,
+[0] = 0,
+["alternatepower"] = 0,
+[3] = 0,
+[6] = 0,
+},
+{
+["buff_uptime"] = 0,
+["ress"] = 0,
+["cooldowns_defensive"] = 0,
+["dispell"] = 0,
+["interrupt"] = 0,
+["debuff_uptime"] = 0,
+["cc_break"] = 0,
+["dead"] = 0,
+},
+},
+["frags_need_refresh"] = false,
+["amountCasts"] = {
+},
+["instance_type"] = "none",
+["zoneName"] = "Восточные королевства",
+["data_fim"] = "07:47:58",
+["timeEnd"] = 1793425678,
+["bIsClosed"] = true,
+["cleu_timeline"] = {
+},
+["enemy"] = "Неизвестно",
+["trinketProcs"] = {
+},
+["TotalElapsedCombatTime"] = 13.33499999999913,
+["CombatEndedAt"] = 28055.515,
+["aura_timeline"] = {
+},
+["compressed_charts"] = {
+},
+["data_inicio"] = 0,
+["end_time"] = 311421.631,
+["mapId"] = 0,
+["EncounterName"] = "Неупокоенное сердце",
+["tempo_start"] = 311014.257,
+["frags"] = {
+},
+["is_challenge"] = false,
+["spells_cast_timeline"] = {
+},
+["boss_hp"] = 1,
+["combat_counter"] = 16,
+["player_last_events"] = {
+},
+["PhaseData"] = {
+{
+1,
+1,
+},
+["damage_section"] = {
+},
+["heal_section"] = {
+},
+["heal"] = {
+{
+},
+},
+["damage"] = {
+{
+},
+},
+},
+["start_time"] = 0,
+["TimeData"] = {
+},
+["playerTalents"] = {
+},
+},
 },
 },
 ["apocalypse_savedsegments"] = {
 },
 ["ocd_tracker"] = {
-["show_title"] = true,
+["enabled"] = false,
 ["current_cooldowns"] = {
 },
 ["lines_per_column"] = 12,
 ["group_frames"] = true,
-["show_options"] = false,
+["width"] = 120,
 ["frames"] = {
 ["defensive-raid"] = {
 },
@@ -30,11 +172,12 @@ _detalhes_database = {
 ["defensive-personal"] = {
 },
 },
-["width"] = 120,
+["show_options"] = false,
 ["ignored_cooldowns"] = {
 },
-["height"] = 18,
 ["framme_locked"] = false,
+["cooldowns"] = {
+},
 ["own_frame"] = {
 ["defensive-raid"] = false,
 ["ofensive"] = false,
@@ -42,13 +185,12 @@ _detalhes_database = {
 ["utility"] = false,
 ["defensive-personal"] = false,
 },
-["cooldowns"] = {
-},
+["height"] = 18,
 ["show_conditions"] = {
 ["only_inside_instance"] = true,
 ["only_in_group"] = true,
 },
-["enabled"] = false,
+["show_title"] = true,
 ["filters"] = {
 ["itemutil"] = false,
 ["itempower"] = false,
@@ -61,7 +203,7 @@ _detalhes_database = {
 ["utility"] = false,
 },
 },
-["combat_counter"] = 12,
+["combat_counter"] = 17,
 ["player_stats"] = {
 },
 ["force_font_outline"] = "",
@@ -69,14 +211,10 @@ _detalhes_database = {
 },
 ["arena_data_compressed"] = {
 },
-["damage_meter_sessions"] = {
-},
+["last_realversion"] = 172,
 ["arena_data_index_selected"] = 1,
 ["character_data"] = {
-["logons"] = 6,
-},
-["on_death_menu"] = false,
-["damage_meter_session_info"] = {
+["logons"] = 35,
 },
 ["local_instances_config"] = {
 {
@@ -100,10 +238,10 @@ _detalhes_database = {
 ["attribute"] = 1,
 ["pos"] = {
 ["normal"] = {
-["y"] = -406.0000305175781,
-["x"] = -1070.666534423828,
-["w"] = 467.6190795898438,
-["h"] = 185.4286041259766,
+["y"] = -481.4999465942383,
+["x"] = -1200.333236694336,
+["w"] = 426.0000305175781,
+["h"] = 134.9999847412109,
 },
 ["solo"] = {
 ["y"] = 2,
@@ -114,18 +252,22 @@ _detalhes_database = {
 },
 },
 },
-["announce_firsthit"] = {
-["enabled"] = true,
-["channel"] = "SELF",
+["damage_meter_session_info"] = {
 },
-["last_instance_id"] = 0,
+["cached_roles"] = {
+},
+["nick_tag_cache"] = {
+["nextreset"] = 1794531328,
+["last_version"] = 16,
+},
+["last_instance_id"] = 2805,
 ["data_harvest_for_charsts"] = {
 ["players"] = {
 {
-["playerKey"] = "total",
-["combatObjectContainer"] = 1,
 ["name"] = "Damage of Each Individual Player",
 ["playerOnly"] = true,
+["playerKey"] = "total",
+["combatObjectContainer"] = 1,
 },
 },
 ["totals"] = {
@@ -143,22 +285,36 @@ _detalhes_database = {
 ["custom"] = "",
 ["next"] = "",
 },
-["last_instance_time"] = 0,
-["active_profile"] = "Ньарлатхотеп-Пиратская Бухта",
-["last_day"] = "29",
-["cached_talents"] = {
+["announce_prepots"] = {
+["enabled"] = false,
+["channel"] = "SELF",
+["reverse"] = false,
 },
+["active_profile"] = "Ньарлатхотеп-Пиратская Бухта",
+["mythic_dungeon_currentsaved"] = {
+["dungeon_name"] = "",
+["started"] = false,
+["segment_id"] = 0,
+["ej_id"] = 0,
+["started_at"] = 0,
+["run_id"] = 0,
+["level"] = 0,
+["dungeon_zone_id"] = 0,
+["previous_boss_killed_at"] = 0,
+},
+["last_instance_time"] = 1793510936,
 ["benchmark_db"] = {
 ["frame"] = {
 },
 },
-["ignore_nicktag"] = false,
-["arena_data_headers"] = {
+["cached_talents"] = {
+},
+["apocalypes_info"] = {
 },
 ["combat_log"] = {
 ["inverse_deathlog_overalldata"] = false,
-["merge_gemstones_1007"] = false,
 ["track_hunter_frenzy"] = false,
+["merge_gemstones_1007"] = false,
 ["merge_critical_heals"] = false,
 ["inverse_deathlog_raid"] = false,
 ["calc_evoker_damage"] = true,
@@ -174,9 +330,9 @@ _detalhes_database = {
 ["enabled"] = true,
 ["only_my_group"] = false,
 ["animate"] = false,
-["useclasscolors"] = false,
+["updatespeed"] = 1,
 ["hide_pull_bar"] = false,
-["author"] = "Terciob",
+["useclasscolors"] = false,
 ["playercolor"] = {
 1,
 1,
@@ -190,7 +346,7 @@ _detalhes_database = {
 ["absolute_mode"] = false,
 ["show_party_pets"] = false,
 ["playSoundFile"] = "Details Threat Warning Volume 3",
-["updatespeed"] = 1,
+["author"] = "Terciob",
 },
 ["DETAILS_PLUGIN_COMPARETWO_WINDOW"] = {
 ["enabled"] = true,
@@ -212,15 +368,15 @@ _detalhes_database = {
 ["tank_block_size"] = 150,
 ["bar_height"] = 24,
 ["tank_block_texture"] = "Details Serenity",
-["show_inc_bars"] = true,
-["tank_block_powerbar_size_height"] = 10,
-["tank_block_height"] = 40,
 ["tank_block_color"] = {
 0.074509,
 0.035294,
 0.035294,
 0.832845,
 },
+["tank_block_height"] = 40,
+["tank_block_powerbar_size_height"] = 10,
+["show_inc_bars"] = true,
 },
 ["DETAILS_PLUGIN_ENCOUNTER_DETAILS"] = {
 ["enabled"] = true,
@@ -230,11 +386,11 @@ _detalhes_database = {
 ["last_section_selected"] = "main",
 ["author"] = "Terciob",
 ["window_scale"] = 1,
-["encounter_timers_dbm"] = {
-},
+["hide_on_combat"] = false,
 ["show_icon"] = 5,
 ["opened"] = 0,
-["hide_on_combat"] = false,
+["encounter_timers_dbm"] = {
+},
 },
 ["DETAILS_PLUGIN_RAIDCHECK"] = {
 ["enabled"] = true,
@@ -256,28 +412,28 @@ _detalhes_database = {
 1,
 0.5,
 },
+["scale"] = 1,
 ["main_frame_size"] = {
 299.9999694824219,
 500.0000610351563,
 },
-["arrow_anchor_y"] = 0,
 ["minimap"] = {
 ["minimapPos"] = 160,
 ["radius"] = 160,
 ["hide"] = false,
 },
-["main_frame_locked"] = false,
+["row_height"] = 20,
 ["arrow_anchor_x"] = 0,
-["author"] = "Terciob",
+["font_color"] = {
+1,
+1,
+1,
+1,
+},
 ["row_texture"] = "Details Serenity",
 ["square_grow_direction"] = "right",
-["y"] = -7.62939453125e-05,
-["row_color"] = {
-0.1,
-0.1,
-0.1,
-0.4,
-},
+["point"] = "CENTER",
+["main_frame_strata"] = "LOW",
 ["square_amount"] = 5,
 ["enabled"] = false,
 ["arrow_size"] = 10,
@@ -286,11 +442,11 @@ _detalhes_database = {
 ["point"] = "CENTER",
 ["scale"] = 1,
 ["font_shadow"] = true,
-["y"] = -6.103515625e-05,
-["x"] = 0.00018310546875,
-["attribute_type"] = 1,
-["update_speed"] = 0.05,
+["y"] = 0.026580810546875,
+["x"] = 0.0008544921875,
 ["size"] = 32,
+["update_speed"] = 0.05,
+["attribute_type"] = 1,
 },
 ["row_spacement"] = 21,
 ["main_frame_color"] = {
@@ -299,58 +455,66 @@ _detalhes_database = {
 0,
 0.2,
 },
-["main_frame_strata"] = "LOW",
+["author"] = "Terciob",
 ["arrow_texture"] = "Interface\\CHATFRAME\\ChatFrameExpandArrow",
-["use_spark"] = true,
+["y"] = 0.0007171630859375,
 ["font_size"] = 10,
-["x"] = 0.00128173828125,
+["x"] = 6.103515625e-05,
 ["font_face"] = "Friz Quadrata TT",
 ["square_size"] = 32,
-["point"] = "CENTER",
-["font_color"] = {
-1,
-1,
-1,
-1,
+["use_spark"] = true,
+["row_color"] = {
+0.1,
+0.1,
+0.1,
+0.4,
 },
-["row_height"] = 20,
-["scale"] = 1,
+["main_frame_locked"] = false,
+["arrow_anchor_y"] = 0,
 },
+},
+["announce_firsthit"] = {
+["enabled"] = true,
+["channel"] = "SELF",
 },
 ["data_harvested_for_charts"] = {
 },
 ["mythic_plus_log"] = {
 },
-["announce_prepots"] = {
-["enabled"] = false,
-["channel"] = "SELF",
-["reverse"] = false,
+["damage_meter_sessions"] = {
+{
+["playerCasts"] = {
 },
-["nick_tag_cache"] = {
-["nextreset"] = 1794531328,
-["last_version"] = 16,
+["endUnixTime"] = 1794045608,
+["sessionId"] = 1,
+["added"] = false,
+["playerAuras"] = {
+},
+["endDate"] = "12:00:08",
+["startUnixTime"] = 1794045602,
+["endTime"] = 28055.831,
+["sessionName"] = "Захватчик из племени Глубинных Плавников",
+["startDate"] = "12:00:02",
+["startTime"] = 28049.347,
+["alreadyAdded"] = false,
+["detailsId"] = "Захватчик из племени Глубинных Плавников1",
+},
 },
 ["apocalypse_hashes"] = {
 },
+["last_version"] = "12.1.5 15402",
 ["SoloTablesSaved"] = {
 ["Mode"] = 1,
 },
-["last_version"] = "12.1.5 15339",
 ["combat_id"] = 0,
 ["savedStyles"] = {
 },
-["mythic_dungeon_currentsaved"] = {
-["dungeon_name"] = "",
-["started"] = false,
-["segment_id"] = 0,
-["ej_id"] = 0,
-["started_at"] = 0,
-["run_id"] = 0,
-["level"] = 0,
-["dungeon_zone_id"] = 0,
-["previous_boss_killed_at"] = 0,
+["on_death_menu"] = false,
+["coach"] = {
+["enabled"] = false,
+["welcome_panel_pos"] = {
 },
-["cached_roles"] = {
+["last_coach_name"] = false,
 },
 ["announce_deaths"] = {
 ["enabled"] = false,
@@ -384,37 +548,16 @@ _detalhes_database = {
 ["_ActorTable"] = {
 },
 },
-["raid_roster"] = {
-},
-["tempo_start"] = 126718.164,
+["boss_hp"] = 1,
+["tempo_start"] = 1793509713,
 ["last_events_tables"] = {
 },
 ["alternate_power"] = {
 },
-["totals_grupo"] = {
-0,
-0,
-{
-0,
-[0] = 0,
-["alternatepower"] = 0,
-[3] = 0,
-[6] = 0,
-},
-{
-["buff_uptime"] = 0,
-["ress"] = 0,
-["debuff_uptime"] = 0,
-["cooldowns_defensive"] = 0,
-["interrupt"] = 0,
-["dispell"] = 0,
-["cc_break"] = 0,
-["dead"] = 0,
-},
-},
 ["bossTimers"] = {
 },
-["trinketProcs"] = {
+["cleu_events"] = {
+["n"] = 1,
 },
 ["playerTalents"] = {
 },
@@ -431,10 +574,10 @@ _detalhes_database = {
 {
 ["buff_uptime"] = 0,
 ["ress"] = 0,
-["debuff_uptime"] = 0,
 ["cooldowns_defensive"] = 0,
-["interrupt"] = 0,
 ["dispell"] = 0,
+["interrupt"] = 0,
+["debuff_uptime"] = 0,
 ["cc_break"] = 0,
 ["dead"] = 0,
 },
@@ -443,61 +586,82 @@ _detalhes_database = {
 },
 ["player_last_events"] = {
 },
-["cleu_events"] = {
-["n"] = 1,
-},
 ["frags_need_refresh"] = false,
+["overall_refreshed"] = true,
+["amountCasts"] = {
+},
+["instance_type"] = "party",
+["zoneName"] = "Шпили Ветрокрылых",
+["data_fim"] = 0,
+["cleu_timeline"] = {
+},
+["trinketProcs"] = {
+},
 ["aura_timeline"] = {
 },
 ["compressed_charts"] = {
 },
 ["data_inicio"] = 0,
-["amountCasts"] = {
+["mapId"] = 2805,
+["raid_roster"] = {
 },
-["mapId"] = 2735,
-["instance_type"] = "neighborhood",
-["zoneName"] = "Лагерь Основателя",
-["boss_hp"] = 1,
 ["is_challenge"] = false,
-["frags"] = {
-},
-["data_fim"] = 0,
-["cleu_timeline"] = {
-},
 ["spells_cast_timeline"] = {
 },
+["totals_grupo"] = {
+0,
+0,
+{
+0,
+[0] = 0,
+["alternatepower"] = 0,
+[3] = 0,
+[6] = 0,
+},
+{
+["buff_uptime"] = 0,
+["ress"] = 0,
+["cooldowns_defensive"] = 0,
+["dispell"] = 0,
+["interrupt"] = 0,
+["debuff_uptime"] = 0,
+["cc_break"] = 0,
+["dead"] = 0,
+},
+},
+["combat_counter"] = 17,
 ["PhaseData"] = {
 {
 1,
 1,
 },
+["damage_section"] = {
+},
 ["heal_section"] = {
 },
 ["heal"] = {
 },
-["damage_section"] = {
-},
 ["damage"] = {
 },
 },
+["segments_added"] = {
+},
 ["start_time"] = 0,
 ["TimeData"] = {
+["Raid Damage Done"] = {
 },
-["combat_counter"] = 11,
 },
-["coach"] = {
-["enabled"] = false,
-["welcome_panel_pos"] = {
+["frags"] = {
 },
-["last_coach_name"] = false,
 },
-["apocalypes_info"] = {
+["last_day"] = "07",
+["arena_data_headers"] = {
 },
-["last_realversion"] = 172,
+["ignore_nicktag"] = false,
 ["announce_cooldowns"] = {
+["enabled"] = false,
 ["ignored_cooldowns"] = {
 },
-["enabled"] = false,
 ["custom"] = "",
 ["channel"] = "RAID",
 },

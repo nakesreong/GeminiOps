@@ -1,0 +1,145 @@
+VER 3 010000000000001B "1" "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [@player] Тотем исцеляющего потока
+END
+VER 3 010000000000002D "10" "INV_MISC_QUESTIONMARK"
+#showtooltip Исцеляющий всплеск
+/stopmacro [flying][channeling]
+/cast [@target,help,nodead][@player] Исцеляющий всплеск
+END
+VER 3 0100000000000019 "2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [known:187874] Сокрушающая молния
+/startattack
+END
+VER 3 0100000000000026 "3" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем конденсации
+END
+VER 3 010000000000001C "4" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем ветряного порыва
+END
+VER 3 010000000000001E "6" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем заземления
+END
+VER 3 0100000000000023 "6" "134400"
+#showtooltip
+/stopmacro [flying][channeling]
+/cast [@player] Тотем хватки земли
+END
+VER 3 0100000000000008 "AM2" "134400"
+#showtooltip
+/castsequence reset=3 Щит молний, Небесная ярость, Оружие неистовства ветра(Усиленное оружие), Оружие языка пламени(Усиленное оружие)
+END
+VER 3 010000000000002A "CM1" "134400"
+#showtooltip Астральный сдвиг
+/stopmacro [flying]
+/cast Астральный сдвиг
+END
+VER 3 0100000000000048 "es1" "INV_MISC_QUESTIONMARK"
+#showtooltip Гальваническое пламя
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Гальваническое пламя
+END
+VER 3 0100000000000049 "es2" "INV_MISC_QUESTIONMARK"
+#showtooltip Оружие неистовства ветра
+/stopmacro [flying]
+/cast Оружие неистовства ветра
+END
+VER 3 010000000000004A "es3" "INV_MISC_QUESTIONMARK"
+#showtooltip Оружие языка пламени
+/stopmacro [flying]
+/cast Оружие языка пламени
+END
+VER 3 010000000000004B "es4" "INV_MISC_QUESTIONMARK"
+#showtooltip Перерождение
+/stopmacro [flying]
+/cast Перерождение
+END
+VER 3 010000000000000B "F" "INV_MISC_QUESTIONMARK"
+#showtooltip Пронизывающий ветер
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Пронизывающий ветер
+END
+VER 3 010000000000003A "s1" "INV_MISC_QUESTIONMARK"
+#showtooltip Астральное возвращение
+/stopmacro [flying]
+/cast Астральное возвращение
+END
+VER 3 0100000000000043 "s10" "INV_MISC_QUESTIONMARK"
+#showtooltip Проецирование тотемов
+/stopmacro [flying]
+/cast [@cursor] Проецирование тотемов
+END
+VER 3 0100000000000044 "s11" "INV_MISC_QUESTIONMARK"
+#showtooltip Сглаз
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Сглаз
+END
+VER 3 0100000000000045 "s12" "INV_MISC_QUESTIONMARK"
+#showtooltip Хождение по воде
+/stopmacro [flying]
+/cast [@mouseover,help,nodead][@target,help,nodead][@player] Хождение по воде
+END
+VER 3 0100000000000046 "s13" "INV_MISC_QUESTIONMARK"
+#showtooltip Цепное исцеление
+/stopmacro [flying]
+/cast [@mouseover,help,nodead][@target,help,nodead][@player] Цепное исцеление
+END
+VER 3 010000000000004C "s14" "INV_MISC_QUESTIONMARK"
+#showtooltip Щит земли
+/stopmacro [flying]
+/cast [@player] Щит земли
+END
+VER 3 010000000000003B "s2" "INV_MISC_QUESTIONMARK"
+#showtooltip Великое очищение
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Великое очищение
+END
+VER 3 010000000000003C "s3" "INV_MISC_QUESTIONMARK"
+#showtooltip Героизм
+/stopmacro [flying]
+/cast Героизм
+END
+VER 3 010000000000003D "s4" "INV_MISC_QUESTIONMARK"
+#showtooltip Дальнее зрение
+/stopmacro [flying]
+/cast Дальнее зрение
+END
+VER 3 010000000000003E "s5" "INV_MISC_QUESTIONMARK"
+#showtooltip Дух предков
+/stopmacro [flying]
+/cast [@mouseover,help,dead][@target,help,dead] Дух предков
+END
+VER 3 010000000000003F "s6" "INV_MISC_QUESTIONMARK"
+#showtooltip Молния
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Молния
+END
+VER 3 0100000000000040 "s7" "INV_MISC_QUESTIONMARK"
+#showtooltip Очищение духа
+/stopmacro [flying]
+/cast [@mouseover,help,nodead][@target,help,nodead][@player] Очищение духа
+END
+VER 3 0100000000000041 "s8" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast Поступь духа
+END
+VER 3 0100000000000042 "s9" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [indoors][combat] Призрачный волк; [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [noflyable] Призрачный волк; Лунный чарофитильный транспорт
+END
+VER 3 010000000000004D "Коллекция образов" "2869702"
+#plumber:outfit
+/click PLMR_OUTFIT
+END

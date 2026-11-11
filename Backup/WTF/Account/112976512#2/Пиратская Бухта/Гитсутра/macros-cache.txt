@@ -1,0 +1,159 @@
+VER 3 0100000000000001 "." "134400"
+#showtooltip
+/stopmacro [flying]
+/cast [combat][indoors] Кувырок; [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift,flyable] Зотокрылый темный искатель; Величественный мушан бойца
+/cast [nomounted] Кувырок
+END
+VER 3 0100000000000002 "m1" "INV_MISC_QUESTIONMARK"
+#showtooltip Вывести из строя
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Вывести из строя
+/startattack
+END
+VER 3 010000000000000B "m10" "INV_MISC_QUESTIONMARK"
+#showtooltip Полет дзен
+/stopmacro [flying]
+/cast Полет дзен
+END
+VER 3 010000000000000C "m11" "INV_MISC_QUESTIONMARK"
+#showtooltip Сверкающая нефритовая молния
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Сверкающая нефритовая молния
+END
+VER 3 010000000000000D "m12" "INV_MISC_QUESTIONMARK"
+#showtooltip Смертельное касание
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Смертельное касание
+/startattack
+END
+VER 3 010000000000000E "m13" "INV_MISC_QUESTIONMARK"
+#showtooltip Танцующий журавль
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast Танцующий журавль
+/startattack
+END
+VER 3 010000000000000F "m14" "INV_MISC_QUESTIONMARK"
+#showtooltip Тигриное рвение
+/stopmacro [flying]
+/cast [@mouseover,help,nodead][@target,help,nodead][@player] Тигриное рвение
+END
+VER 3 0100000000000010 "m15" "INV_MISC_QUESTIONMARK"
+#showtooltip Трансцендентность
+/stopmacro [flying]
+/cast Трансцендентность
+END
+VER 3 0100000000000011 "m16" "INV_MISC_QUESTIONMARK"
+#showtooltip Трансцендентность: перенос
+/stopmacro [flying]
+/cast Трансцендентность: перенос
+END
+VER 3 0100000000000012 "m17" "INV_MISC_QUESTIONMARK"
+#showtooltip Укрепляющий отвар
+/stopmacro [flying]
+/cast Укрепляющий отвар
+END
+VER 3 0100000000000003 "m2" "INV_MISC_QUESTIONMARK"
+#showtooltip Вызов
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Вызов
+END
+VER 3 0100000000000004 "m3" "INV_MISC_QUESTIONMARK"
+#showtooltip Духовное путешествие
+/stopmacro [flying]
+/cast Духовное путешествие
+END
+VER 3 0100000000000005 "m4" "INV_MISC_QUESTIONMARK"
+#showtooltip Круг мира
+/stopmacro [flying]
+/cast [@cursor] Круг мира
+END
+VER 3 0100000000000006 "m5" "INV_MISC_QUESTIONMARK"
+#showtooltip Круговой удар ногой
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast Круговой удар ногой
+/startattack
+END
+VER 3 0100000000000007 "m6" "INV_MISC_QUESTIONMARK"
+#showtooltip Лапа тигра
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Лапа тигра
+/startattack
+END
+VER 3 0100000000000008 "m7" "INV_MISC_QUESTIONMARK"
+#showtooltip Нокаутирующий удар
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Нокаутирующий удар
+/startattack
+END
+VER 3 0100000000000009 "m8" "INV_MISC_QUESTIONMARK"
+#showtooltip Оживить
+/stopmacro [flying][channeling]
+/cast [@target,help,nodead][@player] Оживить
+END
+VER 3 010000000000000A "m9" "INV_MISC_QUESTIONMARK"
+#showtooltip Паралич
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Паралич
+END
+VER 3 0100000000000013 "wm1" "INV_MISC_QUESTIONMARK"
+#showtooltip Закон кармы
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Закон кармы
+/startattack
+END
+VER 3 0100000000000014 "wm2" "INV_MISC_QUESTIONMARK"
+#showtooltip Зенит
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast Зенит
+/startattack
+END
+VER 3 0100000000000015 "wm3" "INV_MISC_QUESTIONMARK"
+#showtooltip Неистовые кулаки
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Неистовые кулаки
+/startattack
+END
+VER 3 0100000000000016 "wm4" "INV_MISC_QUESTIONMARK"
+#showtooltip Рука-копье
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Рука-копье
+/startattack
+END
+VER 3 0100000000000017 "wm5" "INV_MISC_QUESTIONMARK"
+#showtooltip Удар Владыки Ветра
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast Удар Владыки Ветра
+/startattack
+END
+VER 3 0100000000000018 "wm6" "INV_MISC_QUESTIONMARK"
+#showtooltip Удар восходящего солнца
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Удар восходящего солнца
+/startattack
+END
+VER 3 0100000000000019 "wm7" "INV_MISC_QUESTIONMARK"
+#showtooltip Удар летящего змея
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast Удар летящего змея
+/startattack
+END
+VER 3 010000000000001A "wm8" "INV_MISC_QUESTIONMARK"
+#showtooltip Однокнопочный помощник
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Однокнопочный помощник
+/startattack
+END

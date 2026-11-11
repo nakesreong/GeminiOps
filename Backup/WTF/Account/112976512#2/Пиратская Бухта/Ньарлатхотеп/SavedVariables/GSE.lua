@@ -1,6 +1,12 @@
 
 GSE_C = {
-["resetOOC"] = true,
+["Updates"] = {
+["profiles"] = true,
+["3202"] = true,
+["3212"] = true,
+["3218"] = true,
+["3201"] = true,
+},
 ["ActionBarBinds"] = {
 ["LoadOuts"] = {
 ["1"] = {
@@ -9,13 +15,7 @@ GSE_C = {
 },
 },
 },
-["Updates"] = {
-["3201"] = true,
-["3202"] = true,
-["3212"] = true,
-["3218"] = true,
-["profiles"] = true,
-},
+["resetOOC"] = true,
 ["KeyBindings"] = {
 },
 }

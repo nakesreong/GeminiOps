@@ -14,9 +14,10 @@ VER 3 010000000000000B "d11" "INV_MISC_QUESTIONMARK"
 /cast [noform] Облик кошки; Крадущийся зверь
 END
 VER 3 010000000000000C "d12" "INV_MISC_QUESTIONMARK"
-#showtooltip
+#showtooltip Лунный огонь
 /stopmacro [flying]
-/cast [@target] Лунный огонь
+/cast [nocombat, notarget, form:4] Облик лунного совуха
+/cast [noform][form:1][form:2][form:3] Облик лунного совуха; [@target] Лунный огонь
 END
 VER 3 010000000000000D "d13" "INV_MISC_QUESTIONMARK"
 #showtooltip

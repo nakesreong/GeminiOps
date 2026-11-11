@@ -13,7 +13,7 @@
     {
         "Name":  "Auctionator",
         "Title":  "Auctionator",
-        "Version":  "341",
+        "Version":  "344",
         "Author":  "plusmouse, Borjamacare",
         "CurseID":  "",
         "WagoID":  "",
@@ -24,7 +24,7 @@
     {
         "Name":  "Baganator",
         "Title":  "Baganator",
-        "Version":  "839",
+        "Version":  "846",
         "Author":  "plusmouse",
         "CurseID":  "",
         "WagoID":  "",
@@ -35,7 +35,7 @@
     {
         "Name":  "Bartender4",
         "Title":  "Bartender4",
-        "Version":  "4.18.3.1",
+        "Version":  "4.18.4",
         "Author":  "Nevcairiel",
         "CurseID":  "13501",
         "WagoID":  "v63oVn6b",
@@ -55,6 +55,39 @@
         "GitRepo":  ""
     },
     {
+        "Name":  "BasicMinimap",
+        "Title":  "BasicMinimap",
+        "Version":  "v12.1.6",
+        "Author":  "Funkeh",
+        "CurseID":  "13506",
+        "WagoID":  "5bGoroK0",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "BasicMinimap_Options",
+        "Title":  "BasicMinimap_Options",
+        "Version":  "v12.1.6",
+        "Author":  "Funkeh",
+        "CurseID":  "13506",
+        "WagoID":  "5bGoroK0",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "BeastCollector",
+        "Title":  "|cff00ff96Beast|r|cffffaa00Collector|r",
+        "Version":  "1.0.0",
+        "Author":  "Anya \u0026 Tiger",
+        "CurseID":  "",
+        "WagoID":  "",
+        "TukuiID":  "",
+        "IsCustomGit":  true,
+        "GitRepo":  "https://github.com/nakesreong/BeastCollector.git"
+    },
+    {
         "Name":  "BetterFishing",
         "Title":  "|cffEEE4AEBetter Fishing|r",
         "Version":  "66",
@@ -66,31 +99,9 @@
         "GitRepo":  ""
     },
     {
-        "Name":  "BetterWardrobe",
-        "Title":  "BetterWardrobe (6.12.3)",
-        "Version":  "6.12.3",
-        "Author":  "SLOKnightfall",
-        "CurseID":  "401253",
-        "WagoID":  "0mKOzk6x",
-        "TukuiID":  "",
-        "IsCustomGit":  false,
-        "GitRepo":  ""
-    },
-    {
-        "Name":  "BetterWardrobe_SourceData",
-        "Title":  "BetterWardrobe_SourceData (6.12.3)",
-        "Version":  "6.12.3",
-        "Author":  "SLOKnightfall",
-        "CurseID":  "",
-        "WagoID":  "",
-        "TukuiID":  "",
-        "IsCustomGit":  false,
-        "GitRepo":  ""
-    },
-    {
         "Name":  "BigWigs",
         "Title":  "BigWigs",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "Funkeh, Nebula, Justwait, Delk",
         "CurseID":  "2382",
         "WagoID":  "5NRegwG3",
@@ -101,7 +112,7 @@
     {
         "Name":  "BigWigs_BattleForAzeroth",
         "Title":  "BigWigs [|cffeda55fBattle for Azeroth|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "420598",
         "WagoID":  "jK8Xl0Ky",
@@ -112,7 +123,7 @@
     {
         "Name":  "BigWigs_BurningCrusade",
         "Title":  "BigWigs [|cffeda55fBurning Crusade|r]",
-        "Version":  "v12.1.11",
+        "Version":  "v12.1.12",
         "Author":  "",
         "CurseID":  "50688",
         "WagoID":  "v63oQL6b",
@@ -123,7 +134,7 @@
     {
         "Name":  "BigWigs_Cataclysm",
         "Title":  "BigWigs [|cffeda55fCataclysm|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "45694",
         "WagoID":  "kGr0z76y",
@@ -134,7 +145,7 @@
     {
         "Name":  "BigWigs_Classic",
         "Title":  "BigWigs [|cffeda55fClassic|r]",
-        "Version":  "v12.1.2",
+        "Version":  "v12.1.3",
         "Author":  "",
         "CurseID":  "50625",
         "WagoID":  "rNkPgm6a",
@@ -145,7 +156,7 @@
     {
         "Name":  "BigWigs_Core",
         "Title":  "BigWigs [|cffeda55fCore|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -156,7 +167,7 @@
     {
         "Name":  "BigWigs_Dragonflight",
         "Title":  "BigWigs [|cffeda55fDragonflight|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "1086065",
         "WagoID":  "mNwQpeKo",
@@ -167,7 +178,7 @@
     {
         "Name":  "BigWigs_Legion",
         "Title":  "BigWigs [|cffeda55fLegion|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "300657",
         "WagoID":  "96dorENO",
@@ -178,7 +189,7 @@
     {
         "Name":  "BigWigs_MarchOnQuelDanas",
         "Title":  "BigWigs [|cffeda55fMarch on Quel\u0027Danas|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -189,7 +200,7 @@
     {
         "Name":  "BigWigs_MidnightLairs",
         "Title":  "BigWigs [|cffeda55fMidnight Lair Bosses|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -200,7 +211,7 @@
     {
         "Name":  "BigWigs_MidnightWorld",
         "Title":  "BigWigs [|cffeda55fMidnight World Bosses|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -211,7 +222,7 @@
     {
         "Name":  "BigWigs_MistsOfPandaria",
         "Title":  "BigWigs [|cffeda55fMists of Pandaria|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "86782",
         "WagoID":  "rN4VvxKD",
@@ -222,7 +233,7 @@
     {
         "Name":  "BigWigs_Options",
         "Title":  "BigWigs [|cffeda55fOptions|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -233,7 +244,7 @@
     {
         "Name":  "BigWigs_Plugins",
         "Title":  "BigWigs [|cffeda55fPlugins|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -244,7 +255,7 @@
     {
         "Name":  "BigWigs_Shadowlands",
         "Title":  "BigWigs [|cffeda55fShadowlands|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "714747",
         "WagoID":  "kNMdlEGz",
@@ -255,7 +266,7 @@
     {
         "Name":  "BigWigs_Sporefall",
         "Title":  "BigWigs [|cffeda55fSporefall|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -266,7 +277,7 @@
     {
         "Name":  "BigWigs_TheDreamrift",
         "Title":  "BigWigs [|cffeda55fThe Dreamrift|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -277,7 +288,7 @@
     {
         "Name":  "BigWigs_TheUnbindingOfKithix",
         "Title":  "BigWigs [|cffeda55fThe Unbinding of Kith\u0027ix|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -288,7 +299,7 @@
     {
         "Name":  "BigWigs_TheVenomousAbyss",
         "Title":  "BigWigs [|cffeda55fThe Venomous Abyss|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -299,7 +310,7 @@
     {
         "Name":  "BigWigs_TheVoidspire",
         "Title":  "BigWigs [|cffeda55fThe Voidspire|r]",
-        "Version":  "v427.8",
+        "Version":  "v427.9",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "",
@@ -310,7 +321,7 @@
     {
         "Name":  "BigWigs_TheWarWithin",
         "Title":  "BigWigs [|cffeda55fThe War Within|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "1466611",
         "WagoID":  "bGoy9B60",
@@ -321,7 +332,7 @@
     {
         "Name":  "BigWigs_WarlordsOfDraenor",
         "Title":  "BigWigs [|cffeda55fWarlords of Draenor|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "101160",
         "WagoID":  "Q6aExB6W",
@@ -332,7 +343,7 @@
     {
         "Name":  "BigWigs_WrathOfTheLichKing",
         "Title":  "BigWigs [|cffeda55fWrath of the Lich King|r]",
-        "Version":  "v12.1.0",
+        "Version":  "v12.1.1",
         "Author":  "",
         "CurseID":  "50417",
         "WagoID":  "7nGvW2Nx",
@@ -343,7 +354,7 @@
     {
         "Name":  "BlizzMove",
         "Title":  "BlizzMove",
-        "Version":  "v3.8.5",
+        "Version":  "v3.8.8",
         "Author":  "Kiatra, zaCade, Numy - github.com/Kiatra/BlizzMove/",
         "CurseID":  "17809",
         "WagoID":  "",
@@ -354,7 +365,7 @@
     {
         "Name":  "BlizzMove_Debug",
         "Title":  "BlizzMove - Debugging plugin",
-        "Version":  "v3.8.5",
+        "Version":  "v3.8.8",
         "Author":  "Numy - github.com/Kiatra/BlizzMove/",
         "CurseID":  "",
         "WagoID":  "",
@@ -369,6 +380,17 @@
         "Author":  "Funkeh",
         "CurseID":  "6273",
         "WagoID":  "rkGrrgGy",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "CraftSim",
+        "Title":  "CraftSim",
+        "Version":  "27.0.7",
+        "Author":  "genju",
+        "CurseID":  "705015",
+        "WagoID":  "0mNwaPKo",
         "TukuiID":  "",
         "IsCustomGit":  false,
         "GitRepo":  ""
@@ -398,7 +420,7 @@
     {
         "Name":  "Details",
         "Title":  "Details! Damage Meter",
-        "Version":  "#Details.20261015.15339.172",
+        "Version":  "#Details.20261109.15410.172",
         "Author":  "",
         "CurseID":  "61284",
         "WagoID":  "qv63A7Gb",
@@ -530,7 +552,7 @@
     {
         "Name":  "ElvUI_WindTools",
         "Title":  "|cff1784d1ElvUI|r |cff5385edW|r|cff5094eai|r|cff4da4e7n|r|cff4ab4e4d|r|cff47c0e1T|r|cff44cbdfo|r|cff41d7ddo|r|cff41d7ddl|r|cff41d7dds|r [AllowLoadGameType standard, camelot]",
-        "Version":  "4.23",
+        "Version":  "4.24",
         "Author":  "fang2hou",
         "CurseID":  "300361",
         "WagoID":  "lQNlD9Ne",
@@ -552,7 +574,7 @@
     {
         "Name":  "Gathering",
         "Title":  "Gathering",
-        "Version":  "2.78",
+        "Version":  "2.82",
         "Author":  "Hydra",
         "CurseID":  "",
         "WagoID":  "",
@@ -563,7 +585,7 @@
     {
         "Name":  "GeminiOps",
         "Title":  "|cff00ccffGeminiOps|r — Personal AI Account \u0026 Profile Manager",
-        "Version":  "v1.0.0",
+        "Version":  "v1.1.0",
         "Author":  "Gemini (Tiger) \u0026 5cr3am1ng5oul (Anya)",
         "CurseID":  "",
         "WagoID":  "",
@@ -574,7 +596,7 @@
     {
         "Name":  "GSE",
         "Title":  "|cFFFFFFFFGS|r|cFF00FFFFE|r",
-        "Version":  "3.3.36-a",
+        "Version":  "3.3.38",
         "Author":  "TimothyLuke",
         "CurseID":  "101161",
         "WagoID":  "kGr0YY6y",
@@ -585,7 +607,7 @@
     {
         "Name":  "GSE_Actionbar",
         "Title":  "|cFFFFFFFFGS|r|cFF00FFFFE|r |cFF808080Action Bar|r",
-        "Version":  "3.3.36-a",
+        "Version":  "3.3.38",
         "Author":  "TimothyLuke",
         "CurseID":  "",
         "WagoID":  "",
@@ -596,7 +618,7 @@
     {
         "Name":  "GSE_GUI",
         "Title":  "|cFFFFFFFFGS|r|cFF00FFFFE|r |cFF808080Editor and User Interface|r",
-        "Version":  "3.3.36-a",
+        "Version":  "3.3.38",
         "Author":  "TimothyLuke",
         "CurseID":  "",
         "WagoID":  "",
@@ -607,7 +629,7 @@
     {
         "Name":  "GSE_LDB",
         "Title":  "|cFFFFFFFFGS|r|cFF00FFFFE|r |cFF808080Data Feeds and Minimap|r",
-        "Version":  "3.3.36-a",
+        "Version":  "3.3.38",
         "Author":  "TimothyLuke",
         "CurseID":  "",
         "WagoID":  "",
@@ -618,7 +640,7 @@
     {
         "Name":  "GSE_Options",
         "Title":  "|cFFFFFFFFGS|r|cFF00FFFFE|r |cFF808080Configuration Options|r",
-        "Version":  "3.3.36-a",
+        "Version":  "3.3.38",
         "Author":  "TimothyLuke",
         "CurseID":  "",
         "WagoID":  "",
@@ -629,8 +651,30 @@
     {
         "Name":  "GSE_Utils",
         "Title":  "|cFFFFFFFFGS|r|cFF00FFFFE|r |cFF808080Utility Functions|r",
-        "Version":  "3.3.36-a",
+        "Version":  "3.3.38",
         "Author":  "TimothyLuke",
+        "CurseID":  "",
+        "WagoID":  "",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "HidingBar",
+        "Title":  "HidingBar",
+        "Version":  "v12.1.9",
+        "Author":  "sfmict",
+        "CurseID":  "",
+        "WagoID":  "",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "HidingBar_Options",
+        "Title":  "HidingBar Options",
+        "Version":  "v12.1.9",
+        "Author":  "sfmict",
         "CurseID":  "",
         "WagoID":  "",
         "TukuiID":  "",
@@ -737,9 +781,20 @@
         "GitRepo":  ""
     },
     {
+        "Name":  "LegacyVendor",
+        "Title":  "Legacy Vendor",
+        "Version":  "3.0.1",
+        "Author":  "LegacyVendor",
+        "CurseID":  "XXXXXX",
+        "WagoID":  "",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
         "Name":  "LittleWigs",
         "Title":  "LittleWigs",
-        "Version":  "v12.1.22",
+        "Version":  "v12.1.23",
         "Author":  "Funkeh, Delk",
         "CurseID":  "4383",
         "WagoID":  "5bGolnN0",
@@ -794,6 +849,17 @@
     {
         "Name":  "LittleWigs_Dragonflight",
         "Title":  "LittleWigs [|cffeda55fDragonflight|r]",
+        "Version":  "",
+        "Author":  "",
+        "CurseID":  "",
+        "WagoID":  "",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "LittleWigs_Forever",
+        "Title":  "LittleWigs [|cffeda55fForever|r]",
         "Version":  "",
         "Author":  "",
         "CurseID":  "",
@@ -869,9 +935,31 @@
         "GitRepo":  ""
     },
     {
+        "Name":  "MacroToolkit",
+        "Title":  "Macro Toolkit",
+        "Version":  "v2.3.53",
+        "Author":  "Deepac, marciowb, The_Junksterr, Numy",
+        "CurseID":  "47117",
+        "WagoID":  "jK8XprKy",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
+        "Name":  "MacroToolkitIcons",
+        "Title":  "MacroToolkit Icon Data",
+        "Version":  "v2.3.53",
+        "Author":  "Deepac",
+        "CurseID":  "47117",
+        "WagoID":  "jK8XprKy",
+        "TukuiID":  "",
+        "IsCustomGit":  false,
+        "GitRepo":  ""
+    },
+    {
         "Name":  "Masque",
         "Title":  "Masque",
-        "Version":  "12.1.7",
+        "Version":  "12.1.8",
         "Author":  "StormFX, JJSheets",
         "CurseID":  "13592",
         "WagoID":  "kRNLgpGo",
@@ -882,7 +970,7 @@
     {
         "Name":  "Masque_ElvUI",
         "Title":  "Masque: ElvUI",
-        "Version":  "4.2",
+        "Version":  "4.3",
         "Author":  "Lorade",
         "CurseID":  "",
         "WagoID":  "",
@@ -915,7 +1003,7 @@
     {
         "Name":  "MountCollector",
         "Title":  "|cff00ccffMount|r|cffffaa00Collector|r",
-        "Version":  "1.4.2",
+        "Version":  "1.6.1",
         "Author":  "Gemini (Tiger) | QA \u0026 Vision: Anya (5cr3am1ng5oul)",
         "CurseID":  "1760103",
         "WagoID":  "",
@@ -937,7 +1025,7 @@
     {
         "Name":  "Pawn",
         "Title":  "Pawn",
-        "Version":  "2.14.0",
+        "Version":  "2.14.1",
         "Author":  "",
         "CurseID":  "",
         "WagoID":  "R4N2k46L",
@@ -948,7 +1036,7 @@
     {
         "Name":  "PeaversCurrencyData",
         "Title":  "|cff3abdf7Peavers|rCurrencyData",
-        "Version":  "1.0.7407",
+        "Version":  "1.0.7441",
         "Author":  "Peavers",
         "CurseID":  "1266517",
         "WagoID":  "",
@@ -959,7 +1047,7 @@
     {
         "Name":  "Plater",
         "Title":  "Plater",
-        "Version":  "Plater-v662-Retail",
+        "Version":  "Plater-v663-Retail",
         "Author":  "",
         "CurseID":  "100547",
         "WagoID":  "kRNLep6o",
@@ -970,7 +1058,7 @@
     {
         "Name":  "Plumber",
         "Title":  "Plumber",
-        "Version":  "1.9.7",
+        "Version":  "1.9.7 d",
         "Author":  "Raenore, Peterodox",
         "CurseID":  "",
         "WagoID":  "",
@@ -981,7 +1069,7 @@
     {
         "Name":  "Rarity",
         "Title":  "Rarity: Collector\u0027s Edition",
-        "Version":  "(v0.3.1)",
+        "Version":  "(v0.4.0)",
         "Author":  "Allara",
         "CurseID":  "1614412",
         "WagoID":  "",
@@ -1014,7 +1102,7 @@
     {
         "Name":  "SimpleAddonManager",
         "Title":  "Simple Addon Manager",
-        "Version":  "v1.67",
+        "Version":  "v1.69",
         "Author":  "Eliote",
         "CurseID":  "689213",
         "WagoID":  "Rn6Vzq6d",
@@ -1024,8 +1112,8 @@
     },
     {
         "Name":  "SpArc",
-        "Title":  "|cffa335eeSpArc|r — Semicircle FSM Rotation \u0026 Cooldown HUD",
-        "Version":  "v2.9.2",
+        "Title":  "|cffa335eeSpArc|r — FSM Rotation Arc, UnitFrames, Nameplates, MSBT \u0026 Camera",
+        "Version":  "v2.9.7",
         "Author":  "Gemini (Tiger) | QA \u0026 Vision: Anya (5cr3am1ng5oul)",
         "CurseID":  "1756564",
         "WagoID":  "",
@@ -1036,7 +1124,7 @@
     {
         "Name":  "SpeedyAutoLoot",
         "Title":  "|cffEEE4AESpeedy AutoLoot|r",
-        "Version":  "124",
+        "Version":  "125",
         "Author":  "Yuyuli",
         "CurseID":  "",
         "WagoID":  "",
@@ -1047,7 +1135,7 @@
     {
         "Name":  "StutterAlert",
         "Title":  "StutterAlert",
-        "Version":  "1.0.8",
+        "Version":  "1.1.0",
         "Author":  "Osiris the Kiwi / Discord: osirisnz",
         "CurseID":  "",
         "WagoID":  "",
@@ -1058,7 +1146,7 @@
     {
         "Name":  "Syndicator",
         "Title":  "Syndicator",
-        "Version":  "288",
+        "Version":  "290",
         "Author":  "plusmouse",
         "CurseID":  "",
         "WagoID":  "",
@@ -1069,7 +1157,7 @@
     {
         "Name":  "TomTom",
         "Title":  "TomTom",
-        "Version":  "v4.3.13-release",
+        "Version":  "v4.4.1-release",
         "Author":  "Cladhaire, Ludovicus",
         "CurseID":  "18808",
         "WagoID":  "Rn6VaONd",

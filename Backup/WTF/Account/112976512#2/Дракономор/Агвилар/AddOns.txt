@@ -54,11 +54,11 @@ Details_DataStorage: enabled
 Details_Streamer: enabled
 Details_TinyThreat: enabled
 Details_Vanguard: enabled
-ElvUI_Libraries: enabled
-ElvUI: enabled
-ElvUI_Options: enabled
+ElvUI_Libraries: disabled
+ElvUI: disabled
+ElvUI_Options: disabled
 ElvUI_SLE: enabled
-ElvUI_WindTools: enabled
+ElvUI_WindTools: disabled
 Gathering: disabled
 GSE: enabled
 GSE_Options: enabled
@@ -81,9 +81,9 @@ ShadowedUFFacade: disabled
 Masque_ElvUI: enabled
 Masque_ElvUIesque: enabled
 MountsRarity: disabled
-MoveSearchEye: enabled
+MoveSearchEye: disabled
 PeaversCurrencyData: enabled
-Plater: enabled
+Plater: disabled
 RareScanner: enabled
 Rarity_Options: disabled
 Rarity: disabled
@@ -96,7 +96,7 @@ SimpleAddonManager: enabled
 SpArc: enabled
 SpeedyAutoLoot: enabled
 StutterAlert: enabled
-TomTom: enabled
+TomTom: disabled
 WagoAnalytics: disabled
 WagoAppCompanion: disabled
 WeakAurasModelPaths: enabled

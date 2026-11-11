@@ -81,12 +81,13 @@ if (Test-Path $elvZip) {
     Write-Host "[3/5] ElvUI_Bundle.zip not found in Backup/; skipping ElvUI zip extraction." -ForegroundColor Yellow
 }
 
-# 5. Deploy our 4 custom GitHub addons (SpArc, MAWM, MountCollector, GeminiOps)
+# 5. Deploy our 5 custom GitHub addons (SpArc, MAWM, MountCollector, BeastCollector, GeminiOps)
 $customAddons = @(
     @{ Name = "GeminiOps";      Repo = "https://github.com/nakesreong/GeminiOps.git" },
     @{ Name = "SpArc";          Repo = "https://github.com/nakesreong/SpArc.git" },
     @{ Name = "MAWM";           Repo = "https://github.com/nakesreong/MAWM.git" },
-    @{ Name = "MountCollector"; Repo = "https://github.com/nakesreong/MountCollector.git" }
+    @{ Name = "MountCollector"; Repo = "https://github.com/nakesreong/MountCollector.git" },
+    @{ Name = "BeastCollector"; Repo = "https://github.com/nakesreong/BeastCollector.git" }
 )
 
 foreach ($addon in $customAddons) {

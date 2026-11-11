@@ -1,11 +1,53 @@
 
 BAGANATOR_CONFIG = {
+["Version"] = 1,
 ["CharacterSpecific"] = {
 ["sort_ignore_bank_slots_count"] = {
 },
-["sort_ignore_slots_count_2"] = {
+["currencies_tracked_imported"] = {
 },
 ["currencies_tracked"] = {
+["Ниоч-ПиратскаяБухта"] = {
+},
+["Ньарлатхотеп-ПиратскаяБухта"] = {
+{
+["currencyID"] = 1602,
+},
+{
+["currencyID"] = 1755,
+},
+{
+["currencyID"] = 1792,
+},
+{
+["currencyID"] = 2803,
+},
+{
+["currencyID"] = 3310,
+},
+{
+["currencyID"] = 3316,
+},
+},
+["Калиратри-СвежевательДуш"] = {
+{
+["currencyID"] = 1602,
+},
+{
+["currencyID"] = 1792,
+},
+{
+["currencyID"] = 2123,
+},
+{
+["currencyID"] = 2815,
+},
+{
+["currencyID"] = 3056,
+},
+},
+["Котастрофа-ПиратскаяБухта"] = {
+},
 ["Ньарлатхотеп-СвежевательДуш"] = {
 {
 ["currencyID"] = 1602,
@@ -34,22 +76,7 @@ BAGANATOR_CONFIG = {
 },
 ["Трипобраз-СвежевательДуш"] = {
 },
-["Калиратри-СвежевательДуш"] = {
-{
-["currencyID"] = 1602,
-},
-{
-["currencyID"] = 1792,
-},
-{
-["currencyID"] = 2123,
-},
-{
-["currencyID"] = 2815,
-},
-{
-["currencyID"] = 3056,
-},
+["Гитсутра-ПиратскаяБухта"] = {
 },
 ["Морвара-СвежевательДуш"] = {
 {
@@ -68,6 +95,8 @@ BAGANATOR_CONFIG = {
 ["currencyID"] = 3056,
 },
 },
+["Гитпулл-ПиратскаяБухта"] = {
+},
 ["Улак-СвежевательДуш"] = {
 },
 ["Моржовый-СвежевательДуш"] = {
@@ -76,10 +105,9 @@ BAGANATOR_CONFIG = {
 },
 },
 },
-["currencies_tracked_imported"] = {
+["sort_ignore_slots_count_2"] = {
 },
 },
-["Version"] = 1,
 ["Profiles"] = {
 ["DEFAULT"] = {
 ["guild_view_width"] = 14,
@@ -98,20 +126,20 @@ BAGANATOR_CONFIG = {
 ["default_battlepet"] = true,
 ["default_food"] = true,
 ["default_reagent"] = true,
-["default_weapon"] = true,
+["default_junk"] = true,
 ["default_special_empty"] = true,
-["default_recipe"] = true,
-["default_gem"] = true,
+["default_miscellaneous"] = true,
+["default_key"] = true,
 ["default_consumable"] = true,
 ["default_tradegoods"] = true,
-["default_potion"] = true,
-["default_keystone"] = true,
-["default_profession"] = true,
-["default_auto_equipment_sets"] = true,
 ["default_container"] = true,
-["default_key"] = true,
-["default_miscellaneous"] = true,
-["default_junk"] = true,
+["default_keystone"] = true,
+["default_auto_equipment_sets"] = true,
+["default_profession"] = true,
+["default_potion"] = true,
+["default_gem"] = true,
+["default_recipe"] = true,
+["default_weapon"] = true,
 },
 ["show_search_box"] = true,
 ["debug_categories_search"] = false,
@@ -124,14 +152,14 @@ BAGANATOR_CONFIG = {
 ["item_upgrade"] = true,
 ["guild_bank"] = false,
 ["auction_house"] = true,
-["forge_of_bonds"] = false,
+["trade_partner"] = false,
 ["tradeskill"] = false,
 ["character_panel"] = false,
 ["scrapping_machine"] = true,
 ["item_interaction"] = true,
 ["mail"] = false,
 ["sockets"] = false,
-["trade_partner"] = false,
+["forge_of_bonds"] = false,
 ["bank"] = true,
 },
 ["icon_corners_auto_insert_applied"] = {
@@ -195,7 +223,7 @@ BAGANATOR_CONFIG = {
 "default_junk",
 "default_special_empty",
 },
-["current_skin"] = "elvui",
+["current_skin"] = "blizzard",
 ["hide_boe_on_common"] = false,
 ["bank_view_type"] = "category",
 ["icon_grey_junk"] = false,
@@ -237,16 +265,17 @@ BAGANATOR_CONFIG = {
 ["category_default_import"] = 3,
 ["debug_categories"] = false,
 ["character_bank_current_tab"] = 1,
-["currencies_tracked_imported"] = 0,
-["currency_headers_collapsed"] = {
+["icon_bottom_left_corner_array"] = {
+"bag_type",
+"equipment_set",
 },
-["junk_plugin_ignored"] = {
+["custom_categories"] = {
 },
-["currencies_tracked"] = {
-},
+["category_group_empty_slots"] = true,
+["guild_current_tab"] = 1,
 ["saved_searches"] = {
 },
-["lock_frames"] = false,
+["icon_equipment_set_border"] = true,
 ["category_modifications"] = {
 ["default_housing"] = {
 ["addedItems"] = {
@@ -262,40 +291,15 @@ BAGANATOR_CONFIG = {
 ["icon_text_quality_colors"] = false,
 ["character_bank_view_width"] = 14,
 ["icon_text_font_size"] = 14,
-["bag_view_type"] = "category",
+["bag_icon_size"] = 37,
 ["sort_ignore_slots_count_2"] = 0,
 ["disabled_skins"] = {
 },
 ["bag_view_width"] = 12,
 ["sort_ignore_bank_slots_count"] = 0,
-["category_section_toggled"] = {
-},
-["character_select_position"] = {
-"RIGHT",
-"Baganator_CategoryViewBackpackViewFrameelvui",
-"LEFT",
-0,
-0,
+["upgrade_plugin_ignored"] = {
 },
 ["debug_keywords"] = false,
-["new_items_flashing"] = true,
-["auto_sort_on_open"] = false,
-["category_migration"] = 5,
-["show_buttons_on_alt"] = false,
-["bag_view_show_bag_slots"] = true,
-["debug_timers"] = false,
-["guild_view_dialog_position"] = {
-"BOTTOM",
-"Baganator_GuildViewFrame",
-"TOP",
-0,
-0,
-},
-["bag_view_position"] = {
-"BOTTOMRIGHT",
--496.71435546875,
-341.3333129882813,
-},
 ["skins"] = {
 ["elvui"] = {
 ["use_bag_font"] = false,
@@ -315,27 +319,51 @@ BAGANATOR_CONFIG = {
 ["empty_slot_background"] = false,
 },
 },
-["upgrade_plugin_ignored"] = {
+["bag_view_position"] = {
+"BOTTOMRIGHT",
+-409.21435546875,
+371.3332824707031,
 },
-["show_sort_button_2"] = true,
-["setting_anchors"] = false,
-["bag_icon_size"] = 37,
-["currency_panel_position"] = {
+["auto_sort_on_open"] = false,
+["category_migration"] = 5,
+["debug_timers"] = false,
+["bag_view_show_bag_slots"] = true,
+["show_buttons_on_alt"] = false,
+["guild_view_dialog_position"] = {
+"BOTTOM",
+"Baganator_GuildViewFrame",
+"TOP",
+0,
+0,
+},
+["new_items_flashing"] = true,
+["character_select_position"] = {
 "RIGHT",
-"Baganator_CategoryViewBackpackViewFrameelvui",
+"Baganator_CategoryViewBackpackViewFrameblizzard",
 "LEFT",
 0,
 0,
 },
-["icon_equipment_set_border"] = true,
-["guild_current_tab"] = 1,
-["category_group_empty_slots"] = true,
-["custom_categories"] = {
+["category_section_toggled"] = {
 },
-["icon_bottom_left_corner_array"] = {
-"bag_type",
-"equipment_set",
+["show_sort_button_2"] = true,
+["setting_anchors"] = false,
+["bag_view_type"] = "category",
+["currency_panel_position"] = {
+"RIGHT",
+"Baganator_CategoryViewBackpackViewFrameblizzard",
+"LEFT",
+0,
+0,
 },
+["lock_frames"] = false,
+["currencies_tracked"] = {
+},
+["junk_plugin_ignored"] = {
+},
+["currency_headers_collapsed"] = {
+},
+["currencies_tracked_imported"] = 0,
 },
 },
 }

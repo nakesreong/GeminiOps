@@ -18,15 +18,15 @@ MoveSearchEyeDB = {
 ["enabled"] = true,
 },
 },
-["autoHideInCombat"] = false,
+["lock"] = false,
 ["snapEnabled"] = true,
 ["fadeAlpha"] = 0.4,
-["snapPadding"] = 8,
+["autoHideInCombat"] = false,
 ["modifier"] = "ALT",
-["autoHideInInstance"] = false,
-["fadeWhenIdle"] = false,
 ["usePerCharProfile"] = false,
-["lock"] = false,
+["fadeWhenIdle"] = false,
+["autoHideInInstance"] = false,
+["snapPadding"] = 8,
 }
 MoveSearchEyeProfiles = {
 }

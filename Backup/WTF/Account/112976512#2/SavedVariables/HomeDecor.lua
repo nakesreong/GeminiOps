@@ -21,16 +21,16 @@ HomeDecorDB = {
 ["name"] = "Ashwood Lumber",
 },
 ["210796"] = {
-["itemID"] = 210796,
-["kind"] = "herb",
 ["name"] = "Микоцвет",
+["kind"] = "herb",
 ["icon"] = 5525214,
+["itemID"] = 210796,
 },
 ["210932"] = {
-["itemID"] = 210932,
-["kind"] = "ore",
 ["name"] = "Висмут",
+["kind"] = "ore",
 ["icon"] = 5728051,
+["itemID"] = 210932,
 },
 ["242691"] = {
 ["kind"] = "lumber",
@@ -38,16 +38,16 @@ HomeDecorDB = {
 ["name"] = "Olemba Lumber",
 },
 ["237359"] = {
-["itemID"] = 237359,
-["kind"] = "ore",
 ["name"] = "Сверкающая медная руда",
+["kind"] = "ore",
 ["icon"] = 7300485,
+["itemID"] = 237359,
 },
 ["210931"] = {
-["itemID"] = 210931,
-["kind"] = "ore",
 ["name"] = "Висмут",
+["kind"] = "ore",
 ["icon"] = 5728051,
+["itemID"] = 210931,
 },
 ["251762"] = {
 ["kind"] = "lumber",
@@ -60,22 +60,22 @@ HomeDecorDB = {
 ["name"] = "Bamboo Lumber",
 },
 ["222420"] = {
-["itemID"] = 222420,
-["kind"] = "ore",
 ["name"] = "Заряженный сплав",
+["kind"] = "ore",
 ["icon"] = 5931156,
+["itemID"] = 222420,
 },
 ["236761"] = {
-["itemID"] = 236761,
-["kind"] = "herb",
 ["name"] = "Тихоцвет",
+["kind"] = "herb",
 ["icon"] = 7290677,
+["itemID"] = 236761,
 },
 ["222424"] = {
-["itemID"] = 222424,
-["kind"] = "ore",
 ["name"] = "Освященный сплав",
+["kind"] = "ore",
 ["icon"] = 5931157,
+["itemID"] = 222424,
 },
 ["245586"] = {
 ["kind"] = "lumber",
@@ -83,10 +83,10 @@ HomeDecorDB = {
 ["name"] = "Ironwood Lumber",
 },
 ["222419"] = {
-["itemID"] = 222419,
-["kind"] = "ore",
 ["name"] = "Основной сплав",
+["kind"] = "ore",
 ["icon"] = 5931155,
+["itemID"] = 222419,
 },
 ["248012"] = {
 ["kind"] = "lumber",
@@ -94,28 +94,28 @@ HomeDecorDB = {
 ["name"] = "Dornic Fir Lumber",
 },
 ["210936"] = {
-["itemID"] = 210936,
-["kind"] = "ore",
 ["name"] = "Когтесталь",
+["kind"] = "ore",
 ["icon"] = 5735005,
+["itemID"] = 210936,
 },
 ["8846"] = {
-["itemID"] = 8846,
-["kind"] = "herb",
 ["name"] = "Кровь Грома",
+["kind"] = "herb",
 ["icon"] = 134197,
+["itemID"] = 8846,
 },
 ["256963"] = {
-["itemID"] = 256963,
-["kind"] = "lumber",
 ["name"] = "Талассийская древесина",
+["kind"] = "lumber",
 ["icon"] = 7467222,
+["itemID"] = 256963,
 },
 ["222417"] = {
-["itemID"] = 222417,
-["kind"] = "ore",
 ["name"] = "Основной сплав",
+["kind"] = "ore",
 ["icon"] = 5931155,
+["itemID"] = 222417,
 },
 ["251767"] = {
 ["kind"] = "lumber",
@@ -128,16 +128,16 @@ HomeDecorDB = {
 ["name"] = "Arden Lumber",
 },
 ["226202"] = {
-["itemID"] = 226202,
-["kind"] = "ore",
 ["name"] = "Вторящий плавень",
+["kind"] = "ore",
 ["icon"] = 4622294,
+["itemID"] = 226202,
 },
 ["210930"] = {
-["itemID"] = 210930,
-["kind"] = "ore",
 ["name"] = "Висмут",
+["kind"] = "ore",
 ["icon"] = 5728051,
+["itemID"] = 210930,
 },
 ["251773"] = {
 ["kind"] = "lumber",
@@ -155,10 +155,10 @@ HomeDecorDB = {
 ["name"] = "Shadowmoon Lumber",
 },
 ["237362"] = {
-["itemID"] = 237362,
-["kind"] = "ore",
 ["name"] = "Теневая оловянная руда",
+["kind"] = "ore",
 ["icon"] = 7300486,
+["itemID"] = 237362,
 },
 },
 ["settings"] = {
@@ -222,7 +222,7 @@ HomeDecorDB = {
 ["251766"] = 0,
 ["251763"] = 0,
 },
-["updated"] = 1793240983,
+["updated"] = 1793426401,
 },
 ["Ньарлатхотеп-СвежевательДуш"] = {
 ["personal"] = {
@@ -429,7 +429,7 @@ HomeDecorDB = {
 ["altProfessions"] = {
 ["characters"] = {
 ["Ньарлатхотеп-ПиратскаяБухта"] = {
-["updated"] = 1793240982,
+["updated"] = 1793425275,
 ["name"] = "Ньарлатхотеп",
 ["professions"] = {
 ["794"] = {

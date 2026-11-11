@@ -6,10 +6,19 @@ vendorSettings = {
 ["scale"] = 0.9,
 ["completedDrop"] = {
 [250792] = true,
-[253488] = true,
 [284223] = true,
 [262616] = true,
+[264255] = true,
+[264334] = true,
+[263238] = true,
+[257418] = true,
+[264257] = true,
 [267009] = true,
+[253469] = true,
+[263233] = true,
+[256683] = true,
+[263211] = true,
+[253488] = true,
 },
 ["completedAchievs"] = {
 },
@@ -21,10 +30,11 @@ vendorSettings = {
 ["markCompletedThings"] = false,
 ["showMinimapButton"] = true,
 ["useCustomFont"] = true,
-["useTomTom"] = true,
-["visited"] = {
-},
 ["textScale"] = 1.25,
+["visited"] = {
+[242399] = true,
+},
+["useTomTom"] = true,
 ["completedDropNoXP"] = {
 [245992] = true,
 [254319] = true,
@@ -38,14 +48,15 @@ vendorSettings = {
 [246415] = true,
 [253467] = true,
 [262614] = true,
-[254878] = true,
-[252045] = true,
-[266259] = true,
 [263231] = true,
+[266259] = true,
+[252045] = true,
+[254878] = true,
 },
 }
 dbDV = {
 ["minimap"] = {
+["minimapPos"] = 66.12109504653647,
 ["hide"] = false,
 },
 }

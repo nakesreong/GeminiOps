@@ -43,10 +43,10 @@ Details_Streamer: enabled
 Details_TinyThreat: enabled
 Details_Vanguard: enabled
 DialogueUI: disabled
-ElvUI_Libraries: enabled
-ElvUI: enabled
-ElvUI_Options: enabled
-ElvUI_WindTools: enabled
+ElvUI_Libraries: disabled
+ElvUI: disabled
+ElvUI_Options: disabled
+ElvUI_WindTools: disabled
 FrameSort: enabled
 Gathering: disabled
 GeminiOps: enabled
@@ -82,10 +82,10 @@ MAWM: enabled
 MogIt: enabled
 MountCollector: enabled
 MountsRarity: disabled
-MoveSearchEye: enabled
+MoveSearchEye: disabled
 Pawn: enabled
 PeaversCurrencyData: enabled
-Plater: enabled
+Plater: disabled
 Plumber: enabled
 Rarity_Options: disabled
 Rarity: disabled
@@ -94,7 +94,7 @@ SpArc: enabled
 SpeedyAutoLoot: enabled
 StutterAlert: enabled
 Syndicator: enabled
-TomTom: enabled
+TomTom: disabled
 HousingDecorGuide: enabled
 WagoAnalytics: disabled
 WagoAppCompanion: disabled

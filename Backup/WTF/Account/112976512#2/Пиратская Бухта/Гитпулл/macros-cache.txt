@@ -1,0 +1,186 @@
+VER 3 0100000000000001 "h1" "INV_MISC_QUESTIONMARK"
+#showtooltip Выживает сильнейший
+/stopmacro [flying]
+/cast Выживает сильнейший
+END
+VER 3 010000000000000A "h10" "INV_MISC_QUESTIONMARK"
+#showtooltip Отрыв
+/stopmacro [flying]
+/cast Отрыв
+/cast [combat][mod:shift] Дух орла
+END
+VER 3 010000000000000B "h11" "INV_MISC_QUESTIONMARK"
+#showtooltip Подрезать крылья
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Подрезать крылья
+/startattack
+/petattack
+END
+VER 3 010000000000000C "h12" "INV_MISC_QUESTIONMARK"
+#showtooltip Приказ хозяина
+/stopmacro [flying]
+/cast [@mouseover,help,nodead][@target,help,nodead][@player] Приказ хозяина
+END
+VER 3 010000000000000D "h13" "INV_MISC_QUESTIONMARK"
+#showtooltip Притвориться мертвым
+/stopcasting
+/stopmacro [flying]
+/cast Притвориться мертвым
+END
+VER 3 010000000000000E "h14" "INV_MISC_QUESTIONMARK"
+#showtooltip Смоляная ловушка
+/stopmacro [flying]
+/cast [@cursor] Смоляная ловушка
+END
+VER 3 0100000000000018 "h15" "INV_MISC_QUESTIONMARK"
+#showtooltip Камуфляж
+/stopmacro [flying]
+/cast Камуфляж
+END
+VER 3 0100000000000019 "h16" "INV_MISC_QUESTIONMARK"
+#showtooltip Связующий выстрел
+/stopmacro [flying]
+/cast [@cursor] Связующий выстрел
+END
+VER 3 010000000000001A "h17" "INV_MISC_QUESTIONMARK"
+#showtooltip Усмиряющий выстрел
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Усмиряющий выстрел
+END
+VER 3 010000000000001B "h18" "INV_MISC_QUESTIONMARK"
+#showtooltip Воскрешение питомца
+/stopmacro [flying]
+/cast Воскрешение питомца
+END
+VER 3 010000000000001C "h19" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/cast [mod:shift,pet] Отпустить питомца; [nopet,mod:alt] Призыв питомца 2; [nopet] Призыв питомца 1; Лечение питомца
+END
+VER 3 0100000000000002 "h2" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/stopmacro [flying]
+/castrandom [combat][indoors] Дух гепарда; [mod:alt] Вожак стаи из Седых холмов; [mod:ctrl] Позолоченный брутозавр торговца; [mod:shift] Зотокрылый темный искатель
+/cast Дух гепарда
+END
+VER 3 010000000000001D "h20" "INV_MISC_QUESTIONMARK"
+#showtooltip Кормление питомца
+/stopmacro [flying]
+/cast Кормление питомца
+END
+VER 3 010000000000001E "h21" "INV_MISC_QUESTIONMARK"
+#showtooltip Отпустить питомца
+/stopmacro [flying]
+/cast Отпустить питомца
+END
+VER 3 0100000000000003 "h3" "INV_MISC_QUESTIONMARK"
+#showtooltip Дух черепахи
+/stopcasting
+/stopmacro [flying]
+/cast Дух черепахи
+END
+VER 3 0100000000000004 "h4" "INV_MISC_QUESTIONMARK"
+#showtooltip Живость
+/stopmacro [flying]
+/cast Живость
+END
+VER 3 0100000000000005 "h5" "INV_MISC_QUESTIONMARK"
+#showtooltip Замораживающая ловушка
+/stopmacro [flying]
+/cast [@cursor] Замораживающая ловушка
+END
+VER 3 0100000000000006 "h6" "INV_MISC_QUESTIONMARK"
+#showtooltip Команда "Взять!"
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Команда "Взять!"
+/startattack
+/petattack
+END
+VER 3 0100000000000007 "h7" "INV_MISC_QUESTIONMARK"
+#showtooltip Метка охотника
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Метка охотника
+END
+VER 3 0100000000000008 "h8" "INV_MISC_QUESTIONMARK"
+#showtooltip Намордник
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Намордник
+/startattack
+/petattack
+END
+VER 3 0100000000000009 "h9" "INV_MISC_QUESTIONMARK"
+#showtooltip Осветительная ракета
+/stopmacro [flying]
+/cast [@cursor] Осветительная ракета
+END
+VER 3 010000000000000F "sh1" "INV_MISC_QUESTIONMARK"
+#showtooltip Бросок топорика
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Бросок топорика
+/startattack
+/petattack
+END
+VER 3 0100000000000010 "sh2" "INV_MISC_QUESTIONMARK"
+#showtooltip Гарпун
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Гарпун
+/startattack
+/petattack
+END
+VER 3 0100000000000011 "sh3" "INV_MISC_QUESTIONMARK"
+#showtooltip Глаза зверя
+/stopmacro [flying]
+/cast Глаза зверя
+END
+VER 3 0100000000000012 "sh4" "INV_MISC_QUESTIONMARK"
+#showtooltip Дух орла
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast Отрыв
+/cast Дух орла
+/startattack
+/petattack
+END
+VER 3 0100000000000013 "sh5" "INV_MISC_QUESTIONMARK"
+#showtooltip Захват врасплох
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Захват врасплох
+/startattack
+/petattack
+END
+VER 3 0100000000000014 "sh6" "INV_MISC_QUESTIONMARK"
+#showtooltip Огнебомба
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Огнебомба
+/startattack
+/petattack
+END
+VER 3 0100000000000015 "sh7" "INV_MISC_QUESTIONMARK"
+#showtooltip Огнестрел
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [combat][harm,nodead] Огнестрел; Распыление
+/stopmacro [nocombat,noharm]
+/startattack
+/petattack
+END
+VER 3 0100000000000016 "sh8" "INV_MISC_QUESTIONMARK"
+#showtooltip Удар ящера
+/stopmacro [flying]
+/cleartarget [dead][noharm]
+/cast [@mouseover,harm,nodead][@target,harm,nodead] Удар ящера
+/startattack
+/petattack
+END
+VER 3 0100000000000017 "sh9" "INV_MISC_QUESTIONMARK"
+#showtooltip Устрашение
+/stopmacro [flying]
+/cast [@target,harm,nodead][@mouseover,harm,nodead] Устрашение
+END
