@@ -56,7 +56,27 @@ local function DeepCopyTable(src, seen)
   return copy
 end
 
+local DeepCopy = DeepCopyTable
 GeminiOps.DeepCopyTable = DeepCopyTable
+
+local function OverwriteTableInPlace(dst, src)
+  if type(dst) ~= "table" or type(src) ~= "table" then return end
+  for k in pairs(dst) do
+    if src[k] == nil then
+      dst[k] = nil
+    end
+  end
+  for k, v in pairs(src) do
+    if type(v) == "table" then
+      if type(dst[k]) ~= "table" then
+        dst[k] = {}
+      end
+      OverwriteTableInPlace(dst[k], v)
+    else
+      dst[k] = v
+    end
+  end
+end
 
 function GeminiOps:EnsureDB()
   _G.GeminiOpsDB = _G.GeminiOpsDB or {}
@@ -2102,20 +2122,50 @@ function GeminiOps.ConfigureNativeChatAndScale(customWidth, customHeight, custom
     local targetW = gopsDB.chatWidth or 480
     local targetH = gopsDB.chatHeight or 300
     pcall(function()
+      -- Override EditModeChatFrameSystemMixin getters so EditMode itself uses targetW x targetH
+      cf1.GetWidthSetting = function() return gopsDB.chatWidth or 480 end
+      cf1.GetHeightSetting = function() return gopsDB.chatHeight or 300 end
+
+      if cf1.IsMovable and cf1:IsMovable() and cf1.SetUserPlaced then
+        cf1:SetUserPlaced(true)
+      end
       cf1:SetClampedToScreen(false)
+
+      local clearPts = cf1.ClearAllPointsBase or cf1.ClearAllPoints
+      local setPt = cf1.SetPointBase or cf1.SetPoint
+      if clearPts then clearPts(cf1) end
       cf1:ClearAllPoints()
+      if setPt then setPt(cf1, "BOTTOMLEFT", _G.UIParent, "BOTTOMLEFT", 36, 22) end
       cf1:SetPoint("BOTTOMLEFT", _G.UIParent, "BOTTOMLEFT", 36, 22)
+
       cf1:SetSize(targetW, targetH)
       cf1:SetWidth(targetW)
       cf1:SetHeight(targetH)
-      local bg1 = _G.ChatFrame1Background
+
+      if _G.SetChatWindowSavedDimensions then
+        pcall(_G.SetChatWindowSavedDimensions, 1, targetW, targetH)
+      end
+
+      if cf1.FontStringContainer then
+        cf1.FontStringContainer:ClearAllPoints()
+        cf1.FontStringContainer:SetPoint("TOPLEFT", cf1, "TOPLEFT", -3, 3)
+        cf1.FontStringContainer:SetPoint("BOTTOMRIGHT", cf1, "BOTTOMRIGHT", 3, -3)
+      end
+
+      local bg1 = _G.ChatFrame1Background or cf1.Background
       if bg1 then
+        bg1:ClearAllPoints()
+        bg1:SetPoint("TOPLEFT", cf1, "TOPLEFT", -2, 3)
+        bg1:SetPoint("BOTTOMRIGHT", cf1, "BOTTOMRIGHT", 2, -6)
         bg1:SetVertexColor(0.04, 0.04, 0.05, 0.85)
         bg1:SetAlpha(0.85)
         bg1:Show()
       end
-      if _G.FCF_SavePositionAndDimensions then
-        pcall(_G.FCF_SavePositionAndDimensions, cf1)
+
+      if _G.GeneralDockManager then
+        _G.GeneralDockManager:ClearAllPoints()
+        _G.GeneralDockManager:SetPoint("BOTTOMLEFT", cf1, "TOPLEFT", 0, 3)
+        _G.GeneralDockManager:SetPoint("BOTTOMRIGHT", cf1, "TOPRIGHT", 0, 3)
       end
     end)
     chatSizeGuard = false
@@ -2147,9 +2197,25 @@ function GeminiOps.ConfigureNativeChatAndScale(customWidth, customHeight, custom
         end
       end)
     end
+    if _G.EditModeManagerFrame and _G.EditModeManagerFrame.UpdateLayoutInfo then
+      _G.hooksecurefunc(_G.EditModeManagerFrame, "UpdateLayoutInfo", function()
+        EnforceChatFrame1Geometry()
+        if GeminiOps.ApplyDetailsVisibilityAndPosition then
+          GeminiOps.ApplyDetailsVisibilityAndPosition()
+        end
+      end)
+    end
     if _G.ChatFrame1 then
       if _G.ChatFrame1.UpdateSystem then
         _G.hooksecurefunc(_G.ChatFrame1, "UpdateSystem", function()
+          EnforceChatFrame1Geometry()
+          if GeminiOps.ApplyDetailsVisibilityAndPosition then
+            GeminiOps.ApplyDetailsVisibilityAndPosition()
+          end
+        end)
+      end
+      if _G.ChatFrame1.RefreshSystemSize then
+        _G.hooksecurefunc(_G.ChatFrame1, "RefreshSystemSize", function()
           EnforceChatFrame1Geometry()
           if GeminiOps.ApplyDetailsVisibilityAndPosition then
             GeminiOps.ApplyDetailsVisibilityAndPosition()
