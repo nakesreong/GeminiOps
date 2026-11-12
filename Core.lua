@@ -1984,6 +1984,96 @@ local function ApplyDetailsTabFont(fs, size)
   end
 end
 
+function GeminiOps.ConfigureNativeChatAndScale(customWidth, customHeight, customFontSize, customUiScale, silent)
+  local gopsDB = GeminiOps:EnsureDB()
+  local activeSlot = gopsDB.activeHardwareProfile or "PC"
+  local defaultW = (activeSlot == "LAPTOP") and 415 or 468
+  local defaultH = (activeSlot == "LAPTOP") and 195 or 225
+  local defaultFont = (activeSlot == "LAPTOP") and 14 or 15
+  local defaultScale = (activeSlot == "LAPTOP") and 0.85 or 0.78
+
+  local chatW = customWidth or gopsDB.chatWidth or defaultW
+  local chatH = customHeight or gopsDB.chatHeight or defaultH
+  local fontSize = customFontSize or gopsDB.chatFontSize or defaultFont
+  local uiScale = customUiScale or gopsDB.targetUiScale or defaultScale
+
+  gopsDB.chatWidth = chatW
+  gopsDB.chatHeight = chatH
+  gopsDB.chatFontSize = fontSize
+  gopsDB.targetUiScale = uiScale
+
+  -- 1. Native WoW UI Scale calibration (fixes blurry fractional font rendering when ElvUI is disabled)
+  if not (_G.ElvUI and _G.ElvUI[1]) and C_CVar and C_CVar.SetCVar then
+    if not gopsDB.completedTasks["native_uiscale_init_v1"] or customUiScale ~= nil then
+      pcall(C_CVar.SetCVar, "useUiScale", "1")
+      pcall(C_CVar.SetCVar, "uiScale", string.format("%.2f", uiScale))
+      gopsDB.completedTasks["native_uiscale_init_v1"] = true
+    end
+  end
+
+  -- 2. Native ChatFrame1..10 dark background (matching Details! opacity), crisp font size & larger geometry
+  _G.DEFAULT_CHATFRAME_ALPHA = 0.85
+  _G.CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0.65
+  _G.CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = 0.90
+  _G.CHAT_FRAME_FADE_OUT_TIME = 0
+
+  local numChat = _G.NUM_CHAT_WINDOWS or 10
+  for i = 1, numChat do
+    if _G.SetChatWindowSize then pcall(_G.SetChatWindowSize, i, fontSize) end
+    if _G.SetChatWindowColor then pcall(_G.SetChatWindowColor, i, 0.04, 0.04, 0.05) end
+    if _G.SetChatWindowAlpha then pcall(_G.SetChatWindowAlpha, i, 0.85) end
+
+    local cf = _G["ChatFrame" .. i]
+    if cf then
+      cf.oldAlpha = 0.85
+      if _G.FCF_SetChatWindowFontSize then pcall(_G.FCF_SetChatWindowFontSize, nil, cf, fontSize) end
+      if _G.FCF_SetWindowColor then pcall(_G.FCF_SetWindowColor, cf, 0.04, 0.04, 0.05) end
+      if _G.FCF_SetWindowAlpha then pcall(_G.FCF_SetWindowAlpha, cf, 0.85) end
+      local fPath, _, fFlags = cf:GetFont()
+      if fPath then
+        pcall(cf.SetFont, cf, fPath, fontSize, fFlags or "")
+      end
+    end
+
+    local bg = _G["ChatFrame" .. i .. "Background"]
+    if bg then
+      pcall(bg.SetVertexColor, bg, 0.04, 0.04, 0.05, 0.85)
+      pcall(bg.SetAlpha, bg, 0.85)
+      pcall(bg.Show, bg)
+    end
+  end
+
+  local cf1 = _G.ChatFrame1
+  if cf1 and not (_G.LeftChatPanel and _G.LeftChatPanel:IsShown()) then
+    pcall(cf1.SetSize, cf1, chatW, chatH)
+    if _G.FCF_SavePositionAndDimensions then
+      pcall(_G.FCF_SavePositionAndDimensions, cf1)
+    end
+  end
+
+  if not GeminiOps._chatFadeHooked and _G.hooksecurefunc and _G.FCF_FadeOutChatFrame then
+    GeminiOps._chatFadeHooked = true
+    _G.hooksecurefunc("FCF_FadeOutChatFrame", function(chatFrame)
+      if not chatFrame then return end
+      chatFrame.oldAlpha = 0.85
+      local name = chatFrame:GetName()
+      local bg = name and _G[name .. "Background"]
+      if bg then
+        pcall(bg.SetVertexColor, bg, 0.04, 0.04, 0.05, 0.85)
+        pcall(bg.SetAlpha, bg, 0.85)
+      end
+    end)
+  end
+
+  if not silent then
+    print(string.format(
+      "|cff00ccff[GeminiOps]|r Чат увеличен (%dx%d, шрифт %dpt, тёмный фон 85%% под Details!) | UIScale: %.2f",
+      chatW, chatH, fontSize, uiScale
+    ))
+  end
+  return true
+end
+
 function GeminiOps.SetupDetailsLeftChat(modeOverride, toggleActiveTab)
   local gopsDB = GeminiOps:EnsureDB()
   if not gopsDB.completedTasks["details_default_above_v2"] then
@@ -1993,17 +2083,20 @@ function GeminiOps.SetupDetailsLeftChat(modeOverride, toggleActiveTab)
   if modeOverride == "TAB" or modeOverride == "ABOVE" then
     gopsDB.detailsLeftMode = modeOverride
   end
-  local mode = gopsDB.detailsLeftMode or "ABOVE" -- "ABOVE" (nailed above LeftChatPanel) or "TAB" (inside LeftChatPanel)
+  local mode = gopsDB.detailsLeftMode or "ABOVE" -- "ABOVE" (nailed above Chat) or "TAB" (inside LeftChatPanel)
   gopsDB.detailsLeftMode = mode
+
+  -- Ensure native ChatFrame1 is enlarged and darkened first when ElvUI is disabled
+  GeminiOps.ConfigureNativeChatAndScale(nil, nil, nil, nil, true)
 
   local Details = _G.Details or _G._detalhes
   if not Details or not Details.GetInstance then
     return false, "Details! not loaded"
   end
 
-  local lcp = _G.LeftChatPanel
+  local lcp = (_G.LeftChatPanel and _G.LeftChatPanel:IsShown() and _G.LeftChatPanel) or _G.ChatFrame1Background or _G.ChatFrame1
   if not lcp then
-    return false, "LeftChatPanel not found"
+    return false, "Chat frame not found"
   end
 
   local ok, err = pcall(function()
@@ -2178,15 +2271,16 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
   local mode = gopsDB.detailsLeftMode or "ABOVE"
   local Details = _G.Details or _G._detalhes
   local inst = Details and Details.GetInstance and Details:GetInstance(1)
-  local lcp = _G.LeftChatPanel
+  local hasElvChat = (_G.LeftChatPanel and _G.LeftChatPanel:IsShown())
+  local lcp = hasElvChat and _G.LeftChatPanel or _G.ChatFrame1Background or _G.ChatFrame1
   if not inst or not inst.baseframe or not lcp then return end
 
-  local lw = lcp:GetWidth() or 468
-  local lh = lcp:GetHeight() or 230
+  local lw = (not hasElvChat and gopsDB.chatWidth) or lcp:GetWidth() or 468
+  local lh = (not hasElvChat and gopsDB.chatHeight) or lcp:GetHeight() or 225
   if lw < 200 then lw = 468 end
-  if lh < 100 then lh = 230 end
+  if lh < 100 then lh = 225 end
 
-  if mode == "TAB" then
+  if mode == "TAB" and hasElvChat then
     local w = lw - 4
     local h = lh - 46
     inst.baseframe:ClearAllPoints()
@@ -2213,12 +2307,14 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
       SetDetailsFramesVisible(inst, false)
     end
   else
-    -- ABOVE mode: Nailed directly above LeftChatPanel (leaving both LeftChatPanel & RightChatPanel 100% visible)
+    -- ABOVE mode: Nailed directly above LeftChatPanel or native ChatFrame1
     if detailsChatTabBg then detailsChatTabBg:Hide() end
-    local w = lw - 2
+    local w = hasElvChat and (lw - 2) or lw
     local h = 155
+    local offX = hasElvChat and 1 or 0
+    local offY = hasElvChat and 8 or 28
     inst.baseframe:ClearAllPoints()
-    inst.baseframe:SetPoint("BOTTOMLEFT", lcp, "TOPLEFT", 1, 8)
+    inst.baseframe:SetPoint("BOTTOMLEFT", lcp, "TOPLEFT", offX, offY)
     inst.baseframe:SetSize(w, h)
     inst.baseframe:SetFrameStrata("LOW")
     if inst.rowframe then
@@ -2234,7 +2330,7 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
       pcall(inst.ReajustaGump, inst)
     end
     inst.baseframe:ClearAllPoints()
-    inst.baseframe:SetPoint("BOTTOMLEFT", lcp, "TOPLEFT", 1, 8)
+    inst.baseframe:SetPoint("BOTTOMLEFT", lcp, "TOPLEFT", offX, offY)
     inst.baseframe:SetSize(w, h)
     SetDetailsFramesVisible(inst, true)
   end
@@ -2475,8 +2571,17 @@ function GeminiOps.SetupEcoMinimapButton()
       self:SetScript("OnUpdate", nil)
     end)
 
-    ecoMinimapBtn:SetScript("OnClick", function()
-      GeminiOps.ToggleEcoGraphicsMode()
+    ecoMinimapBtn:SetScript("OnClick", function(_, mouseBtn)
+      if mouseBtn == "RightButton" then
+        if GeminiOps.ToggleControlPanel then
+          GeminiOps.ToggleControlPanel()
+        end
+      else
+        GeminiOps.ToggleEcoGraphicsMode()
+        if GeminiOps.UpdateControlPanelVisuals then
+          GeminiOps.UpdateControlPanelVisuals()
+        end
+      end
       if _G.GameTooltip and _G.GameTooltip:IsOwned(ecoMinimapBtn) then
         ecoMinimapBtn:GetScript("OnEnter")(ecoMinimapBtn)
       end
@@ -2486,17 +2591,17 @@ function GeminiOps.SetupEcoMinimapButton()
       if _G.GameTooltip then
         _G.GameTooltip:SetOwner(self, "ANCHOR_LEFT")
         local isEco = (gopsDB.ecoModeActive == true)
+        local hwSlot = (gopsDB.activeHardwareProfile == "LAPTOP") and "💻 Ноут (Раптор)" or "🖥️ ПК (Монитор)"
+        _G.GameTooltip:AddLine("|cff00ccffGeminiOps — Операционная панель|r")
+        _G.GameTooltip:AddLine("Активный профиль UI: |cffffd100" .. hwSlot .. "|r", 0.9, 0.9, 0.9)
         if isEco then
-          _G.GameTooltip:AddLine("|cff00ff7f⚡ ЭКО-РЕЖИМ АКТИВЕН (Станция / Генератор)|r")
-          _G.GameTooltip:AddLine("Видяшка отдыхает: 55 FPS (8 в фоне), FSR 77%, без тумана и теней.", 0.85, 0.95, 0.85, true)
-          _G.GameTooltip:AddLine(" ")
-          _G.GameTooltip:AddLine("|cffffd100Клик:|r Вернуть |cffffd100Красивый режим (MAX)|r", 1, 1, 1)
+          _G.GameTooltip:AddLine("Графика: |cff00ff7f⚡ ECO (Станция / Генератор — 55 FPS, FSR 77%)|r", 0.85, 0.95, 0.85)
         else
-          _G.GameTooltip:AddLine("|cffffd100✨ КРАСИВЫЙ РЕЖИМ АКТИВЕН (MAX Графика)|r")
-          _G.GameTooltip:AddLine("Полное разрешение 100% и максимальные шейдеры.", 0.9, 0.9, 0.9, true)
-          _G.GameTooltip:AddLine(" ")
-          _G.GameTooltip:AddLine("|cffffd100Клик:|r Включить |cff00ff7fЭко-режим (Станция / Генератор)|r", 1, 1, 1)
+          _G.GameTooltip:AddLine("Графика: |cffffd100✨ MAX (Розетка — 100% Ультра)|r", 0.95, 0.92, 0.80)
         end
+        _G.GameTooltip:AddLine(" ")
+        _G.GameTooltip:AddLine("|cffffd100ЛКМ:|r Переключить графику (|cffffd100MAX|r <-> |cff00ff7fECO|r)", 1, 1, 1)
+        _G.GameTooltip:AddLine("|cffffd100ПКМ:|r Открыть |cff00ccffGeminiOps|r (Режимы |cffffd100ПК <-> Ноут|r, Скейл, Чат)", 1, 1, 1)
         _G.GameTooltip:AddLine("|cffaaaaaaПеретащить:|r Зажать и двигать вокруг миникарты", 0.7, 0.7, 0.7)
         _G.GameTooltip:Show()
       end
@@ -2513,6 +2618,440 @@ function GeminiOps.SetupEcoMinimapButton()
 
   if gopsDB.ecoModeActive then
     GeminiOps.ApplyEcoGraphicsMode(true, true)
+  end
+end
+
+---------------------------------------------------------------------------------------
+--  3I. HARDWARE LAYOUT PROFILES ("PC" ULTRWIDE <-> "LAPTOP" RAPTOR) & CONTROL PANEL
+---------------------------------------------------------------------------------------
+local BT4_PROFILE_MODULES = {
+  "ActionBars",
+  "StanceBar",
+  "PetBar",
+  "BagBar",
+  "MicroMenu",
+  "StatusTrackingBar",
+  "ExtraActionBar",
+  "ZoneAbilityBar",
+}
+
+local controlPanelFrame = nil
+
+function GeminiOps.SaveHardwareProfile(slot, silent)
+  slot = (slot == "LAPTOP") and "LAPTOP" or "PC"
+  local gopsDB = GeminiOps:EnsureDB()
+  gopsDB.hardwareProfiles = gopsDB.hardwareProfiles or {}
+
+  local snap = {
+    savedAt      = _G.date and _G.date("%Y-%m-%d %H:%M") or "now",
+    uiScale      = tonumber(C_CVar and C_CVar.GetCVar and C_CVar.GetCVar("uiScale")) or gopsDB.targetUiScale or ((slot == "LAPTOP") and 0.85 or 0.78),
+    useUiScale   = (C_CVar and C_CVar.GetCVar and C_CVar.GetCVar("useUiScale")) or "1",
+    chatWidth    = (_G.ChatFrame1 and math.floor((_G.ChatFrame1:GetWidth() or 468) + 0.5)) or gopsDB.chatWidth or 468,
+    chatHeight   = (_G.ChatFrame1 and math.floor((_G.ChatFrame1:GetHeight() or 225) + 0.5)) or gopsDB.chatHeight or 225,
+    chatFontSize = gopsDB.chatFontSize or 15,
+    bartender4   = {},
+  }
+
+  -- 1. Snapshot Blizzard Edit Mode active layout index
+  if _G.C_EditMode and _G.C_EditMode.GetLayouts then
+    local okEM, layouts = pcall(_G.C_EditMode.GetLayouts)
+    if okEM and type(layouts) == "table" and layouts.activeLayout then
+      snap.editModeActiveLayout = layouts.activeLayout
+    end
+  end
+
+  -- 2. Snapshot Bartender4 active profile bar positions, scales, rows & padding
+  local BT4 = _G.Bartender4
+  if BT4 and BT4.GetModule then
+    for _, modName in ipairs(BT4_PROFILE_MODULES) do
+      local mod = BT4:GetModule(modName, true)
+      if mod and mod.db and type(mod.db.profile) == "table" then
+        snap.bartender4[modName] = DeepCopy(mod.db.profile)
+      end
+    end
+  end
+
+  -- 3. Snapshot SpArc active profile & global layout geometry
+  if type(_G.SpArcDB) == "table" then
+    snap.sparcDB = DeepCopy(_G.SpArcDB)
+  end
+
+  -- 4. Snapshot BasicMinimap & BlizzMove
+  if type(_G.BasicMinimapSV) == "table" then
+    snap.basicMinimap = DeepCopy(_G.BasicMinimapSV)
+  end
+  if type(_G.BlizzMoveDB) == "table" then
+    snap.blizzMove = DeepCopy(_G.BlizzMoveDB)
+  end
+
+  gopsDB.hardwareProfiles[slot] = snap
+  gopsDB.activeHardwareProfile = slot
+
+  if GeminiOps.UpdateControlPanelVisuals then
+    GeminiOps.UpdateControlPanelVisuals()
+  end
+
+  if not silent then
+    local label = (slot == "LAPTOP") and "💻 Ноут (Раптор)" or "🖥️ ПК (Широкоформатный монитор)"
+    print(string.format(
+      "|cff00ccff[GeminiOps]|r Текущая раскладка интерфейса (Bartender4, SpArc, EditMode, Чат %dx%d, UIScale %.2f) сохранена в профиль: |cffffd100%s|r!",
+      snap.chatWidth, snap.chatHeight, snap.uiScale, label
+    ))
+  end
+  return true
+end
+
+function GeminiOps.ApplyHardwareProfile(slot, silent)
+  slot = (slot == "LAPTOP") and "LAPTOP" or "PC"
+  local gopsDB = GeminiOps:EnsureDB()
+  gopsDB.hardwareProfiles = gopsDB.hardwareProfiles or {}
+
+  -- Ensure PC baseline exists before switching away for the first time
+  if not gopsDB.hardwareProfiles["PC"] then
+    GeminiOps.SaveHardwareProfile("PC", true)
+  end
+
+  local snap = gopsDB.hardwareProfiles[slot]
+  if not snap then
+    -- Initialize Laptop profile from current layout with Laptop-friendly scale & chat size
+    GeminiOps.SaveHardwareProfile(slot, true)
+    snap = gopsDB.hardwareProfiles[slot]
+    if slot == "LAPTOP" and snap then
+      snap.uiScale = 0.85
+      snap.chatWidth = 420
+      snap.chatHeight = 195
+      snap.chatFontSize = 14
+    end
+  end
+
+  gopsDB.activeHardwareProfile = slot
+
+  -- 1. Apply UI Scale & Chat / Details! dimensions
+  GeminiOps.ConfigureNativeChatAndScale(
+    snap.chatWidth or ((slot == "LAPTOP") and 420 or 468),
+    snap.chatHeight or ((slot == "LAPTOP") and 195 or 225),
+    snap.chatFontSize or ((slot == "LAPTOP") and 14 or 15),
+    snap.uiScale or ((slot == "LAPTOP") and 0.85 or 0.78),
+    true
+  )
+
+  -- 2. Apply Blizzard Edit Mode layout if saved
+  if snap.editModeActiveLayout and _G.C_EditMode and _G.C_EditMode.SetActiveLayout then
+    if not (_G.InCombatLockdown and _G.InCombatLockdown()) then
+      pcall(_G.C_EditMode.SetActiveLayout, snap.editModeActiveLayout)
+    end
+  end
+
+  -- 3. Apply Bartender4 bar positions & scales live
+  local BT4 = _G.Bartender4
+  if BT4 and BT4.GetModule and type(snap.bartender4) == "table" and not (_G.InCombatLockdown and _G.InCombatLockdown()) then
+    for _, modName in ipairs(BT4_PROFILE_MODULES) do
+      local savedModProfile = snap.bartender4[modName]
+      local mod = BT4:GetModule(modName, true)
+      if savedModProfile and mod and mod.db and type(mod.db.profile) == "table" then
+        OverwriteTableInPlace(mod.db.profile, savedModProfile)
+        if modName == "ActionBars" and type(mod.actionbars) == "table" and type(mod.db.profile.actionbars) == "table" then
+          for i = 1, 10 do
+            local barCfg = mod.db.profile.actionbars[i]
+            local barObj = mod.actionbars[i]
+            if barCfg and barObj and barObj.ApplyConfig then
+              pcall(barObj.ApplyConfig, barObj, barCfg)
+            end
+          end
+        elseif mod.bar and mod.bar.ApplyConfig then
+          pcall(mod.bar.ApplyConfig, mod.bar, mod.db.profile)
+        elseif mod.ApplyConfig then
+          pcall(mod.ApplyConfig, mod)
+        end
+      end
+    end
+  end
+
+  -- 4. Apply SpArc layout geometry
+  if type(snap.sparcDB) == "table" and type(_G.SpArcDB) == "table" then
+    OverwriteTableInPlace(_G.SpArcDB, snap.sparcDB)
+    if _G.SpArc then
+      if _G.SpArc.ApplyLayout then pcall(_G.SpArc.ApplyLayout, _G.SpArc) end
+      if _G.SpArc.UpdateHUD then pcall(_G.SpArc.UpdateHUD, _G.SpArc) end
+      if _G.SpArc.RefreshUnitFrames then pcall(_G.SpArc.RefreshUnitFrames, _G.SpArc) end
+    end
+  end
+
+  -- 5. Apply BasicMinimap & BlizzMove
+  if type(snap.basicMinimap) == "table" and type(_G.BasicMinimapSV) == "table" then
+    OverwriteTableInPlace(_G.BasicMinimapSV, snap.basicMinimap)
+  end
+  if type(snap.blizzMove) == "table" and type(_G.BlizzMoveDB) == "table" then
+    OverwriteTableInPlace(_G.BlizzMoveDB, snap.blizzMove)
+  end
+
+  -- 6. Re-align Details! above chat
+  GeminiOps.SetupDetailsLeftChat("ABOVE", false)
+
+  if GeminiOps.UpdateControlPanelVisuals then
+    GeminiOps.UpdateControlPanelVisuals()
+  end
+
+  if not silent then
+    local label = (slot == "LAPTOP") and "💻 Ноут (Раптор)" or "🖥️ ПК (Широкоформатный монитор)"
+    print(string.format(
+      "|cff00ccff[GeminiOps]|r Включён профиль интерфейса: |cffffd100%s|r (UIScale: %.2f, Чат: %dx%d).",
+      label, gopsDB.targetUiScale or 0.78, gopsDB.chatWidth or 468, gopsDB.chatHeight or 225
+    ))
+  end
+  return true
+end
+
+function GeminiOps.EnsureDefaultPCHardwareProfile()
+  local gopsDB = GeminiOps:EnsureDB()
+  gopsDB.hardwareProfiles = gopsDB.hardwareProfiles or {}
+  gopsDB.activeHardwareProfile = gopsDB.activeHardwareProfile or "PC"
+  if not gopsDB.hardwareProfiles["PC"] then
+    GeminiOps.SaveHardwareProfile("PC", true)
+  end
+end
+
+local function CreateOpsButton(parent, width, height, text, onClick)
+  local btn = _G.CreateFrame("Button", nil, parent, "BackdropTemplate")
+  btn:SetSize(width, height)
+  if btn.SetBackdrop then
+    btn:SetBackdrop({
+      bgFile = "Interface\\Buttons\\WHITE8X8",
+      edgeFile = "Interface\\Buttons\\WHITE8X8",
+      edgeSize = 1,
+    })
+    btn:SetBackdropColor(0.11, 0.12, 0.16, 0.95)
+    btn:SetBackdropBorderColor(0.28, 0.30, 0.38, 0.95)
+  end
+  local fs = btn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  ApplyDetailsTabFont(fs, 12)
+  fs:SetPoint("CENTER", btn, "CENTER", 0, 0)
+  fs:SetText(text)
+  fs:SetTextColor(0.92, 0.92, 0.96, 1.0)
+  btn.fs = fs
+
+  btn:SetScript("OnEnter", function(self)
+    if not self._isActive and self.SetBackdropBorderColor then
+      self:SetBackdropBorderColor(0.95, 0.80, 0.30, 1.0)
+    end
+  end)
+  btn:SetScript("OnLeave", function(self)
+    if GeminiOps.UpdateControlPanelVisuals then
+      GeminiOps.UpdateControlPanelVisuals()
+    elseif self.SetBackdropBorderColor then
+      self:SetBackdropBorderColor(0.28, 0.30, 0.38, 0.95)
+    end
+  end)
+  btn:SetScript("OnClick", onClick)
+  return btn
+end
+
+local function SetOpsButtonHighlight(btn, active, activeR, activeG, activeB)
+  if not btn or not btn.SetBackdropBorderColor then return end
+  btn._isActive = active
+  if active then
+    local r, g, b = activeR or 1.0, activeG or 0.82, activeB or 0.22
+    btn:SetBackdropColor(r * 0.18, g * 0.18, b * 0.18, 0.96)
+    btn:SetBackdropBorderColor(r, g, b, 1.0)
+    if btn.fs then btn.fs:SetTextColor(r, g, b, 1.0) end
+  else
+    btn:SetBackdropColor(0.11, 0.12, 0.16, 0.95)
+    btn:SetBackdropBorderColor(0.28, 0.30, 0.38, 0.95)
+    if btn.fs then btn.fs:SetTextColor(0.88, 0.88, 0.92, 1.0) end
+  end
+end
+
+function GeminiOps.UpdateControlPanelVisuals()
+  if not controlPanelFrame then return end
+  local gopsDB = GeminiOps:EnsureDB()
+  local hw = gopsDB.activeHardwareProfile or "PC"
+  local isEco = (gopsDB.ecoModeActive == true)
+  local curScale = tonumber(C_CVar and C_CVar.GetCVar and C_CVar.GetCVar("uiScale")) or gopsDB.targetUiScale or 0.78
+  local curFont = gopsDB.chatFontSize or 15
+
+  if controlPanelFrame.statusText then
+    local hwText = (hw == "LAPTOP") and "|cff00ccff💻 Ноут (Раптор)|r" or "|cffffd100🖥️ ПК (Монитор 3440x1440)|r"
+    local ecoText = isEco and "|cff00ff7f⚡ ECO (Станция)|r" or "|cffffd100✨ MAX (Розетка)|r"
+    controlPanelFrame.statusText:SetText(string.format("Режим UI: %s   |   Графика: %s", hwText, ecoText))
+  end
+
+  SetOpsButtonHighlight(controlPanelFrame.btnPC, hw == "PC", 1.0, 0.82, 0.22)
+  SetOpsButtonHighlight(controlPanelFrame.btnLaptop, hw == "LAPTOP", 0.25, 0.85, 1.0)
+
+  SetOpsButtonHighlight(controlPanelFrame.btnMax, not isEco, 1.0, 0.82, 0.22)
+  SetOpsButtonHighlight(controlPanelFrame.btnEco, isEco, 0.20, 0.95, 0.45)
+
+  if controlPanelFrame.scaleBtns then
+    for _, sb in ipairs(controlPanelFrame.scaleBtns) do
+      SetOpsButtonHighlight(sb, math.abs((sb._val or 0) - curScale) < 0.015, 0.35, 0.90, 1.0)
+    end
+  end
+  if controlPanelFrame.fontBtns then
+    for _, fb in ipairs(controlPanelFrame.fontBtns) do
+      SetOpsButtonHighlight(fb, (fb._val or 0) == curFont, 0.35, 0.90, 1.0)
+    end
+  end
+end
+
+function GeminiOps.ToggleControlPanel()
+  if not controlPanelFrame then
+    local f = _G.CreateFrame("Frame", "GeminiOpsControlPanel", UIParent, "BackdropTemplate")
+    f:SetSize(460, 410)
+    f:SetPoint("CENTER", UIParent, "CENTER", 0, 40)
+    f:SetFrameStrata("DIALOG")
+    f:SetFrameLevel(50)
+    f:EnableMouse(true)
+    f:SetMovable(true)
+    f:RegisterForDrag("LeftButton")
+    f:SetScript("OnDragStart", f.StartMoving)
+    f:SetScript("OnDragStop", f.StopMovingOrSizing)
+
+    if f.SetBackdrop then
+      f:SetBackdrop({
+        bgFile = "Interface\\Buttons\\WHITE8X8",
+        edgeFile = "Interface\\Buttons\\WHITE8X8",
+        edgeSize = 1,
+      })
+      f:SetBackdropColor(0.05, 0.06, 0.08, 0.96)
+      f:SetBackdropBorderColor(0.25, 0.70, 0.95, 0.90)
+    end
+
+    if _G.UISpecialFrames then
+      table.insert(_G.UISpecialFrames, "GeminiOpsControlPanel")
+    end
+
+    local title = f:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    ApplyDetailsTabFont(title, 15)
+    title:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -14)
+    title:SetText("|cff00ccffGeminiOps|r — Управление конфигурацией")
+
+    local closeBtn = CreateOpsButton(f, 24, 24, "X", function() f:Hide() end)
+    closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -10, -10)
+
+    local statusText = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(statusText, 12)
+    statusText:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -38)
+    f.statusText = statusText
+
+    -- Section 1: Hardware Profile (PC vs Laptop)
+    local sec1 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(sec1, 12)
+    sec1:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -66)
+    sec1:SetText("|cffffd1001. Профиль рабочего места (ПК Монитор <-> Ноут Раптор):|r")
+
+    f.btnPC = CreateOpsButton(f, 208, 32, "🖥️ Режим: ПК (Монитор)", function()
+      GeminiOps.ApplyHardwareProfile("PC", false)
+    end)
+    f.btnPC:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -86)
+
+    f.btnLaptop = CreateOpsButton(f, 208, 32, "💻 Режим: Ноут (Раптор)", function()
+      GeminiOps.ApplyHardwareProfile("LAPTOP", false)
+    end)
+    f.btnLaptop:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -86)
+
+    f.btnSavePC = CreateOpsButton(f, 208, 24, "💾 Сохранить текущий UI как ПК", function()
+      GeminiOps.SaveHardwareProfile("PC", false)
+    end)
+    f.btnSavePC:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -124)
+
+    f.btnSaveLaptop = CreateOpsButton(f, 208, 24, "💾 Сохранить текущий UI как Ноут", function()
+      GeminiOps.SaveHardwareProfile("LAPTOP", false)
+    end)
+    f.btnSaveLaptop:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -124)
+
+    -- Section 2: Power & Graphics Mode (MAX vs ECO)
+    local sec2 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(sec2, 12)
+    sec2:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -162)
+    sec2:SetText("|cffffd1002. Питание и Графика (Розетка <-> Зарядная станция / Генератор):|r")
+
+    f.btnMax = CreateOpsButton(f, 208, 30, "✨ MAX: Красивый (Розетка)", function()
+      GeminiOps.ApplyEcoGraphicsMode(false, false)
+      GeminiOps.UpdateControlPanelVisuals()
+    end)
+    f.btnMax:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -182)
+
+    f.btnEco = CreateOpsButton(f, 208, 30, "⚡ ECO: Эко-режим (Станция)", function()
+      GeminiOps.ApplyEcoGraphicsMode(true, false)
+      GeminiOps.UpdateControlPanelVisuals()
+    end)
+    f.btnEco:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -182)
+
+    -- Section 3: Native UI Scale (Crisp Fonts) & Chat
+    local sec3 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(sec3, 12)
+    sec3:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -226)
+    sec3:SetText("|cffffd1003. Масштаб интерфейса (UIScale для чётких шрифтов):|r")
+
+    f.scaleBtns = {}
+    local scales = { 0.70, 0.75, 0.78, 0.82, 0.85, 0.90 }
+    for idx, sc in ipairs(scales) do
+      local sb = CreateOpsButton(f, 66, 26, string.format("%.2f", sc), function()
+        GeminiOps.ConfigureNativeChatAndScale(nil, nil, nil, sc, false)
+        GeminiOps.SetupDetailsLeftChat("ABOVE", false)
+        GeminiOps.UpdateControlPanelVisuals()
+      end)
+      sb._val = sc
+      sb:SetPoint("TOPLEFT", f, "TOPLEFT", 16 + (idx - 1) * 72, -246)
+      f.scaleBtns[#f.scaleBtns + 1] = sb
+    end
+
+    local sec4 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(sec4, 12)
+    sec4:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -284)
+    sec4:SetText("|cffffd1004. Размер шрифта чата и выравнивание Чат + Details!:|r")
+
+    f.fontBtns = {}
+    local fonts = { 13, 14, 15, 16 }
+    for idx, fz in ipairs(fonts) do
+      local fb = CreateOpsButton(f, 52, 26, tostring(fz) .. "pt", function()
+        GeminiOps.ConfigureNativeChatAndScale(nil, nil, fz, nil, false)
+        GeminiOps.SetupDetailsLeftChat("ABOVE", false)
+        GeminiOps.UpdateControlPanelVisuals()
+      end)
+      fb._val = fz
+      fb:SetPoint("TOPLEFT", f, "TOPLEFT", 16 + (idx - 1) * 56, -304)
+      f.fontBtns[#f.fontBtns + 1] = fb
+    end
+
+    local alignBtn = CreateOpsButton(f, 196, 26, "📐 Выровнять Чат и Details!", function()
+      GeminiOps.ConfigureNativeChatAndScale(nil, nil, nil, nil, false)
+      GeminiOps.SetupDetailsLeftChat("ABOVE", false)
+    end)
+    alignBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -304)
+
+    -- Section 5: Quick Macro Operations
+    local sec5 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(sec5, 12)
+    sec5:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -342)
+    sec5:SetText("|cffffd1005. Операции с макросами персонажа:|r")
+
+    local btnSyncM = CreateOpsButton(f, 136, 28, "🔄 Синхр. макросы", function()
+      _G.SlashCmdList["GEMINIOPS"]("macros")
+    end)
+    btnSyncM:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -362)
+
+    local btnPvE = CreateOpsButton(f, 136, 28, "🎯 Мили: @mouseover", function()
+      _G.SlashCmdList["GEMINIOPS"]("pve")
+    end)
+    btnPvE:SetPoint("TOPLEFT", f, "TOPLEFT", 162, -362)
+
+    local btnPvP = CreateOpsButton(f, 136, 28, "⚔️ Мили: Анти-Пет PvP", function()
+      _G.SlashCmdList["GEMINIOPS"]("pvp")
+    end)
+    btnPvP:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -362)
+
+    controlPanelFrame = f
+    GeminiOps.UpdateControlPanelVisuals()
+    f:Show()
+    return
+  end
+
+  if controlPanelFrame:IsShown() then
+    controlPanelFrame:Hide()
+  else
+    GeminiOps.UpdateControlPanelVisuals()
+    controlPanelFrame:Show()
   end
 end
 
@@ -2706,10 +3245,12 @@ eventFrame:SetScript("OnEvent", function(_, event)
         -- Move Details! out of RightChatPanel (Loot) to LeftChatPanel (Above by default) for all characters
         GeminiOps.SetupDetailsLeftChat(nil, nil)
         GeminiOps.SetupEcoMinimapButton()
+        GeminiOps.EnsureDefaultPCHardwareProfile()
       end)
       C_Timer.After(3.0, function()
         GeminiOps.SetupDetailsLeftChat(nil, nil)
         GeminiOps.SetupEcoMinimapButton()
+        GeminiOps.EnsureDefaultPCHardwareProfile()
       end)
     end
   elseif event == "PLAYER_ENTERING_WORLD" then
@@ -2731,7 +3272,17 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
   local cmd = (msg or ""):match("^(%S*)")
   cmd = (cmd or ""):lower()
 
-  if cmd == "clone" then
+  if cmd == "" or cmd == "ui" or cmd == "panel" or cmd == "menu" then
+    GeminiOps.ToggleControlPanel()
+  elseif cmd == "pc" or cmd == "desktop" then
+    GeminiOps.ApplyHardwareProfile("PC", false)
+  elseif cmd == "laptop" or cmd == "note" or cmd == "raptor" then
+    GeminiOps.ApplyHardwareProfile("LAPTOP", false)
+  elseif cmd == "savepc" then
+    GeminiOps.SaveHardwareProfile("PC", false)
+  elseif cmd == "savelaptop" or cmd == "savenote" then
+    GeminiOps.SaveHardwareProfile("LAPTOP", false)
+  elseif cmd == "clone" then
     local curKey = GeminiOps.GetCurrentCharKey()
     local tpl
     if curKey == "Морвара - Свежеватель Душ" or curKey == "Морвара - Пиратская Бухта" then
@@ -2807,6 +3358,6 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
     local plProf = (_G.Plater and _G.Plater.db and _G.Plater.db.GetCurrentProfile and _G.Plater.db:GetCurrentProfile()) or "N/A"
     print("|cff00ccff[GeminiOps v" .. GeminiOps.VERSION .. "]|r Персонаж: |cffffd100" .. curKey .. "|r")
     print("  • Профиль ElvUI: |cff00ff96" .. tostring(elvProf) .. "|r | Bartender4: |cff00ff96" .. tostring(btProf) .. "|r | Plater: |cff00ff96" .. tostring(plProf) .. "|r")
-    print("  • Команды: |cffffd100/gops eco|r, |cffffd100/gops macros|r, |cffffd100/gops pvp|r, |cffffd100/gops pve|r, |cffffd100/gops above|r, |cffffd100/gops clone|r.")
+    print("  • Команды: |cffffd100/gops|r (панель), |cffffd100/gops pc|r, |cffffd100/gops laptop|r, |cffffd100/gops eco|r, |cffffd100/gops macros|r.")
   end
 end
