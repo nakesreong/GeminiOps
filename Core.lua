@@ -2479,9 +2479,8 @@ local ECO_GRAPHICS_CVARS = {
   useMaxFPS                 = "1",
   maxFPS                    = "55",
   useMaxFPSBk               = "1",
-  maxFPSBk                  = "15",
-  LowLatencyMode            = "1",    -- NVIDIA Reflex ON (without Boost): eliminates DX12 queue stutters without locking max clocks!
-  gxMaxFrameLatency         = "2",
+  maxFPSBk                  = "8",
+  LowLatencyMode            = "0",    -- Kills NVIDIA Reflex+Boost idle/load clock lock (2250MHz -> P8 idle!)
   renderScale               = "0.75",
   ResampleQuality           = "3",    -- AMD FSR 1.0 upscaling
   ResampleAlwaysSharpen     = "1",
@@ -2531,8 +2530,7 @@ local ECO_GRAPHICS_CVARS = {
 
 local LAPTOP_ECO_OVERRIDES = {
   maxFPS                    = "45",   -- Sweet spot for battery/power-station on laptop
-  maxFPSBk                  = "15",   -- Smooth background pacing without 440ms double-tick stalls
-  LowLatencyMode            = "1",    -- Reflex ON (no Boost) for smooth frame pacing
+  maxFPSBk                  = "5",    -- Drops background dGPU draw to ~4-5W
   renderScale               = "0.65", -- 1664x1040 w/ FSR on 16" 2560x1600 = crisp UI + 2.4x fewer pixels!
 }
 
