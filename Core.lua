@@ -2461,39 +2461,91 @@ GeminiOps.EmbedDetailsInRightChat = GeminiOps.SetupDetailsLeftChat
 ---------------------------------------------------------------------------------------
 --  3H. ECO / POWER-STATION GRAPHICS MODE & MINIMAP BUTTON
 ---------------------------------------------------------------------------------------
+local function IsRunningOnLaptop()
+  local gopsDB = GeminiOps:EnsureDB()
+  if gopsDB.activeHardwareProfile == "LAPTOP" then
+    return true
+  end
+  if _G.GetPhysicalScreenSize then
+    local ok, w, h = pcall(_G.GetPhysicalScreenSize)
+    if ok and w and h and w <= 2560 and h == 1600 then
+      return true
+    end
+  end
+  return false
+end
+
 local ECO_GRAPHICS_CVARS = {
   useMaxFPS                 = "1",
   maxFPS                    = "55",
   useMaxFPSBk               = "1",
   maxFPSBk                  = "8",
-  renderScale               = "0.77",
+  LowLatencyMode            = "0",    -- Kills NVIDIA Reflex+Boost idle/load clock lock (2250MHz -> P8 idle!)
+  renderScale               = "0.75",
   ResampleQuality           = "3",    -- AMD FSR 1.0 upscaling
   ResampleAlwaysSharpen     = "1",
-  ResampleSharpness         = "0.25",
-  graphicsShadowQuality     = "0",    -- Low shadows
-  graphicsLiquidDetail      = "0",    -- Low water reflections
-  graphicsSSAO              = "0",    -- Off
-  graphicsDepthEffects      = "0",    -- Off
-  graphicsComputeEffects    = "0",    -- Off (disables Volumetric Fog GPU drain)
+  ResampleSharpness         = "0.3",
+  ffxAntiAliasingMode       = "0",
+  MSAAQuality               = "0",    -- Disables heavy 4x/8x MSAA GPU drain
+  RAIDsettingsEnabled       = "0",    -- Prevents dungeons/delves/raids from reverting to heavy RAID* CVars
+  -- High-level Settings UI sliders
+  graphicsShadowQuality     = "0",
+  graphicsLiquidDetail      = "0",
+  graphicsSSAO              = "0",
+  graphicsDepthEffects      = "0",
+  graphicsComputeEffects    = "0",
   graphicsOutlineMode       = "1",
   graphicsParticleDensity   = "2",
-  graphicsViewDistance      = "3",
-  graphicsEnvironmentDetail = "3",
-  graphicsGroundClutter     = "2",
-  volumeFog                 = "0",
-  sunShafts                 = "0",
+  graphicsSpellDensity      = "1",    -- Essential spells only (keeps all boss mechanics visible!)
+  graphicsViewDistance      = "2",
+  graphicsEnvironmentDetail = "2",
+  graphicsGroundClutter     = "1",
+  -- Low-level render engine CVars (guaranteed immediate GPU/CPU power drop without opening Settings UI)
+  shadowMode                = "0",
+  shadowSoft                = "0",
   shadowRt                  = "0",
-  ffxAntiAliasingMode       = "0",
-  MSAAQuality               = "0",
+  SSAO                      = "0",
+  volumeFog                 = "0",
+  volumeFogLevel            = "0",
+  sunShafts                 = "0",
+  waterDetail               = "0",
+  refraction                = "0",
+  rippleDetail              = "0",
+  reflectionMode            = "0",
+  weatherDensity            = "0",
+  physicsLevel              = "0",
+  particledensity           = "40",
+  OutlineEngineMode         = "1",
+  farclip                   = "3500",
+  horizonClip               = "3500",
+  horizonStart              = "1000",
+  terrainLodDist            = "250",
+  wmoLodDist                = "250",
+  doodadLodScale            = "75",
+  lodObjectCullSize         = "22",
+  lodObjectFadeScale        = "75",
+  groundEffectDensity       = "32",
+  groundEffectDist          = "70",
+}
+
+local LAPTOP_ECO_OVERRIDES = {
+  maxFPS                    = "45",   -- Sweet spot for battery/power-station on laptop
+  maxFPSBk                  = "5",    -- Drops background dGPU draw to ~4-5W
+  renderScale               = "0.65", -- 1664x1040 w/ FSR on 16" 2560x1600 = crisp UI + 2.4x fewer pixels!
 }
 
 local BEAUTIFUL_FALLBACK_CVARS = {
   useMaxFPS                 = "1",
   maxFPS                    = "120",
   useMaxFPSBk               = "1",
-  maxFPSBk                  = "30",
+  maxFPSBk                  = "15",
+  LowLatencyMode            = "2",
   renderScale               = "1",
   ResampleAlwaysSharpen     = "0",
+  ResampleSharpness         = "0.2",
+  ffxAntiAliasingMode       = "0",
+  MSAAQuality               = "0",
+  RAIDsettingsEnabled       = "1",
   graphicsShadowQuality     = "3",
   graphicsLiquidDetail      = "2",
   graphicsSSAO              = "3",
@@ -2501,12 +2553,35 @@ local BEAUTIFUL_FALLBACK_CVARS = {
   graphicsComputeEffects    = "3",
   graphicsOutlineMode       = "2",
   graphicsParticleDensity   = "4",
+  graphicsSpellDensity      = "2",
   graphicsViewDistance      = "7",
   graphicsEnvironmentDetail = "7",
   graphicsGroundClutter     = "7",
-  volumeFog                 = "1",
-  sunShafts                 = "2",
+  shadowMode                = "3",
+  shadowSoft                = "1",
   shadowRt                  = "0",
+  SSAO                      = "3",
+  volumeFog                 = "1",
+  volumeFogLevel            = "2",
+  sunShafts                 = "2",
+  waterDetail               = "2",
+  refraction                = "2",
+  rippleDetail              = "1",
+  reflectionMode            = "0",
+  weatherDensity            = "3",
+  physicsLevel              = "2",
+  particledensity           = "80",
+  OutlineEngineMode         = "2",
+  farclip                   = "8000",
+  horizonClip               = "8000",
+  horizonStart              = "3000",
+  terrainLodDist            = "550",
+  wmoLodDist                = "400",
+  doodadLodScale            = "125",
+  lodObjectCullSize         = "16",
+  lodObjectFadeScale        = "125",
+  groundEffectDensity       = "128",
+  groundEffectDist          = "260",
 }
 
 local ecoMinimapBtn = nil
@@ -2521,12 +2596,12 @@ function GeminiOps.SnapshotBeautifulGraphics()
       gopsDB.savedNormalGraphics[cvarName] = tostring(val)
     end
   end
-  -- Guard against accidentally snapshotting while already in 0.77 renderScale
+  -- Guard against accidentally snapshotting while already in reduced renderScale / ECO FPS
   if tonumber(gopsDB.savedNormalGraphics.renderScale) and tonumber(gopsDB.savedNormalGraphics.renderScale) < 0.85 then
     gopsDB.savedNormalGraphics.renderScale = "1"
   end
   if tonumber(gopsDB.savedNormalGraphics.maxFPS) and tonumber(gopsDB.savedNormalGraphics.maxFPS) <= 56 then
-    gopsDB.savedNormalGraphics.maxFPS = "120"
+    gopsDB.savedNormalGraphics.maxFPS = IsRunningOnLaptop() and "60" or "120"
   end
 end
 
@@ -2564,6 +2639,7 @@ end
 function GeminiOps.ApplyEcoGraphicsMode(enable, silent)
   if not C_CVar or not C_CVar.SetCVar then return false end
   local gopsDB = GeminiOps:EnsureDB()
+  local isLaptop = IsRunningOnLaptop()
 
   if enable then
     if not gopsDB.ecoModeActive or type(gopsDB.savedNormalGraphics) ~= "table" or next(gopsDB.savedNormalGraphics) == nil then
@@ -2572,10 +2648,19 @@ function GeminiOps.ApplyEcoGraphicsMode(enable, silent)
     for cvarName, ecoVal in pairs(ECO_GRAPHICS_CVARS) do
       pcall(C_CVar.SetCVar, cvarName, ecoVal)
     end
+    if isLaptop then
+      for cvarName, lapVal in pairs(LAPTOP_ECO_OVERRIDES) do
+        pcall(C_CVar.SetCVar, cvarName, lapVal)
+      end
+    end
     gopsDB.ecoModeActive = true
     GeminiOps.UpdateEcoMinimapButtonVisual()
     if not silent then
-      print("|cff00ccff[GeminiOps]|r |cff00ff7fВКЛЮЧЕН ЭКО-РЕЖИМ (Станция / Генератор)|r: лок 55 FPS (8 в фоне), FSR 77% с резкостью, отключены объёмный туман, тени и SSAO.")
+      if isLaptop then
+        print("|cff00ccff[GeminiOps]|r |cff00ff7fВКЛЮЧЕН ЭКО-РЕЖИМ (Ноут Раптор / Блэкаут)|r: 45 FPS (5 в фоне), FSR 65% с резкостью, выключены Reflex Boost, MSAA, тени, туман и дальность.")
+      else
+        print("|cff00ccff[GeminiOps]|r |cff00ff7fВКЛЮЧЕН ЭКО-РЕЖИМ (Станция / Генератор)|r: 55 FPS (8 в фоне), FSR 75% с резкостью, выключены Reflex Boost, MSAA, тени и туман.")
+      end
     end
   else
     local saved = (type(gopsDB.savedNormalGraphics) == "table" and next(gopsDB.savedNormalGraphics) ~= nil)
@@ -2591,7 +2676,7 @@ function GeminiOps.ApplyEcoGraphicsMode(enable, silent)
     gopsDB.ecoModeActive = false
     GeminiOps.UpdateEcoMinimapButtonVisual()
     if not silent then
-      print("|cff00ccff[GeminiOps]|r |cffffd100ВКЛЮЧЕН КРАСИВЫЙ РЕЖИМ (Ультра / Розетка)|r: возвращены 100% масштаб разрешения, FPS и полная графика!")
+      print("|cff00ccff[GeminiOps]|r |cffffd100ВКЛЮЧЕН КРАСИВЫЙ РЕЖИМ (Ультра / Розетка)|r: возвращены 100% масштаб разрешения, Reflex, FPS и полная графика!")
     end
   end
   return true
@@ -2701,7 +2786,11 @@ function GeminiOps.SetupEcoMinimapButton()
         _G.GameTooltip:AddLine("|cff00ccffGeminiOps — Операционная панель|r")
         _G.GameTooltip:AddLine("Активный профиль UI: |cffffd100" .. hwSlot .. "|r", 0.9, 0.9, 0.9)
         if isEco then
-          _G.GameTooltip:AddLine("Графика: |cff00ff7f⚡ ECO (Станция / Генератор — 55 FPS, FSR 77%)|r", 0.85, 0.95, 0.85)
+          if IsRunningOnLaptop() then
+            _G.GameTooltip:AddLine("Графика: |cff00ff7f⚡ ECO (Ноут Блэкаут — 45 FPS, FSR 65%, Reflex OFF)|r", 0.85, 0.95, 0.85)
+          else
+            _G.GameTooltip:AddLine("Графика: |cff00ff7f⚡ ECO (Станция / Генератор — 55 FPS, FSR 75%, Reflex OFF)|r", 0.85, 0.95, 0.85)
+          end
         else
           _G.GameTooltip:AddLine("Графика: |cffffd100✨ MAX (Розетка — 100% Ультра)|r", 0.95, 0.92, 0.80)
         end
