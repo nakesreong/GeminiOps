@@ -1984,16 +1984,26 @@ local function ApplyDetailsTabFont(fs, size)
   end
 end
 
+local chatSizeGuard = false
+
 function GeminiOps.ConfigureNativeChatAndScale(customWidth, customHeight, customFontSize, customUiScale, silent)
   local gopsDB = GeminiOps:EnsureDB()
   local activeSlot = gopsDB.activeHardwareProfile or "PC"
-  local defaultW = (activeSlot == "LAPTOP") and 415 or 468
-  local defaultH = (activeSlot == "LAPTOP") and 195 or 225
+  local defaultW = (activeSlot == "LAPTOP") and 420 or 480
+  local defaultH = (activeSlot == "LAPTOP") and 240 or 300
   local defaultFont = (activeSlot == "LAPTOP") and 14 or 15
   local defaultScale = (activeSlot == "LAPTOP") and 0.85 or 0.78
 
+  -- One-time upgrade to taller 300px chat so 14-15 lines fit comfortably
+  if not gopsDB.completedTasks["chat_tall_300_v2"] then
+    gopsDB.chatWidth = defaultW
+    gopsDB.chatHeight = defaultH
+    gopsDB.completedTasks["chat_tall_300_v2"] = true
+  end
+
   local chatW = customWidth or gopsDB.chatWidth or defaultW
   local chatH = customHeight or gopsDB.chatHeight or defaultH
+  if chatH < 200 then chatH = defaultH end
   local fontSize = customFontSize or gopsDB.chatFontSize or defaultFont
   local uiScale = customUiScale or gopsDB.targetUiScale or defaultScale
 
@@ -2011,7 +2021,7 @@ function GeminiOps.ConfigureNativeChatAndScale(customWidth, customHeight, custom
     end
   end
 
-  -- 2. Native ChatFrame1..10 dark background (matching Details! opacity), crisp font size & larger geometry
+  -- 2. Native ChatFrame1..10 dark background (matching Details! opacity), crisp font size & taller geometry
   _G.DEFAULT_CHATFRAME_ALPHA = 0.85
   _G.CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0.65
   _G.CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = 0.90
@@ -2043,26 +2053,90 @@ function GeminiOps.ConfigureNativeChatAndScale(customWidth, customHeight, custom
     end
   end
 
-  local cf1 = _G.ChatFrame1
-  if cf1 and not (_G.LeftChatPanel and _G.LeftChatPanel:IsShown()) then
-    pcall(cf1.SetSize, cf1, chatW, chatH)
-    if _G.FCF_SavePositionAndDimensions then
-      pcall(_G.FCF_SavePositionAndDimensions, cf1)
-    end
-  end
-
-  if not GeminiOps._chatFadeHooked and _G.hooksecurefunc and _G.FCF_FadeOutChatFrame then
-    GeminiOps._chatFadeHooked = true
-    _G.hooksecurefunc("FCF_FadeOutChatFrame", function(chatFrame)
-      if not chatFrame then return end
-      chatFrame.oldAlpha = 0.85
-      local name = chatFrame:GetName()
-      local bg = name and _G[name .. "Background"]
-      if bg then
-        pcall(bg.SetVertexColor, bg, 0.04, 0.04, 0.05, 0.85)
-        pcall(bg.SetAlpha, bg, 0.85)
+  local function EnforceChatFrame1Geometry()
+    if chatSizeGuard then return end
+    local cf1 = _G.ChatFrame1
+    if not cf1 or (_G.LeftChatPanel and _G.LeftChatPanel:IsShown()) then return end
+    chatSizeGuard = true
+    local targetW = gopsDB.chatWidth or 480
+    local targetH = gopsDB.chatHeight or 300
+    pcall(function()
+      cf1:SetClampedToScreen(false)
+      cf1:ClearAllPoints()
+      cf1:SetPoint("BOTTOMLEFT", _G.UIParent, "BOTTOMLEFT", 36, 22)
+      cf1:SetSize(targetW, targetH)
+      cf1:SetWidth(targetW)
+      cf1:SetHeight(targetH)
+      local bg1 = _G.ChatFrame1Background
+      if bg1 then
+        bg1:SetVertexColor(0.04, 0.04, 0.05, 0.85)
+        bg1:SetAlpha(0.85)
+        bg1:Show()
+      end
+      if _G.FCF_SavePositionAndDimensions then
+        pcall(_G.FCF_SavePositionAndDimensions, cf1)
       end
     end)
+    chatSizeGuard = false
+  end
+
+  EnforceChatFrame1Geometry()
+
+  if not GeminiOps._chatFadeHooked and _G.hooksecurefunc then
+    GeminiOps._chatFadeHooked = true
+    if _G.FCF_FadeOutChatFrame then
+      _G.hooksecurefunc("FCF_FadeOutChatFrame", function(chatFrame)
+        if not chatFrame then return end
+        chatFrame.oldAlpha = 0.85
+        local name = chatFrame:GetName()
+        local bg = name and _G[name .. "Background"]
+        if bg then
+          pcall(bg.SetVertexColor, bg, 0.04, 0.04, 0.05, 0.85)
+          pcall(bg.SetAlpha, bg, 0.85)
+        end
+      end)
+    end
+    if _G.FCF_RestorePositionAndDimensions then
+      _G.hooksecurefunc("FCF_RestorePositionAndDimensions", function(chatFrame)
+        if chatFrame == _G.ChatFrame1 then
+          EnforceChatFrame1Geometry()
+          if GeminiOps.ApplyDetailsVisibilityAndPosition then
+            GeminiOps.ApplyDetailsVisibilityAndPosition()
+          end
+        end
+      end)
+    end
+    if _G.ChatFrame1 then
+      if _G.ChatFrame1.UpdateSystem then
+        _G.hooksecurefunc(_G.ChatFrame1, "UpdateSystem", function()
+          EnforceChatFrame1Geometry()
+          if GeminiOps.ApplyDetailsVisibilityAndPosition then
+            GeminiOps.ApplyDetailsVisibilityAndPosition()
+          end
+        end)
+      end
+      _G.hooksecurefunc(_G.ChatFrame1, "SetSize", function(_, w, h)
+        if chatSizeGuard then return end
+        local targetW = gopsDB.chatWidth or 480
+        local targetH = gopsDB.chatHeight or 300
+        if (w and math.abs(w - targetW) > 4) or (h and math.abs(h - targetH) > 4) then
+          EnforceChatFrame1Geometry()
+          if GeminiOps.ApplyDetailsVisibilityAndPosition then
+            GeminiOps.ApplyDetailsVisibilityAndPosition()
+          end
+        end
+      end)
+      _G.hooksecurefunc(_G.ChatFrame1, "SetHeight", function(_, h)
+        if chatSizeGuard then return end
+        local targetH = gopsDB.chatHeight or 300
+        if h and math.abs(h - targetH) > 4 then
+          EnforceChatFrame1Geometry()
+          if GeminiOps.ApplyDetailsVisibilityAndPosition then
+            GeminiOps.ApplyDetailsVisibilityAndPosition()
+          end
+        end
+      end)
+    end
   end
 
   if not silent then
@@ -2266,19 +2340,27 @@ function GeminiOps.UpdateDetailsTabVisual()
   end
 end
 
+local detailsPosGuard = false
+
 function GeminiOps.ApplyDetailsVisibilityAndPosition()
+  if detailsPosGuard then return end
+  detailsPosGuard = true
+
   local gopsDB = GeminiOps:EnsureDB()
   local mode = gopsDB.detailsLeftMode or "ABOVE"
   local Details = _G.Details or _G._detalhes
   local inst = Details and Details.GetInstance and Details:GetInstance(1)
   local hasElvChat = (_G.LeftChatPanel and _G.LeftChatPanel:IsShown())
   local lcp = hasElvChat and _G.LeftChatPanel or _G.ChatFrame1Background or _G.ChatFrame1
-  if not inst or not inst.baseframe or not lcp then return end
+  if not inst or not inst.baseframe or not lcp then
+    detailsPosGuard = false
+    return
+  end
 
-  local lw = (not hasElvChat and gopsDB.chatWidth) or lcp:GetWidth() or 468
-  local lh = (not hasElvChat and gopsDB.chatHeight) or lcp:GetHeight() or 225
-  if lw < 200 then lw = 468 end
-  if lh < 100 then lh = 225 end
+  local lw = (not hasElvChat and gopsDB.chatWidth) or lcp:GetWidth() or 480
+  local lh = (not hasElvChat and gopsDB.chatHeight) or lcp:GetHeight() or 300
+  if lw < 200 then lw = 480 end
+  if lh < 180 then lh = 300 end
 
   if mode == "TAB" and hasElvChat then
     local w = lw - 4
@@ -2312,7 +2394,7 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
     local w = hasElvChat and (lw - 2) or lw
     local h = 155
     local offX = hasElvChat and 1 or 0
-    local offY = hasElvChat and 8 or 28
+    local offY = hasElvChat and 8 or 26
     inst.baseframe:ClearAllPoints()
     inst.baseframe:SetPoint("BOTTOMLEFT", lcp, "TOPLEFT", offX, offY)
     inst.baseframe:SetSize(w, h)
@@ -2326,13 +2408,23 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
     if inst.SaveMainWindowSize then
       pcall(inst.SaveMainWindowSize, inst)
     end
-    if inst.ReajustaGump then
-      pcall(inst.ReajustaGump, inst)
-    end
     inst.baseframe:ClearAllPoints()
     inst.baseframe:SetPoint("BOTTOMLEFT", lcp, "TOPLEFT", offX, offY)
     inst.baseframe:SetSize(w, h)
+    if inst.ReajustaGump then
+      pcall(inst.ReajustaGump, inst)
+    end
     SetDetailsFramesVisible(inst, true)
+  end
+
+  -- Hook RestoreMainWindowPosition so Details! never drifts away from top of ChatFrame1
+  if not inst._geminiPosHooked and _G.hooksecurefunc and inst.RestoreMainWindowPosition then
+    inst._geminiPosHooked = true
+    pcall(_G.hooksecurefunc, inst, "RestoreMainWindowPosition", function()
+      if not detailsPosGuard then
+        GeminiOps.ApplyDetailsVisibilityAndPosition()
+      end
+    end)
   end
 
   -- Nail it down ("прибить гвоздями") so it cannot be accidentally dragged
@@ -2348,6 +2440,7 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
   end
 
   GeminiOps.UpdateDetailsTabVisual()
+  detailsPosGuard = false
 end
 
 GeminiOps.EmbedDetailsInRightChat = GeminiOps.SetupDetailsLeftChat
@@ -2642,12 +2735,19 @@ function GeminiOps.SaveHardwareProfile(slot, silent)
   local gopsDB = GeminiOps:EnsureDB()
   gopsDB.hardwareProfiles = gopsDB.hardwareProfiles or {}
 
+  local defaultW = (slot == "LAPTOP") and 420 or 480
+  local defaultH = (slot == "LAPTOP") and 240 or 300
+  local curW = gopsDB.chatWidth or defaultW
+  local curH = gopsDB.chatHeight or defaultH
+  if curW < 360 then curW = defaultW end
+  if curH < 200 then curH = defaultH end
+
   local snap = {
     savedAt      = _G.date and _G.date("%Y-%m-%d %H:%M") or "now",
     uiScale      = tonumber(C_CVar and C_CVar.GetCVar and C_CVar.GetCVar("uiScale")) or gopsDB.targetUiScale or ((slot == "LAPTOP") and 0.85 or 0.78),
     useUiScale   = (C_CVar and C_CVar.GetCVar and C_CVar.GetCVar("useUiScale")) or "1",
-    chatWidth    = (_G.ChatFrame1 and math.floor((_G.ChatFrame1:GetWidth() or 468) + 0.5)) or gopsDB.chatWidth or 468,
-    chatHeight   = (_G.ChatFrame1 and math.floor((_G.ChatFrame1:GetHeight() or 225) + 0.5)) or gopsDB.chatHeight or 225,
+    chatWidth    = curW,
+    chatHeight   = curH,
     chatFontSize = gopsDB.chatFontSize or 15,
     bartender4   = {},
   }
@@ -2719,17 +2819,21 @@ function GeminiOps.ApplyHardwareProfile(slot, silent)
     if slot == "LAPTOP" and snap then
       snap.uiScale = 0.85
       snap.chatWidth = 420
-      snap.chatHeight = 195
+      snap.chatHeight = 240
       snap.chatFontSize = 14
     end
   end
 
   gopsDB.activeHardwareProfile = slot
 
+  local targetW = snap.chatWidth or ((slot == "LAPTOP") and 420 or 480)
+  local targetH = snap.chatHeight or ((slot == "LAPTOP") and 240 or 300)
+  if targetH < 240 and slot == "PC" then targetH = 300 end
+
   -- 1. Apply UI Scale & Chat / Details! dimensions
   GeminiOps.ConfigureNativeChatAndScale(
-    snap.chatWidth or ((slot == "LAPTOP") and 420 or 468),
-    snap.chatHeight or ((slot == "LAPTOP") and 195 or 225),
+    targetW,
+    targetH,
     snap.chatFontSize or ((slot == "LAPTOP") and 14 or 15),
     snap.uiScale or ((slot == "LAPTOP") and 0.85 or 0.78),
     true
@@ -2785,7 +2889,8 @@ function GeminiOps.ApplyHardwareProfile(slot, silent)
     OverwriteTableInPlace(_G.BlizzMoveDB, snap.blizzMove)
   end
 
-  -- 6. Re-align Details! above chat
+  -- 6. Re-align Chat & Details! above chat (after EditMode layout switch)
+  GeminiOps.ConfigureNativeChatAndScale(targetW, targetH, nil, nil, true)
   GeminiOps.SetupDetailsLeftChat("ABOVE", false)
 
   if GeminiOps.UpdateControlPanelVisuals then
@@ -2796,7 +2901,7 @@ function GeminiOps.ApplyHardwareProfile(slot, silent)
     local label = (slot == "LAPTOP") and "💻 Ноут (Раптор)" or "🖥️ ПК (Широкоформатный монитор)"
     print(string.format(
       "|cff00ccff[GeminiOps]|r Включён профиль интерфейса: |cffffd100%s|r (UIScale: %.2f, Чат: %dx%d).",
-      label, gopsDB.targetUiScale or 0.78, gopsDB.chatWidth or 468, gopsDB.chatHeight or 225
+      label, gopsDB.targetUiScale or 0.78, gopsDB.chatWidth or 480, gopsDB.chatHeight or 300
     ))
   end
   return true
@@ -2808,6 +2913,9 @@ function GeminiOps.EnsureDefaultPCHardwareProfile()
   gopsDB.activeHardwareProfile = gopsDB.activeHardwareProfile or "PC"
   if not gopsDB.hardwareProfiles["PC"] then
     GeminiOps.SaveHardwareProfile("PC", true)
+  elseif gopsDB.hardwareProfiles["PC"].chatHeight and gopsDB.hardwareProfiles["PC"].chatHeight < 280 then
+    gopsDB.hardwareProfiles["PC"].chatWidth = 480
+    gopsDB.hardwareProfiles["PC"].chatHeight = 300
   end
 end
 
@@ -2868,6 +2976,7 @@ function GeminiOps.UpdateControlPanelVisuals()
   local isEco = (gopsDB.ecoModeActive == true)
   local curScale = tonumber(C_CVar and C_CVar.GetCVar and C_CVar.GetCVar("uiScale")) or gopsDB.targetUiScale or 0.78
   local curFont = gopsDB.chatFontSize or 15
+  local curChatH = gopsDB.chatHeight or 300
 
   if controlPanelFrame.statusText then
     local hwText = (hw == "LAPTOP") and "|cff00ccff💻 Ноут (Раптор)|r" or "|cffffd100🖥️ ПК (Монитор 3440x1440)|r"
@@ -2891,12 +3000,17 @@ function GeminiOps.UpdateControlPanelVisuals()
       SetOpsButtonHighlight(fb, (fb._val or 0) == curFont, 0.35, 0.90, 1.0)
     end
   end
+  if controlPanelFrame.chatHBtns then
+    for _, hb in ipairs(controlPanelFrame.chatHBtns) do
+      SetOpsButtonHighlight(hb, math.abs((hb._val or 0) - curChatH) <= 15, 0.35, 0.90, 1.0)
+    end
+  end
 end
 
 function GeminiOps.ToggleControlPanel()
   if not controlPanelFrame then
     local f = _G.CreateFrame("Frame", "GeminiOpsControlPanel", UIParent, "BackdropTemplate")
-    f:SetSize(460, 410)
+    f:SetSize(460, 415)
     f:SetPoint("CENTER", UIParent, "CENTER", 0, 40)
     f:SetFrameStrata("DIALOG")
     f:SetFrameLevel(50)
@@ -2999,26 +3113,37 @@ function GeminiOps.ToggleControlPanel()
     local sec4 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     ApplyDetailsTabFont(sec4, 12)
     sec4:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -284)
-    sec4:SetText("|cffffd1004. Размер шрифта чата и выравнивание Чат + Details!:|r")
+    sec4:SetText("|cffffd1004. Шрифт и Высота чата (с авто-стыковкой Details! сверху):|r")
 
     f.fontBtns = {}
     local fonts = { 13, 14, 15, 16 }
     for idx, fz in ipairs(fonts) do
-      local fb = CreateOpsButton(f, 52, 26, tostring(fz) .. "pt", function()
+      local fb = CreateOpsButton(f, 48, 26, tostring(fz) .. "pt", function()
         GeminiOps.ConfigureNativeChatAndScale(nil, nil, fz, nil, false)
         GeminiOps.SetupDetailsLeftChat("ABOVE", false)
         GeminiOps.UpdateControlPanelVisuals()
       end)
       fb._val = fz
-      fb:SetPoint("TOPLEFT", f, "TOPLEFT", 16 + (idx - 1) * 56, -304)
+      fb:SetPoint("TOPLEFT", f, "TOPLEFT", 16 + (idx - 1) * 52, -304)
       f.fontBtns[#f.fontBtns + 1] = fb
     end
 
-    local alignBtn = CreateOpsButton(f, 196, 26, "📐 Выровнять Чат и Details!", function()
-      GeminiOps.ConfigureNativeChatAndScale(nil, nil, nil, nil, false)
-      GeminiOps.SetupDetailsLeftChat("ABOVE", false)
-    end)
-    alignBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -304)
+    f.chatHBtns = {}
+    local heights = {
+      { h = 240, label = "240px" },
+      { h = 300, label = "300px" },
+      { h = 360, label = "360px" },
+    }
+    for idx, item in ipairs(heights) do
+      local hb = CreateOpsButton(f, 66, 26, item.label, function()
+        GeminiOps.ConfigureNativeChatAndScale(480, item.h, nil, nil, false)
+        GeminiOps.SetupDetailsLeftChat("ABOVE", false)
+        GeminiOps.UpdateControlPanelVisuals()
+      end)
+      hb._val = item.h
+      hb:SetPoint("TOPLEFT", f, "TOPLEFT", 236 + (idx - 1) * 70, -304)
+      f.chatHBtns[#f.chatHBtns + 1] = hb
+    end
 
     -- Section 5: Quick Macro Operations
     local sec5 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
