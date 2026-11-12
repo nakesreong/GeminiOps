@@ -297,12 +297,16 @@ function GeminiOps.RestoreMicroMenuAndBagsWithoutElvUI()
   if _G.ElvUI then return end
   if _G.InCombatLockdown and _G.InCombatLockdown() then return end
 
+  local gopsDB = GeminiOps:EnsureDB()
+  local migrateToTop = not gopsDB.completedTasks["bt4_top_micromenu_bags_v2"]
+
   -- Dismiss annoying yellow Blizzard tutorial HelpTips ("Откройте коллекцию отряда...")
   if _G.HelpTip and _G.HelpTip.HideAll then
     pcall(_G.HelpTip.HideAll, _G.HelpTip)
   end
 
-  -- Restore Bartender4 MicroMenu and BagBar that were hidden when ElvUI WindTools GameBar was active
+  -- Restore Bartender4 MicroMenu and BagBar that were hidden when ElvUI WindTools GameBar was active.
+  -- IMPORTANT: Never overwrite user's saved position after the one-time top migration!
   if type(_G.Bartender4DB) == "table" and type(_G.Bartender4DB.namespaces) == "table" then
     local mmNS = _G.Bartender4DB.namespaces.MicroMenu
     if type(mmNS) == "table" and type(mmNS.profiles) == "table" then
@@ -311,6 +315,13 @@ function GeminiOps.RestoreMicroMenuAndBagsWithoutElvUI()
           prof.enabled = true
           if type(prof.visibility) == "table" then
             prof.visibility.always = false
+          end
+          if migrateToTop or type(prof.position) ~= "table" or not prof.position.point or (prof.position.point == "BOTTOM" and prof.position.y == 42) then
+            prof.position = prof.position or {}
+            prof.position.point = "TOP"
+            prof.position.x = -137.05
+            prof.position.y = -0.91
+            prof.position.scale = 0.85
           end
         end
       end
@@ -323,6 +334,13 @@ function GeminiOps.RestoreMicroMenuAndBagsWithoutElvUI()
           prof.onebag = true
           if type(prof.visibility) == "table" then
             prof.visibility.always = false
+          end
+          if migrateToTop or type(prof.position) ~= "table" or not prof.position.point or (prof.position.point == "BOTTOM" and prof.position.y == 42) then
+            prof.position = prof.position or {}
+            prof.position.point = "TOP"
+            prof.position.x = 169.40
+            prof.position.y = -4.28
+            prof.position.scale = 0.90
           end
         end
       end
@@ -338,10 +356,12 @@ function GeminiOps.RestoreMicroMenuAndBagsWithoutElvUI()
       mmCfg.visibility = mmCfg.visibility or {}
       mmCfg.visibility.always = false
       mmCfg.position = mmCfg.position or {}
-      mmCfg.position.point = "BOTTOM"
-      mmCfg.position.x = 185
-      mmCfg.position.y = 42
-      mmCfg.position.scale = 0.85
+      if migrateToTop or not mmCfg.position.point or (mmCfg.position.point == "BOTTOM" and mmCfg.position.y == 42) then
+        mmCfg.position.point = "TOP"
+        mmCfg.position.x = -137.05
+        mmCfg.position.y = -0.91
+        mmCfg.position.scale = 0.85
+      end
       if BT4.EnableModule and mmMod.IsEnabled and not mmMod:IsEnabled() then
         pcall(BT4.EnableModule, BT4, "MicroMenu")
       end
@@ -361,10 +381,12 @@ function GeminiOps.RestoreMicroMenuAndBagsWithoutElvUI()
       bagCfg.visibility = bagCfg.visibility or {}
       bagCfg.visibility.always = false
       bagCfg.position = bagCfg.position or {}
-      bagCfg.position.point = "BOTTOM"
-      bagCfg.position.x = 140
-      bagCfg.position.y = 42
-      bagCfg.position.scale = 0.90
+      if migrateToTop or not bagCfg.position.point or (bagCfg.position.point == "BOTTOM" and bagCfg.position.y == 42) then
+        bagCfg.position.point = "TOP"
+        bagCfg.position.x = 169.40
+        bagCfg.position.y = -4.28
+        bagCfg.position.scale = 0.90
+      end
       if BT4.EnableModule and bagMod.IsEnabled and not bagMod:IsEnabled() then
         pcall(BT4.EnableModule, BT4, "BagBar")
       end
@@ -373,6 +395,25 @@ function GeminiOps.RestoreMicroMenuAndBagsWithoutElvUI()
       end
       if bagMod.bar and bagMod.bar.Show then
         pcall(bagMod.bar.Show, bagMod.bar)
+      end
+    end
+  end
+
+  if migrateToTop then
+    gopsDB.completedTasks["bt4_top_micromenu_bags_v2"] = true
+    if gopsDB.hardwareProfiles and gopsDB.hardwareProfiles["PC"] and gopsDB.hardwareProfiles["PC"].bartender4 then
+      local btSnap = gopsDB.hardwareProfiles["PC"].bartender4
+      if btSnap.MicroMenu and btSnap.MicroMenu.position then
+        btSnap.MicroMenu.position.point = "TOP"
+        btSnap.MicroMenu.position.x = -137.05
+        btSnap.MicroMenu.position.y = -0.91
+        btSnap.MicroMenu.position.scale = 0.85
+      end
+      if btSnap.BagBar and btSnap.BagBar.position then
+        btSnap.BagBar.position.point = "TOP"
+        btSnap.BagBar.position.x = 169.40
+        btSnap.BagBar.position.y = -4.28
+        btSnap.BagBar.position.scale = 0.90
       end
     end
   end
@@ -2417,14 +2458,23 @@ function GeminiOps.ApplyDetailsVisibilityAndPosition()
     SetDetailsFramesVisible(inst, true)
   end
 
-  -- Hook RestoreMainWindowPosition so Details! never drifts away from top of ChatFrame1
-  if not inst._geminiPosHooked and _G.hooksecurefunc and inst.RestoreMainWindowPosition then
+  -- Hook RestoreMainWindowPosition and RestoreLibWindow so Details! never drifts away from top of ChatFrame1
+  if not inst._geminiPosHooked and _G.hooksecurefunc then
     inst._geminiPosHooked = true
-    pcall(_G.hooksecurefunc, inst, "RestoreMainWindowPosition", function()
-      if not detailsPosGuard then
-        GeminiOps.ApplyDetailsVisibilityAndPosition()
-      end
-    end)
+    if inst.RestoreMainWindowPosition then
+      pcall(_G.hooksecurefunc, inst, "RestoreMainWindowPosition", function()
+        if not detailsPosGuard then
+          GeminiOps.ApplyDetailsVisibilityAndPosition()
+        end
+      end)
+    end
+    if inst.RestoreLibWindow then
+      pcall(_G.hooksecurefunc, inst, "RestoreLibWindow", function()
+        if not detailsPosGuard then
+          GeminiOps.ApplyDetailsVisibilityAndPosition()
+        end
+      end)
+    end
   end
 
   -- Nail it down ("прибить гвоздями") so it cannot be accidentally dragged
