@@ -890,8 +890,8 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
   end
 
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.clonedCharacters[dstKey] == "v5" and not force then
-    return false, "Already cloned (v5)"
+  if gopsDB.clonedCharacters[dstKey] == "v6" and not force then
+    return false, "Already cloned (v6)"
   end
 
   -- 0. Keybindings & core Priest CVars
@@ -1010,20 +1010,39 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
   end
 
   -- 5. SpArc (Per-Character Visual/Camera Profile Cloner; only copy DoT aura rules if same character name across realms)
+  local srcBase = tostring(srcKey or ""):match("^(.-)%s*%-") or tostring(srcKey or "")
+  local dstBase = tostring(dstKey or ""):match("^(.-)%s*%-") or tostring(dstKey or "")
+  local sameChar = (srcBase ~= "" and srcBase == dstBase)
+    or (srcKey == "Гитпулл - Пиратская Бухта" and dstKey == "Гитхард - Гордунни")
   if _G.SpArc and _G.SpArc.CopyProfileFrom then
-    local srcBase = tostring(srcKey or ""):match("^(.-)%s*%-") or tostring(srcKey or "")
-    local dstBase = tostring(dstKey or ""):match("^(.-)%s*%-") or tostring(dstKey or "")
-    local sameChar = (srcBase ~= "" and srcBase == dstBase)
     pcall(_G.SpArc.CopyProfileFrom, _G.SpArc, srcKey, sameChar)
   end
   if type(_G.SpArcDB) == "table" and type(_G.SpArcDB.profiles) == "table" then
     local spSrc = _G.SpArcDB.profiles[srcKey]
+    if sameChar and type(spSrc) == "table" then
+      _G.SpArcDB.profiles[dstKey] = DeepCopyTable(spSrc)
+      if _G.SpArcDB.profileKeys then
+        _G.SpArcDB.profileKeys[dstKey] = dstKey
+      end
+    end
     local spDst = _G.SpArcDB.profiles[dstKey]
     if type(spDst) == "table" then
       if type(spSrc) == "table" and spSrc.mode then
         spDst.mode = spSrc.mode
       end
-      if srcKey == "Калиратри - Свежеватель Душ" then
+      if sameChar and type(spSrc) == "table" then
+        if spSrc.activePresetID then
+          spDst.activePresetID = spSrc.activePresetID
+          _G.SpArcDB.activePresetID = spSrc.activePresetID
+        end
+        if type(spSrc.autoPresets) == "table" then
+          spDst.autoPresets = DeepCopyTable(spSrc.autoPresets)
+          _G.SpArcDB.autoPresets = DeepCopyTable(spSrc.autoPresets)
+        end
+        if _G.SpArc and _G.SpArc.SelectActiveParsedProfile then
+          pcall(_G.SpArc.SelectActiveParsedProfile, _G.SpArc)
+        end
+      elseif srcKey == "Калиратри - Свежеватель Душ" then
         spDst.activePresetID = "MAGE_04_FROST_PVE"
         spDst.autoPresets = {
           PVE  = "MAGE_04_FROST_PVE",
@@ -1116,8 +1135,47 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
     end
   end
 
-  gopsDB.clonedCharacters[dstKey] = "v5"
-  return true, "Скопированы все профили (ElvUI, Bartender4 + бинды, Plater, Details!, SpArc, Masque, BigWigs) с [" .. tostring(srcKey) .. "] на [" .. tostring(dstKey) .. "]"
+  -- 10. MacroToolkit per-character extended macros (121..150) & live macro book sync when cloning same character across realms
+  if sameChar and type(_G.MacroToolkitDB) == "table" then
+    if type(_G.MacroToolkitDB.char) == "table" and type(_G.MacroToolkitDB.char[srcKey]) == "table" then
+      _G.MacroToolkitDB.char[dstKey] = DeepCopyTable(_G.MacroToolkitDB.char[srcKey])
+      if type(_G.MacroToolkitDB.profileKeys) == "table" then
+        _G.MacroToolkitDB.profileKeys[dstKey] = _G.MacroToolkitDB.profileKeys[srcKey] or "profile"
+      end
+      local srcMacros = _G.MacroToolkitDB.char[srcKey].macros
+      if type(srcMacros) == "table" and not (_G.InCombatLockdown and _G.InCombatLockdown()) then
+        for slot = 121, 150 do
+          local mData = srcMacros[slot]
+          if type(mData) == "table" and type(mData.name) == "string" and type(mData.body) == "string" then
+            local cleanBody = mData.body:gsub("\r\n", "\n"):gsub("%s+$", "")
+            local existingIdx = 0
+            if _G.GetMacroInfo then
+              for idx = 121, 150 do
+                local n = _G.GetMacroInfo(idx)
+                if n == mData.name then
+                  existingIdx = idx
+                  break
+                end
+              end
+            end
+            if existingIdx > 0 and _G.EditMacro then
+              pcall(_G.EditMacro, existingIdx, mData.name, "INV_MISC_QUESTIONMARK", cleanBody)
+            elseif _G.CreateMacro then
+              pcall(_G.CreateMacro, mData.name, "INV_MISC_QUESTIONMARK", cleanBody, true)
+            end
+          end
+        end
+      end
+    end
+  end
+
+  if sameChar then
+    gopsDB.completedTasks["hunter_macros_v5_mo_" .. dstKey] = true
+    gopsDB.completedTasks["hunter_macros_v5_pvp_" .. dstKey] = true
+  end
+
+  gopsDB.clonedCharacters[dstKey] = "v6"
+  return true, "Скопированы все профили (ElvUI, Bartender4 + бинды, Plater, Details!, SpArc, MacroToolkit, Masque, BigWigs) с [" .. tostring(srcKey) .. "] на [" .. tostring(dstKey) .. "]"
 end
 
 ---------------------------------------------------------------------------------------
@@ -1774,8 +1832,8 @@ end
 
 function GeminiOps.SyncHunterMacros(force, antiPetMode)
   local curKey = GeminiOps.GetCurrentCharKey()
-  if not GeminiOps.IsPlayerHunter() and curKey ~= "Гитпулл - Пиратская Бухта" and curKey ~= "Гитпулл - Свежеватель Душ" then
-    return false, "Macro sync is only for Hunter (Гитпулл)"
+  if not GeminiOps.IsPlayerHunter() and curKey ~= "Гитхард - Гордунни" and curKey ~= "Гитпулл - Пиратская Бухта" and curKey ~= "Гитпулл - Свежеватель Душ" then
+    return false, "Macro sync is only for Hunter (Гитхард / Гитпулл)"
   end
   if _G.InCombatLockdown and _G.InCombatLockdown() then
     return false, "Cannot sync macros in combat"
@@ -3399,11 +3457,13 @@ eventFrame:SetScript("OnEvent", function(_, event)
         GeminiOps.ApplyEnvironmentHygiene()
         GeminiOps.ApplyExternalAddonQoL()
 
-        -- One-time profile clone for Пиратская Бухта & Свежеватель Душ characters
+        -- One-time profile clone for Пиратская Бухта, Свежеватель Душ & Гордунни characters
         local curKey = GeminiOps.GetCurrentCharKey()
         local autoCloneFromPriest = {
           ["Ньарлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Свежеватель Душ",
           ["Ньярлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Свежеватель Душ",
+          ["Гитхард - Гордунни"]             = "Гитпулл - Пиратская Бухта",
+          ["Гитпулл - Гордунни"]             = "Гитпулл - Пиратская Бухта",
           ["Гитсутра - Пиратская Бухта"]     = true,
           ["Гитсутра - Свежеватель Душ"]     = true,
           ["Гитпулл - Пиратская Бухта"]      = true,
@@ -3529,6 +3589,8 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
       tpl = "Калиратри - Свежеватель Душ"
     elseif curKey == "Ньарлатхотеп - Пиратская Бухта" or curKey == "Ньярлатхотеп - Пиратская Бухта" then
       tpl = "Ньарлатхотеп - Свежеватель Душ"
+    elseif curKey == "Гитхард - Гордунни" or curKey == "Гитпулл - Гордунни" then
+      tpl = "Гитпулл - Пиратская Бухта"
     else
       tpl = GeminiOps.ResolvePriestTemplateKey(curKey)
     end
