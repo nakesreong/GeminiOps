@@ -3543,11 +3543,13 @@ eventFrame:SetScript("OnEvent", function(_, event)
         GeminiOps.SetupDetailsLeftChat(nil, nil, false)
         GeminiOps.SetupEcoMinimapButton()
         GeminiOps.EnsureDefaultPCHardwareProfile()
+        GeminiOps.EnsureAuctionatorShoppingLists(false)
       end)
       C_Timer.After(3.0, function()
         GeminiOps.SetupDetailsLeftChat(nil, nil, false)
         GeminiOps.SetupEcoMinimapButton()
         GeminiOps.EnsureDefaultPCHardwareProfile()
+        GeminiOps.EnsureAuctionatorShoppingLists(false)
       end)
     end
   elseif event == "PLAYER_ENTERING_WORLD" then
@@ -3565,6 +3567,157 @@ eventFrame:SetScript("OnEvent", function(_, event)
     GeminiOps.SaveHardwareProfile(gopsDB.activeHardwareProfile or "PC", true)
   end
 end)
+
+---------------------------------------------------------------------------------------
+--  AUCTIONATOR SHOPPING LISTS (HUNTER ENGINEERING & ENCHANTING 1-100)
+---------------------------------------------------------------------------------------
+local HUNTER_PROFESSION_SHOPPING_LISTS = {
+  {
+    name = "1. Инженерия (Midnight 1-100)",
+    items = {
+      { id = 237359, name = "Сверкающая медная руда",       qty = 160 },
+      { id = 237362, name = "Теневая оловянная руда",       qty = 160 },
+      { id = 237364, name = "Яркая серебряная руда",        qty = 60  },
+      { id = 238197, name = "Слиток сверкающей меди",       qty = 140 },
+      { id = 239700, name = "Сверток светлого льна",        qty = 140 },
+      { id = 236949, name = "Частица света",                qty = 5   },
+      { id = 236950, name = "Частица первозданной энергии", qty = 5   },
+      { id = 236951, name = "Частица дикой магии",          qty = 5   },
+      { id = 236952, name = "Частица чистой Бездны",        qty = 5   },
+      { id = 256963, name = "Талассийская древесина",       qty = 20  },
+    },
+  },
+  {
+    name = "2. Наложение чар (Midnight 1-100)",
+    items = {
+      { id = 243599, name = "Вечнопоющая пыль",              qty = 420 },
+      { id = 243602, name = "Лучистый осколок",              qty = 35  },
+      { id = 243605, name = "Кристалл зари",                 qty = 15  },
+      { id = 244176, name = "Яркий рунический серебряный жезл", qty = 1 },
+      { id = 236949, name = "Частица света",                 qty = 10  },
+      { id = 236950, name = "Частица первозданной энергии",  qty = 20  },
+      { id = 236951, name = "Частица дикой магии",           qty = 10  },
+      { id = 236952, name = "Частица чистой Бездны",         qty = 10  },
+      { id = 242610, name = "Безупречный перидот Харандара", qty = 10  },
+    },
+  },
+  {
+    name = "3. Инженерия Ханта (Нитро + Планер)",
+    items = {
+      { id = 36916,  name = "Кобальтовый слиток",                  qty = 90 },
+      { id = 37705,  name = "Кристаллизованная вода",              qty = 20 },
+      { id = 37701,  name = "Кристаллизованная земля",             qty = 20 },
+      { id = 72096,  name = "Слиток призрачного железа",           qty = 60 },
+      { id = 72988,  name = "Ветрошерстная ткань",                 qty = 20 },
+      { id = 109076, name = "Набор для сборки гоблинского планера", qty = 20 },
+    },
+  },
+  {
+    name = "4. Инженерия и Инчант (Каз Алгар)",
+    items = {
+      { id = 210930, name = "Висмут",                      qty = 200 },
+      { id = 210933, name = "Акирит",                      qty = 100 },
+      { id = 210936, name = "Когтесталь",                  qty = 60  },
+      { id = 219150, name = "Груда ржавого металлолома",   qty = 150 },
+      { id = 219946, name = "Штормовая пыль",              qty = 250 },
+      { id = 219950, name = "Сияющий осколок",             qty = 35  },
+      { id = 224025, name = "Тлеющий осколок",             qty = 10  },
+    },
+  },
+}
+
+local function BuildAuctionatorSearchString(itemName, qty)
+  if _G.Auctionator and _G.Auctionator.API and _G.Auctionator.API.v1 and _G.Auctionator.API.v1.ConvertToSearchString then
+    local ok, res = pcall(_G.Auctionator.API.v1.ConvertToSearchString, "GeminiOps", {
+      searchString = itemName,
+      isExact = true,
+      quantity = qty,
+    })
+    if ok and type(res) == "string" and res ~= "" then
+      return res
+    end
+  end
+  return string.format('"%s";;;;;;;;;;;#;;%s', tostring(itemName), tostring(qty or ""))
+end
+
+function GeminiOps.EnsureAuctionatorShoppingLists(force)
+  local gopsDB = GeminiOps:EnsureDB()
+  if gopsDB.completedTasks["auctionator_hunter_lists_v1"] and not force then
+    return false, "Already synced Auctionator shopping lists"
+  end
+
+  local function ApplyLists()
+    if type(_G.AUCTIONATOR_SHOPPING_LISTS) ~= "table" then
+      _G.AUCTIONATOR_SHOPPING_LISTS = {}
+    end
+    local lm = _G.Auctionator and _G.Auctionator.Shopping and _G.Auctionator.Shopping.ListManager
+    for _, listDef in ipairs(HUNTER_PROFESSION_SHOPPING_LISTS) do
+      local terms = {}
+      for _, entry in ipairs(listDef.items) do
+        local resolvedName = nil
+        if C_Item and C_Item.GetItemNameByID then
+          resolvedName = C_Item.GetItemNameByID(entry.id)
+        end
+        if (not resolvedName or resolvedName == "") and C_Item and C_Item.GetItemInfo then
+          resolvedName = C_Item.GetItemInfo(entry.id)
+        end
+        if not resolvedName or resolvedName == "" then
+          resolvedName = entry.name
+        end
+        terms[#terms + 1] = BuildAuctionatorSearchString(resolvedName, entry.qty)
+      end
+
+      if lm and lm.GetIndexForName and lm.Create and lm.GetByName then
+        local existingIdx = lm:GetIndexForName(listDef.name)
+        if existingIdx ~= nil and lm.Delete then
+          pcall(lm.Delete, lm, listDef.name)
+        end
+        pcall(lm.Create, lm, listDef.name)
+        local okL, listObj = pcall(lm.GetByName, lm, listDef.name)
+        if okL and listObj and listObj.AppendItems then
+          pcall(listObj.AppendItems, listObj, terms)
+        end
+      else
+        local found = false
+        for _, rawList in ipairs(_G.AUCTIONATOR_SHOPPING_LISTS) do
+          if type(rawList) == "table" and rawList.name == listDef.name then
+            rawList.items = terms
+            rawList.isTemporary = false
+            found = true
+            break
+          end
+        end
+        if not found then
+          table.insert(_G.AUCTIONATOR_SHOPPING_LISTS, {
+            name = listDef.name,
+            items = terms,
+            isTemporary = false,
+          })
+        end
+      end
+    end
+  end
+
+  -- Prime item cache for all IDs so localized names are 100% exact from client DB2
+  if _G.Item and _G.Item.CreateFromItemID then
+    for _, listDef in ipairs(HUNTER_PROFESSION_SHOPPING_LISTS) do
+      for _, entry in ipairs(listDef.items) do
+        local itemObj = _G.Item:CreateFromItemID(entry.id)
+        if itemObj and itemObj.ContinueOnItemLoad then
+          itemObj:ContinueOnItemLoad(function() end)
+        end
+      end
+    end
+  end
+
+  ApplyLists()
+  if C_Timer and C_Timer.After then
+    C_Timer.After(2.0, ApplyLists)
+  end
+
+  gopsDB.completedTasks["auctionator_hunter_lists_v1"] = true
+  return true, "Добавлены 4 списка покупок в Auctionator (Инженерия и Наложение чар Midnight 1-100 + Нитро/Планер Ханта)"
+end
 
 _G.SLASH_GEMINIOPS1 = "/gops"
 _G.SLASH_GEMINIOPS2 = "/gemini"
@@ -3640,6 +3793,9 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
     end
   elseif cmd == "eco" or cmd == "power" or cmd == "blackout" then
     GeminiOps.ToggleEcoGraphicsMode()
+  elseif cmd == "ah" or cmd == "shopping" or cmd == "auctionator" then
+    local _, statusMsg = GeminiOps.EnsureAuctionatorShoppingLists(true)
+    print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
   elseif cmd == "tab" then
     local _, statusMsg = GeminiOps.SetupDetailsLeftChat("TAB", true)
     print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
