@@ -269,12 +269,6 @@ function GeminiOps.ApplyEnvironmentHygiene()
     end
   end
   if not (_G.InCombatLockdown and _G.InCombatLockdown()) then
-    if _G.GetActionBarPage and _G.ChangeActionBarPage then
-      local curPage = _G.GetActionBarPage()
-      if curPage and curPage ~= 1 then
-        pcall(_G.ChangeActionBarPage, 1)
-      end
-    end
     -- Unbind all F1..F12 keys (plus Shift/Ctrl/Alt modifiers) & hidden ACTIONPAGE binds so Insights recorder (F6/F7) and system hotkeys never conflict with WoW
     if _G.SetBinding then
       local changedBinds = false
@@ -775,7 +769,6 @@ local TEMPLATE_KEYBINDINGS = {
   { "F10", "NONE" },
   { "F11", "NONE" },
   { "F12", "NONE" },
-  { "G", "Combat Mode - Mouse Look" },
   { "F", "MULTIACTIONBAR1BUTTON5" },
   { "SHIFT-V", "NONE" },
   { "CTRL-V", "NONE" },
@@ -811,7 +804,6 @@ local TEMPLATE_KEYBINDINGS = {
   { "T", "MULTIACTIONBAR1BUTTON7" },
   { "BUTTON5", "CLICK LM_B1:LeftButton" },
   { "SHIFT-BUTTON5", "NONE" },
-  { "`", "Combat Mode - Mouse Look" },
   { "F6", "NONE" },
   { "CTRL-.", "TOGGLESOUND" },
   { "ALT-Q", "NONE" },
@@ -832,7 +824,6 @@ local TEMPLATE_KEYBINDINGS = {
   { "SHIFT-H", "NONE" },
   { "SHIFT-`", "NONE" },
   { "SHIFT-,", "ALLNAMEPLATES" },
-  { "SHIFT-7", "Combat Mode Toggle" },
   { "\\", "NONE" },
   { "ALT-\\", "TOGGLEUI" },
   { "ALT-4", "NONE" },
@@ -890,20 +881,14 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
   end
 
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.clonedCharacters[dstKey] == "v6" and not force then
-    return false, "Already cloned (v6)"
+  if gopsDB.clonedCharacters[dstKey] == "v7" and not force then
+    return false, "Already cloned (v7)"
   end
 
   -- 0. Keybindings & core Priest CVars
   GeminiOps.SyncTemplateKeybindings()
   if C_CVar and C_CVar.SetCVar then
     pcall(C_CVar.SetCVar, "displaySpellActivationOverlays", "0")
-    pcall(C_CVar.SetCVar, "SoftTargetEnemy", "3")
-    pcall(C_CVar.SetCVar, "SoftTargetEnemyRange", "60")
-    pcall(C_CVar.SetCVar, "SoftTargetEnemyArc", "0")
-    pcall(C_CVar.SetCVar, "SoftTargetFriendRange", "60")
-    pcall(C_CVar.SetCVar, "SoftTargetFriendArc", "0")
-    pcall(C_CVar.SetCVar, "enableMultiActionBars", "7")
     pcall(C_CVar.SetCVar, "mapFade", "0")
     pcall(C_CVar.SetCVar, "raidFramesDisplayClassColor", "1")
     pcall(C_CVar.SetCVar, "raidFramesDisplayPowerBars", "1")
@@ -1012,8 +997,9 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
   -- 5. SpArc (Per-Character Visual/Camera Profile Cloner; only copy DoT aura rules if same character name across realms)
   local srcBase = tostring(srcKey or ""):match("^(.-)%s*%-") or tostring(srcKey or "")
   local dstBase = tostring(dstKey or ""):match("^(.-)%s*%-") or tostring(dstKey or "")
+  local isHunterAlias = (dstBase == "Ньярлатокэт" or dstBase == "Ньарлатокэт" or dstBase == "Гитхард" or dstBase == "Гитпулл")
   local sameChar = (srcBase ~= "" and srcBase == dstBase)
-    or (srcKey == "Гитпулл - Пиратская Бухта" and dstKey == "Гитхард - Гордунни")
+    or isHunterAlias
   if _G.SpArc and _G.SpArc.CopyProfileFrom then
     pcall(_G.SpArc.CopyProfileFrom, _G.SpArc, srcKey, sameChar)
   end
@@ -1174,7 +1160,16 @@ function GeminiOps.CloneCharacterProfiles(srcKey, dstKey, force)
     gopsDB.completedTasks["hunter_macros_v5_pvp_" .. dstKey] = true
   end
 
-  gopsDB.clonedCharacters[dstKey] = "v6"
+  if _G.SpArc and not (_G.InCombatLockdown and _G.InCombatLockdown()) then
+    if _G.SpArc.ApplyCombatCameraBindings then
+      pcall(_G.SpArc.ApplyCombatCameraBindings, _G.SpArc)
+    end
+    if _G.SpArc.UpdateCameraState then
+      pcall(_G.SpArc.UpdateCameraState, _G.SpArc)
+    end
+  end
+
+  gopsDB.clonedCharacters[dstKey] = "v7"
   return true, "Скопированы все профили (ElvUI, Bartender4 + бинды, Plater, Details!, SpArc, MacroToolkit, Masque, BigWigs) с [" .. tostring(srcKey) .. "] на [" .. tostring(dstKey) .. "]"
 end
 
@@ -3441,31 +3436,9 @@ local eventFrame = _G.CreateFrame("Frame", "GeminiOpsEventFrame", UIParent)
 eventFrame:RegisterEvent("PLAYER_LOGIN")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 eventFrame:RegisterEvent("PLAYER_LOGOUT")
-eventFrame:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
-eventFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
-
-local pendingPageReset = false
 
 eventFrame:SetScript("OnEvent", function(_, event)
-  if event == "ACTIONBAR_PAGE_CHANGED" then
-    if _G.GetActionBarPage and _G.ChangeActionBarPage then
-      local curPage = _G.GetActionBarPage()
-      if curPage and curPage > 2 then
-        if _G.InCombatLockdown and _G.InCombatLockdown() then
-          pendingPageReset = true
-        else
-          pcall(_G.ChangeActionBarPage, 1)
-        end
-      end
-    end
-    return
-  elseif event == "PLAYER_REGEN_ENABLED" then
-    if pendingPageReset and _G.ChangeActionBarPage then
-      pendingPageReset = false
-      pcall(_G.ChangeActionBarPage, 1)
-    end
-    return
-  elseif event == "PLAYER_LOGIN" then
+  if event == "PLAYER_LOGIN" then
     GeminiOps.ApplyEnvironmentHygiene()
     GeminiOps.ApplyExternalAddonQoL()
 
