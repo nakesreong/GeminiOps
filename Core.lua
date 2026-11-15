@@ -3194,7 +3194,7 @@ end
 function GeminiOps.ToggleControlPanel()
   if not controlPanelFrame then
     local f = _G.CreateFrame("Frame", "GeminiOpsControlPanel", UIParent, "BackdropTemplate")
-    f:SetSize(460, 415)
+    f:SetSize(460, 460)
     f:SetPoint("CENTER", UIParent, "CENTER", 0, 40)
     f:SetFrameStrata("DIALOG")
     f:SetFrameLevel(50)
@@ -3335,6 +3335,23 @@ function GeminiOps.ToggleControlPanel()
       _G.SlashCmdList["GEMINIOPS"]("pvp")
     end)
     btnPvP:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -362)
+
+    -- Section 6: Hunter Engineering & Gear Checklist + Auctionator Lists
+    local sec6 = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(sec6, 12)
+    sec6:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -400)
+    sec6:SetText("|cffffd1006. Инженерия, Чарки и Аукционатор (Гитхард / Хант):|r")
+
+    local btnCheck = CreateOpsButton(f, 228, 28, "🛠️ Чек-лист Инженера и Чар", function()
+      GeminiOps.ToggleHunterChecklist()
+    end)
+    btnCheck:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -420)
+
+    local btnAhLists = CreateOpsButton(f, 188, 28, "🛒 Списки Auctionator", function()
+      local _, statusMsg = GeminiOps.EnsureAuctionatorShoppingLists(true)
+      print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
+    end)
+    btnAhLists:SetPoint("TOPRIGHT", f, "TOPRIGHT", -16, -420)
 
     controlPanelFrame = f
     GeminiOps.UpdateControlPanelVisuals()
@@ -3807,6 +3824,317 @@ function GeminiOps.EnsureAuctionatorShoppingLists(force)
   return true, "Обновлены 8 списков покупок в Auctionator (Инженерия Midnight + все старые дополнения + Наложение чар + Кулинария)"
 end
 
+---------------------------------------------------------------------------------------
+--  HUNTER ENGINEERING, GADGETS & GEAR ENCHANT CHECKLIST WINDOW
+---------------------------------------------------------------------------------------
+local checklistFrame = nil
+
+local ENGINEERING_GADGET_CHECKS = {
+  {
+    label = "Дживс (ремонт + доступ к банку)",
+    itemID = 49040,
+    isToy = true,
+    skillLineID = 2501,
+    expName = "Нордскол",
+    reqSkill = 75,
+  },
+  {
+    label = "МЯУЛЛЕР (переносной почтовый ящик)",
+    itemID = 40768,
+    isToy = true,
+    skillLineID = 2501,
+    expName = "Нордскол",
+    reqSkill = 50,
+  },
+  {
+    label = "Собиратель трофеев (Loot-A-Rang 40м)",
+    itemID = 60854,
+    isToy = true,
+    skillLineID = 2502,
+    expName = "Катаклизм",
+    reqSkill = 70,
+  },
+  {
+    label = "Червоточина: Кель'Талас (Midnight)",
+    itemID = 248485,
+    isToy = true,
+    skillLineID = 2910,
+    expName = "Midnight",
+    reqSkill = 1,
+  },
+  {
+    label = "Червоточина: Каз Алгар (TWW)",
+    itemID = 221966,
+    isToy = true,
+    skillLineID = 2875,
+    expName = "Каз Алгар",
+    reqSkill = 1,
+  },
+  {
+    label = "Червоточина: Драконьи острова (DF)",
+    itemID = 198156,
+    isToy = true,
+    skillLineID = 2827,
+    expName = "Драконьи о-ва",
+    reqSkill = 1,
+  },
+  {
+    label = "Червоточина: Темные Земли (SL)",
+    itemID = 172924,
+    isToy = true,
+    skillLineID = 2755,
+    expName = "Темные Земли",
+    reqSkill = 1,
+  },
+  {
+    label = "Червоточина: Нордскол (WotLK)",
+    itemID = 48933,
+    isToy = true,
+    skillLineID = 2501,
+    expName = "Нордскол",
+    reqSkill = 40,
+  },
+  {
+    label = "Червоточина: Пандария (MoP)",
+    itemID = 87215,
+    isToy = true,
+    skillLineID = 2503,
+    expName = "Пандария",
+    reqSkill = 75,
+  },
+  {
+    label = "Червоточина: Дренор (WoD)",
+    itemID = 112059,
+    isToy = true,
+    skillLineID = 2504,
+    expName = "Дренор",
+    reqSkill = 1,
+  },
+  {
+    label = "Карманное стойло питомцев (Сортировщик)",
+    itemID = 153510,
+    isToy = false,
+    skillLineID = 2506,
+    expName = "Кул-Тирас/Зандалар",
+    reqSkill = 1,
+  },
+}
+
+local function GetEngineeringSkillInfo(skillLineID)
+  if not C_TradeSkillUI or not C_TradeSkillUI.GetProfessionInfoBySkillLineID then
+    return 0, 0, false
+  end
+  local ok, info = pcall(C_TradeSkillUI.GetProfessionInfoBySkillLineID, skillLineID)
+  if ok and type(info) == "table" then
+    local cur = tonumber(info.skillLevel) or 0
+    local max = tonumber(info.maxSkillLevel) or 0
+    return cur, max, (max > 0)
+  end
+  return 0, 0, false
+end
+
+local function CheckOwnToyOrItem(itemID)
+  local hasToy = false
+  if _G.PlayerHasToy then
+    local ok, res = pcall(_G.PlayerHasToy, itemID)
+    if ok and res then hasToy = true end
+  end
+  local count = 0
+  if C_Item and C_Item.GetItemCount then
+    local ok, c = pcall(C_Item.GetItemCount, itemID, true, false, true, true)
+    if ok and type(c) == "number" then count = c end
+  elseif _G.GetItemCount then
+    local ok, c = pcall(_G.GetItemCount, itemID, true)
+    if ok and type(c) == "number" then count = c end
+  end
+  return hasToy or (count > 0), count, hasToy
+end
+
+local function InspectEquippedSlot(slotID, keyword1, keyword2)
+  local link = _G.GetInventoryItemLink and _G.GetInventoryItemLink("player", slotID)
+  if not link then
+    return false, "|cff888888Слот пуст|r", false
+  end
+  local enchantID = link:match("item:%d+:(%d*)")
+  local hasEnchant = (enchantID ~= nil and enchantID ~= "" and enchantID ~= "0")
+  local foundKeyword = false
+  local tinkerLine = nil
+
+  if C_TooltipInfo and C_TooltipInfo.GetInventoryItem then
+    local ok, tip = pcall(C_TooltipInfo.GetInventoryItem, "player", slotID)
+    if ok and tip and type(tip.lines) == "table" then
+      for _, line in ipairs(tip.lines) do
+        local txt = line and line.leftText
+        if type(txt) == "string" and txt ~= "" then
+          local low = txt:lower()
+          if (keyword1 and low:find(keyword1, 1, true)) or (keyword2 and low:find(keyword2, 1, true)) then
+            foundKeyword = true
+            tinkerLine = txt
+            break
+          end
+        end
+      end
+    end
+  end
+
+  return hasEnchant, link, foundKeyword, tinkerLine
+end
+
+function GeminiOps.BuildHunterChecklistText()
+  local lines = {}
+  local curKey = GeminiOps.GetCurrentCharKey() or "Персонаж"
+  lines[#lines + 1] = string.format("|cffffd100Персонаж:|r |cff00ccff%s|r", curKey)
+  lines[#lines + 1] = ""
+
+  -- 1. Equipped Tinkers & Combat Enchants
+  lines[#lines + 1] = "|cffffd1001. Пояс, Плащ и Чары на экипировке:|r"
+
+  local nCur, _, nLearned = GetEngineeringSkillInfo(2501)
+  local pCur, _, pLearned = GetEngineeringSkillInfo(2503)
+  local gliderKits = 0
+  if C_Item and C_Item.GetItemCount then
+    gliderKits = tonumber(C_Item.GetItemCount(109076, true)) or 0
+  end
+
+  local cloakEnch, cloakLink, hasGlider = InspectEquippedSlot(15, "планер", "glider")
+  if hasGlider then
+    lines[#lines + 1] = "  |cff00ff7f[ОК]|r Плащ: Гоблинский планер прикручен! " .. tostring(cloakLink)
+  else
+    local kitInfo = (gliderKits > 0) and string.format(" (в сумках/банке наборов: |cff00ff7f%d|r)", gliderKits) or " (купи по списку №5 в Аукционаторе)"
+    local panInfo = (pLearned and pCur >= 1) and "|cff00ff7fПандария выучена|r" or "|cffff6666нужна Инж. Пандарии (1)|r"
+    lines[#lines + 1] = "  |cffff6666[НЕТ]|r Плащ (Гоблинский планер): не прикручен — " .. panInfo .. kitInfo
+  end
+
+  local waistEnch, waistLink, hasNitro = InspectEquippedSlot(6, "ускорител", "nitro")
+  if hasNitro then
+    lines[#lines + 1] = "  |cff00ff7f[ОК]|r Пояс: Нитроускорители прикручены! " .. tostring(waistLink)
+  else
+    local norInfo = (nLearned and nCur >= 25)
+      and string.format("|cff00ff7fНордскол %d/75 (можно прикрутить!)|r", nCur)
+      or string.format("|cffff9900нужна Инж. Нордскола 25/75 (сейчас %d)|r", nCur)
+    lines[#lines + 1] = "  |cffff6666[НЕТ]|r Пояс (Нитроускорители): не прикручены — " .. norInfo
+  end
+
+  local enchantSlots = {
+    { slot = 16, name = "Оружие" },
+    { slot = 11, name = "Кольцо 1" },
+    { slot = 12, name = "Кольцо 2" },
+    { slot = 3,  name = "Плечи" },
+    { slot = 5,  name = "Нагрудник" },
+    { slot = 1,  name = "Шлем" },
+  }
+  local enchSummary = {}
+  for _, s in ipairs(enchantSlots) do
+    local hasE = InspectEquippedSlot(s.slot)
+    if hasE then
+      enchSummary[#enchSummary + 1] = "|cff00ff7f" .. s.name .. ": ОК|r"
+    else
+      enchSummary[#enchSummary + 1] = "|cffff6666" .. s.name .. ": нет|r"
+    end
+  end
+  lines[#lines + 1] = "  • Чарки шмота: " .. table.concat(enchSummary, "  |  ")
+  lines[#lines + 1] = ""
+
+  -- 2. Engineering Gadgets & Wormholes
+  lines[#lines + 1] = "|cffffd1002. Главные игрушки и гаджеты Инженера:|r"
+  for _, g in ipairs(ENGINEERING_GADGET_CHECKS) do
+    local owned = CheckOwnToyOrItem(g.itemID)
+    local curSkill, maxSkill, learned = GetEngineeringSkillInfo(g.skillLineID)
+    local skillOk = learned and (curSkill >= g.reqSkill)
+
+    local statusTag
+    if owned and skillOk then
+      statusTag = "|cff00ff7f[ГОТОВО]|r"
+    elseif owned and not skillOk then
+      statusTag = "|cffffaa00[ЕСТЬ, КАЧАЕМ НАВЫК]|r"
+    else
+      statusTag = "|cffff5555[НЕТ ПРЕДМЕТА]|r"
+    end
+
+    local skillStr
+    if skillOk then
+      skillStr = string.format("|cff00ff7f%s %d/%d|r", g.expName, curSkill, math.max(maxSkill, g.reqSkill))
+    else
+      skillStr = string.format("|cffff8800%s %d/%d (нужно %d)|r", g.expName, curSkill, math.max(maxSkill, 75), g.reqSkill)
+    end
+
+    lines[#lines + 1] = string.format("  %s %s — %s", statusTag, g.label, skillStr)
+  end
+
+  lines[#lines + 1] = ""
+  lines[#lines + 1] = "|cff88ccffПодсказка:|r Списки реагентов №1–8 уже загружены во вкладку |cffffd100Покупки (Shopping)|r в Auctionator!"
+  return table.concat(lines, "\n")
+end
+
+function GeminiOps.ToggleHunterChecklist()
+  if not checklistFrame then
+    local f = _G.CreateFrame("Frame", "GeminiOpsHunterChecklist", UIParent, "BackdropTemplate")
+    f:SetSize(560, 420)
+    f:SetPoint("CENTER", UIParent, "CENTER", 0, 30)
+    f:SetFrameStrata("DIALOG")
+    f:SetFrameLevel(60)
+    f:EnableMouse(true)
+    f:SetMovable(true)
+    f:RegisterForDrag("LeftButton")
+    f:SetScript("OnDragStart", f.StartMoving)
+    f:SetScript("OnDragStop", f.StopMovingOrSizing)
+
+    if f.SetBackdrop then
+      f:SetBackdrop({
+        bgFile = "Interface\\Buttons\\WHITE8X8",
+        edgeFile = "Interface\\Buttons\\WHITE8X8",
+        edgeSize = 1,
+      })
+      f:SetBackdropColor(0.05, 0.06, 0.08, 0.97)
+      f:SetBackdropBorderColor(0.25, 0.85, 0.55, 0.95)
+    end
+
+    if _G.UISpecialFrames then
+      table.insert(_G.UISpecialFrames, "GeminiOpsHunterChecklist")
+    end
+
+    local title = f:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    ApplyDetailsTabFont(title, 15)
+    title:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -14)
+    title:SetText("|cff00ff96Чек-лист Ханта:|r Инженерия, Игрушки, Планер/Нитро и Чарки")
+
+    local closeBtn = CreateOpsButton(f, 24, 24, "X", function() f:Hide() end)
+    closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -10, -10)
+
+    local body = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    ApplyDetailsTabFont(body, 12)
+    body:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -44)
+    body:SetPoint("RIGHT", f, "RIGHT", -16, 0)
+    body:SetJustifyH("LEFT")
+    body:SetJustifyV("TOP")
+    body:SetSpacing(3)
+    f.bodyText = body
+
+    local btnRefresh = CreateOpsButton(f, 180, 28, "🔄 Обновить статус", function()
+      f.bodyText:SetText(GeminiOps.BuildHunterChecklistText())
+    end)
+    btnRefresh:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 16, 14)
+
+    local btnAh = CreateOpsButton(f, 220, 28, "🛒 Синхр. списки Auctionator", function()
+      local _, statusMsg = GeminiOps.EnsureAuctionatorShoppingLists(true)
+      print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
+    end)
+    btnAh:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -16, 14)
+
+    checklistFrame = f
+    f.bodyText:SetText(GeminiOps.BuildHunterChecklistText())
+    f:Show()
+    return
+  end
+
+  if checklistFrame:IsShown() then
+    checklistFrame:Hide()
+  else
+    checklistFrame.bodyText:SetText(GeminiOps.BuildHunterChecklistText())
+    checklistFrame:Show()
+  end
+end
+
 _G.SLASH_GEMINIOPS1 = "/gops"
 _G.SLASH_GEMINIOPS2 = "/gemini"
 _G.SlashCmdList["GEMINIOPS"] = function(msg)
@@ -3884,6 +4212,8 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
   elseif cmd == "ah" or cmd == "shopping" or cmd == "auctionator" then
     local _, statusMsg = GeminiOps.EnsureAuctionatorShoppingLists(true)
     print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
+  elseif cmd == "check" or cmd == "checklist" or cmd == "eng" then
+    GeminiOps.ToggleHunterChecklist()
   elseif cmd == "tab" then
     local _, statusMsg = GeminiOps.SetupDetailsLeftChat("TAB", true)
     print("|cff00ccff[GeminiOps]|r " .. tostring(statusMsg))
