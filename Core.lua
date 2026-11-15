@@ -251,6 +251,7 @@ function GeminiOps.ApplyEnvironmentHygiene()
   if C_AddOns and C_AddOns.EnableAddOn then
     pcall(C_AddOns.EnableAddOn, "!BugGrabber")
     pcall(C_AddOns.EnableAddOn, "BugSack")
+    pcall(C_AddOns.EnableAddOn, "PremadeGroupsFilter")
   end
   if C_AddOns and C_AddOns.DisableAddOn then
     pcall(C_AddOns.DisableAddOn, "CombatMode")
