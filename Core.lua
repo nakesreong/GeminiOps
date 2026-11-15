@@ -3476,9 +3476,18 @@ eventFrame:SetScript("OnEvent", function(_, event)
 
         -- One-time profile clone for Пиратская Бухта, Свежеватель Душ & Гордунни characters
         local curKey = GeminiOps.GetCurrentCharKey()
+        local hunterTpl = (_G.ElvDB and _G.ElvDB.profiles and _G.ElvDB.profiles["Гитхард - Гордунни"])
+          and "Гитхард - Гордунни"
+          or "Гитпулл - Пиратская Бухта"
         local autoCloneFromPriest = {
           ["Ньарлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Свежеватель Душ",
           ["Ньярлатхотеп - Пиратская Бухта"] = "Ньарлатхотеп - Свежеватель Душ",
+          ["Ньярлатокэт - Гордунни"]         = hunterTpl,
+          ["Ньярлатокэт - Пиратская Бухта"]  = hunterTpl,
+          ["Ньярлатокэт - Свежеватель Душ"]  = hunterTpl,
+          ["Ньарлатокэт - Гордунни"]         = hunterTpl,
+          ["Ньарлатокэт - Пиратская Бухта"]  = hunterTpl,
+          ["Ньарлатокэт - Свежеватель Душ"]  = hunterTpl,
           ["Гитхард - Гордунни"]             = "Гитпулл - Пиратская Бухта",
           ["Гитпулл - Гордунни"]             = "Гитпулл - Пиратская Бухта",
           ["Гитсутра - Пиратская Бухта"]     = true,
@@ -4158,6 +4167,11 @@ _G.SlashCmdList["GEMINIOPS"] = function(msg)
       tpl = "Калиратри - Свежеватель Душ"
     elseif curKey == "Ньарлатхотеп - Пиратская Бухта" or curKey == "Ньярлатхотеп - Пиратская Бухта" then
       tpl = "Ньарлатхотеп - Свежеватель Душ"
+    elseif curKey == "Ньярлатокэт - Гордунни" or curKey == "Ньярлатокэт - Пиратская Бухта" or curKey == "Ньярлатокэт - Свежеватель Душ"
+        or curKey == "Ньарлатокэт - Гордунни" or curKey == "Ньарлатокэт - Пиратская Бухта" or curKey == "Ньарлатокэт - Свежеватель Душ" then
+      tpl = (_G.ElvDB and _G.ElvDB.profiles and _G.ElvDB.profiles["Гитхард - Гордунни"])
+        and "Гитхард - Гордунни"
+        or "Гитпулл - Пиратская Бухта"
     elseif curKey == "Гитхард - Гордунни" or curKey == "Гитпулл - Гордунни" then
       tpl = "Гитпулл - Пиратская Бухта"
     else
