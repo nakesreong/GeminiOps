@@ -3569,8 +3569,13 @@ eventFrame:SetScript("OnEvent", function(_, event)
 end)
 
 ---------------------------------------------------------------------------------------
---  AUCTIONATOR SHOPPING LISTS (HUNTER ENGINEERING & ENCHANTING 1-100)
+--  AUCTIONATOR SHOPPING LISTS (HUNTER ENGINEERING, ENCHANTING & COOKING)
 ---------------------------------------------------------------------------------------
+local OBSOLETE_SHOPPING_LIST_NAMES = {
+  "3. Инженерия Ханта (Нитро + Планер)",
+  "4. Инженерия и Инчант (Каз Алгар)",
+}
+
 local HUNTER_PROFESSION_SHOPPING_LISTS = {
   {
     name = "1. Инженерия (Midnight 1-100)",
@@ -3584,44 +3589,113 @@ local HUNTER_PROFESSION_SHOPPING_LISTS = {
       { id = 236950, name = "Частица первозданной энергии", qty = 5   },
       { id = 236951, name = "Частица дикой магии",          qty = 5   },
       { id = 236952, name = "Частица чистой Бездны",        qty = 5   },
-      { id = 256963, name = "Талассийская древесина",       qty = 20  },
     },
   },
   {
     name = "2. Наложение чар (Midnight 1-100)",
     items = {
-      { id = 243599, name = "Вечнопоющая пыль",              qty = 420 },
-      { id = 243602, name = "Лучистый осколок",              qty = 35  },
-      { id = 243605, name = "Кристалл зари",                 qty = 15  },
-      { id = 244176, name = "Яркий рунический серебряный жезл", qty = 1 },
-      { id = 236949, name = "Частица света",                 qty = 10  },
-      { id = 236950, name = "Частица первозданной энергии",  qty = 20  },
-      { id = 236951, name = "Частица дикой магии",           qty = 10  },
-      { id = 236952, name = "Частица чистой Бездны",         qty = 10  },
-      { id = 242610, name = "Безупречный перидот Харандара", qty = 10  },
+      { id = 243599, name = "Вечнопоющая пыль",                 qty = 420 },
+      { id = 243602, name = "Лучистый осколок",                 qty = 35  },
+      { id = 243605, name = "Кристалл зари",                    qty = 15  },
+      { id = 244176, name = "Яркий рунический серебряный жезл", qty = 1   },
+      { id = 236949, name = "Частица света",                    qty = 10  },
+      { id = 236950, name = "Частица первозданной энергии",     qty = 20  },
+      { id = 236951, name = "Частица дикой магии",              qty = 10  },
+      { id = 236952, name = "Частица чистой Бездны",            qty = 10  },
+      { id = 242610, name = "Безупречный перидот Харандара",    qty = 10  },
     },
   },
   {
-    name = "3. Инженерия Ханта (Нитро + Планер)",
+    name = "3. Инж: Нордскол 1-75 (Дживс + Нитро + МЯУЛЛЕР)",
     items = {
-      { id = 36916,  name = "Кобальтовый слиток",                  qty = 90 },
-      { id = 37705,  name = "Кристаллизованная вода",              qty = 20 },
-      { id = 37701,  name = "Кристаллизованная земля",             qty = 20 },
-      { id = 72096,  name = "Слиток призрачного железа",           qty = 60 },
-      { id = 72988,  name = "Ветрошерстная ткань",                 qty = 20 },
-      { id = 109076, name = "Набор для сборки гоблинского планера", qty = 20 },
+      { id = 36916,  name = "Кобальтовый слиток",     qty = 210 },
+      { id = 36913,  name = "Саронитовый слиток",     qty = 140 },
+      { id = 37705,  name = "Кристаллизованная вода",  qty = 30  },
+      { id = 37701,  name = "Кристаллизованная земля", qty = 20  },
+      { id = 33470,  name = "Ледяная ткань",          qty = 20  },
+      { id = 35627,  name = "Извечная тьма",          qty = 5   },
+      { id = 35624,  name = "Извечная земля",         qty = 5   },
+      { id = 35622,  name = "Извечная вода",          qty = 5   },
     },
   },
   {
-    name = "4. Инженерия и Инчант (Каз Алгар)",
+    name = "4. Инж: Катаклизм 1-75 (Собиратель трофеев)",
     items = {
-      { id = 210930, name = "Висмут",                      qty = 200 },
-      { id = 210933, name = "Акирит",                      qty = 100 },
-      { id = 210936, name = "Когтесталь",                  qty = 60  },
-      { id = 219150, name = "Груда ржавого металлолома",   qty = 150 },
-      { id = 219946, name = "Штормовая пыль",              qty = 250 },
-      { id = 219950, name = "Сияющий осколок",             qty = 35  },
-      { id = 224025, name = "Тлеющий осколок",             qty = 10  },
+      { id = 54849,  name = "Обсидиановый слиток", qty = 85  },
+      { id = 52186,  name = "Слиток элементия",    qty = 120 },
+      { id = 52327,  name = "Неустойчивая земля",  qty = 30  },
+      { id = 52328,  name = "Неустойчивый воздух", qty = 40  },
+      { id = 52325,  name = "Неустойчивый огонь",  qty = 25  },
+      { id = 53010,  name = "Угольный шелк",       qty = 20  },
+    },
+  },
+  {
+    name = "5. Инж: Пандария 1-75 (Планер + Пьер)",
+    items = {
+      { id = 72096,  name = "Слиток призрачного железа",            qty = 360 },
+      { id = 72988,  name = "Ветрошерстная ткань",                  qty = 60  },
+      { id = 76061,  name = "Дух гармонии",                         qty = 10  },
+      { id = 109076, name = "Набор для сборки гоблинского планера", qty = 20  },
+    },
+  },
+  {
+    name = "6. Инж: Классика 1-300 + Запределье 1-75",
+    items = {
+      { id = 2835,   name = "Грубый камень",              qty = 60  },
+      { id = 2840,   name = "Медный слиток",              qty = 66  },
+      { id = 2836,   name = "Необработанный камень",      qty = 60  },
+      { id = 2589,   name = "Льняной материал",           qty = 50  },
+      { id = 2841,   name = "Бронзовый слиток",           qty = 120 },
+      { id = 2838,   name = "Тяжелый камень",             qty = 60  },
+      { id = 2592,   name = "Шерсть",                     qty = 60  },
+      { id = 2319,   name = "Жесткая кожа",               qty = 15  },
+      { id = 3859,   name = "Стальной слиток",            qty = 5   },
+      { id = 7912,   name = "Твердый камень",             qty = 120 },
+      { id = 3860,   name = "Мифриловый слиток",          qty = 170 },
+      { id = 4338,   name = "Магическая ткань",           qty = 20  },
+      { id = 12365,  name = "Массивный камень",           qty = 60  },
+      { id = 12359,  name = "Ториевый слиток",            qty = 225 },
+      { id = 14047,  name = "Руническая ткань",           qty = 35  },
+      { id = 23445,  name = "Слиток оскверненного железа", qty = 90 },
+      { id = 23446,  name = "Адамантитовый слиток",       qty = 60  },
+      { id = 22452,  name = "Изначальная земля",          qty = 10  },
+      { id = 22457,  name = "Изначальный огонь",          qty = 10  },
+      { id = 21877,  name = "Ткань Пустоты",              qty = 40  },
+    },
+  },
+  {
+    name = "7. Инж: Дренор / Легион / БфА / ШЛ / ДФ / ТВВ",
+    items = {
+      { id = 109119, name = "Истинная железная руда",    qty = 200 },
+      { id = 109118, name = "Руда Черной горы",          qty = 200 },
+      { id = 123918, name = "Руда силового камня",       qty = 180 },
+      { id = 152512, name = "Монелитовая руда",          qty = 200 },
+      { id = 152579, name = "Руда штормового серебра",   qty = 100 },
+      { id = 152576, name = "Волноцветный лен",          qty = 80  },
+      { id = 171828, name = "Лейстритовая руда",         qty = 200 },
+      { id = 171840, name = "Пористый камень",           qty = 80  },
+      { id = 173202, name = "Сумеречная ткань",          qty = 40  },
+      { id = 190396, name = "Серевитовая руда",          qty = 160 },
+      { id = 188658, name = "Дракониевая руда",          qty = 80  },
+      { id = 210930, name = "Висмут",                    qty = 200 },
+      { id = 219150, name = "Груда ржавого металлолома", qty = 150 },
+    },
+  },
+  {
+    name = "8. Кулинария (Midnight + Каз Алгар + Старая)",
+    items = {
+      { id = 242639, name = "Почти свинина",             qty = 100 },
+      { id = 275282, name = "Нежное филе",               qty = 100 },
+      { id = 275285, name = "Гибкий корень",             qty = 100 },
+      { id = 236778, name = "Маналилия",                 qty = 30  },
+      { id = 223512, name = "Обычное мясо",              qty = 150 },
+      { id = 222738, name = "Порционный стейк",          qty = 150 },
+      { id = 220135, name = "Кровоокунь",                qty = 100 },
+      { id = 74840,  name = "Мясо дикой птицы",          qty = 100 },
+      { id = 109137, name = "Мясо речного чудища",       qty = 100 },
+      { id = 124117, name = "Постная рулька",            qty = 100 },
+      { id = 154898, name = "Мясистая ляжка",            qty = 100 },
+      { id = 172053, name = "Мрачное мясо",              qty = 100 },
     },
   },
 }
@@ -3642,8 +3716,8 @@ end
 
 function GeminiOps.EnsureAuctionatorShoppingLists(force)
   local gopsDB = GeminiOps:EnsureDB()
-  if gopsDB.completedTasks["auctionator_hunter_lists_v1"] and not force then
-    return false, "Already synced Auctionator shopping lists"
+  if gopsDB.completedTasks["auctionator_hunter_lists_v2"] and not force then
+    return false, "Already synced Auctionator shopping lists v2"
   end
 
   local function ApplyLists()
@@ -3651,6 +3725,20 @@ function GeminiOps.EnsureAuctionatorShoppingLists(force)
       _G.AUCTIONATOR_SHOPPING_LISTS = {}
     end
     local lm = _G.Auctionator and _G.Auctionator.Shopping and _G.Auctionator.Shopping.ListManager
+    for _, oldName in ipairs(OBSOLETE_SHOPPING_LIST_NAMES) do
+      if lm and lm.GetIndexForName and lm.Delete then
+        if lm:GetIndexForName(oldName) ~= nil then
+          pcall(lm.Delete, lm, oldName)
+        end
+      end
+      for i = #_G.AUCTIONATOR_SHOPPING_LISTS, 1, -1 do
+        local rawList = _G.AUCTIONATOR_SHOPPING_LISTS[i]
+        if type(rawList) == "table" and rawList.name == oldName then
+          table.remove(_G.AUCTIONATOR_SHOPPING_LISTS, i)
+        end
+      end
+    end
+
     for _, listDef in ipairs(HUNTER_PROFESSION_SHOPPING_LISTS) do
       local terms = {}
       for _, entry in ipairs(listDef.items) do
@@ -3715,8 +3803,8 @@ function GeminiOps.EnsureAuctionatorShoppingLists(force)
     C_Timer.After(2.0, ApplyLists)
   end
 
-  gopsDB.completedTasks["auctionator_hunter_lists_v1"] = true
-  return true, "Добавлены 4 списка покупок в Auctionator (Инженерия и Наложение чар Midnight 1-100 + Нитро/Планер Ханта)"
+  gopsDB.completedTasks["auctionator_hunter_lists_v2"] = true
+  return true, "Обновлены 8 списков покупок в Auctionator (Инженерия Midnight + все старые дополнения + Наложение чар + Кулинария)"
 end
 
 _G.SLASH_GEMINIOPS1 = "/gops"
